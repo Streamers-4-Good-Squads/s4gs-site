@@ -1,0 +1,47 @@
+import type { DocPage } from './doc-types';
+export const docsFr: Record<string, DocPage> = {
+mission: {
+  title: 'Notre mission | Streamers 4 Good Squads', description: 'Streamers 4 Good Squads, ASBL belge, soutient les enfants des rues, les jeunes mères mineures seules aux Philippines et les enfants victimes d’abus dans le monde.',
+  h1: 'Notre mission', lead: 'Streamers 4 Good Squads réunit des joueuses, des joueurs et des streameurs pour une cause : protéger les enfants.', cta: 'donate',
+  blocks: [
+    { h2: 'Pour qui', paras: ['Chaque don soutient la mission de S4GS auprès des enfants des rues et des jeunes mères mineures seules aux Philippines, ainsi que des enfants victimes d’abus dans le monde.'] },
+    { h2: 'Comment nous agissons', paras: ['S4GS est une association belge (ASBL). Nous organisons des événements en ligne et en présence, comme le Streamathon et la Mobile Cup, et reversons les dons collectés à des partenaires humanitaires.'] },
+    { h2: 'Où va votre don', items: ['70 % aux partenaires humanitaires.', '30 % à la gestion de l’association.', 'Aucune attestation fiscale n’est délivrée pour les dons.'] },
+  ] },
+privacy: {
+  title: 'Confidentialité | Streamers 4 Good Squads', description: 'Politique de confidentialité et cookies de Streamers 4 Good Squads.', noindex: true,
+  h1: 'Confidentialité et cookies', lead: 'Version de travail à valider avant publication. Les mentions entre crochets sont à compléter.',
+  blocks: [
+    { h2: 'Qui est responsable de vos données', paras: ['Streamers 4 Good Squads, association sans but lucratif de droit belge (ASBL). Siège : [adresse à compléter]. Contact : tournoi@s4gs.org.'] },
+    { h2: 'Les données que nous collectons', items: ['Pseudo, identifiant de jeu, pseudo Discord.', 'Adresse e-mail, pays et langue.', 'Jeu, division et équipe choisis.', 'Tranche d’âge et, pour les 13 à 17 ans, l’adresse e-mail d’un parent ou tuteur légal.', 'Vos consentements (règlement, confidentialité, newsletter facultative).'] },
+    { h2: 'Pourquoi et sur quelle base', items: ['Organiser le tournoi et vous envoyer confirmation et rappels : votre consentement lors de la pré-inscription.', 'Obtenir l’accord parental des personnes mineures : consentement du parent ou tuteur.', 'Vous envoyer la newsletter : votre consentement distinct, facultatif.', 'Mesurer l’audience du site : votre consentement via la bannière de cookies.'] },
+    { h2: 'Qui reçoit ces données', paras: ['Uniquement les outils nécessaires au fonctionnement de l’événement : [formulaire d’inscription, à compléter], Microsoft 365 et SharePoint pour la gestion, Discord pour les échanges, et Streamlabs Charity pour les dons. Les paiements se font sur leurs pages : S4GS ne les voit pas et ne collecte aucune donnée bancaire.'] },
+    { h2: 'Combien de temps', paras: ['[Durée à fixer.] Les données des personnes mineures et les accords parentaux sont supprimés dès qu’ils ne sont plus nécessaires après l’événement.'] },
+    { h2: 'Vos droits', paras: ['Vous pouvez demander l’accès à vos données, leur correction, leur suppression, retirer votre consentement à tout moment, en écrivant à tournoi@s4gs.org. Vous pouvez aussi déposer une plainte auprès de l’Autorité de protection des données (autoriteprotectiondonnees.be).'] },
+    { h2: 'Cookies', paras: ['Le site n’utilise des cookies de mesure d’audience qu’avec votre accord. Vous pouvez changer d’avis à tout moment grâce au lien « Gérer mes cookies » en bas de page. [Outil de gestion des cookies à compléter.]'] },
+  ] },
+rules: {
+  title: 'Règlement | S4GS Mobile Cup 2027', description: 'Règlement de la S4GS Mobile Cup 2027 : inscription, déroulé des matchs, scores, déconnexions, litiges et sanctions.',
+  h1: 'Règlement', lead: 'Version de travail, à valider avant l’ouverture des inscriptions. Elle s’applique aux tournois Clash Royale et Brawl Stars de janvier 2027.', cta: 'register',
+  blocks: [
+    { h2: 'Participer', items: ['La participation est gratuite.', 'Âge minimum : 13 ans. De 13 à 17 ans, l’accord d’un parent ou tuteur légal est obligatoire.', 'Un compte de jeu par personne : le prêt de compte est interdit.', 'Les matchs peuvent être diffusés : l’inscription vaut accord sur le droit à l’image pour ces diffusions.'] },
+    { h2: 'Formats', table: { head: ['Tableau', 'Phase 1', 'Phase finale'], rows: [['Clash Royale Open', 'Ronde suisse, 5 rondes, 2 manches gagnantes', 'Top 16 en élimination directe, finale en 3 manches gagnantes'], ['Clash Royale Découverte', 'Ronde suisse, 5 rondes, 2 manches gagnantes', 'Top 16 en élimination directe'], ['Brawl Stars Open (trios)', 'Ronde suisse, 5 rondes, 2 manches gagnantes', 'Top 16 en élimination directe, finale en 3 manches gagnantes'], ['Brawl Stars Découverte (trios)', 'Ronde suisse, 5 rondes, 2 manches gagnantes', 'Top 16 en élimination directe'], ['Coupe mixte ou féminine', 'Selon le nombre d’inscriptions', 'Top 8 en élimination directe']] }, paras: ['Le nombre de rondes suisses s’ajuste au nombre d’inscriptions.'] },
+    { h2: 'Déroulé d’un match', items: ['Check-in sur la plateforme : ouvert 30 minutes avant le début, fermé 10 minutes avant.', 'La plateforme affiche votre adversaire, son pseudo Discord et son identifiant de jeu.', 'Contactez-le sur Discord, puis invitez-le dans le jeu.', 'Jouez le match en entier.', 'Faites une capture d’écran de chaque fin de manche.', 'Les deux camps déclarent le score sur la plateforme, captures jointes.', 'En cas de problème, ouvrez un ticket d’arbitrage sur Discord sans attendre la fin du match.'] },
+    { h2: 'Retards et déconnexions', items: ['Après 10 minutes d’absence, la manche est perdue.', 'Déconnexion dans la première minute, avant tout avantage décisif : la manche est rejouée.', 'Ensuite, l’arbitrage décide à partir des captures.', 'Deux déconnexions volontaires ou répétées dans un match : manche perdue.', 'La latence n’est pas un motif de contestation pour une partie jouée dans sa zone.'] },
+    { h2: 'Litiges', items: ['Ouvrez un ticket sur Discord avec les captures ou un enregistrement d’écran.', 'L’arbitrage décide dans les 10 minutes.', 'Un recours est possible auprès de la direction du tournoi, dont la décision est définitive.'] },
+    { h2: 'Sanctions', table: { head: ['Faute', 'Sanction'], rows: [['Retard de plus de 10 minutes', 'Manche perdue, puis match perdu'], ['Score déclaré faux', 'Avertissement, puis match perdu'], ['Comportement toxique, insultes', 'Avertissement, puis exclusion'], ['Prêt de compte, émulateur, logiciel tiers', 'Exclusion immédiate'], ['Arrangement de résultat', 'Exclusion immédiate des deux camps'], ['Contact inapproprié avec une personne mineure', 'Exclusion immédiate et signalement']] } },
+  ] },
+faq: {
+  title: 'FAQ | S4GS Mobile Cup 2027', description: 'Questions fréquentes sur la S4GS Mobile Cup 2027 : âge minimum, accord parental, déroulé, dons.', h1: 'Questions fréquentes', lead: 'Une question ? Tu trouveras sans doute la réponse ici.',
+  blocks: [{ h2: 'Le tournoi', qa: [
+    { q: 'Est-ce vraiment gratuit ?', a: 'Oui, l’inscription est gratuite. Un don de 5 € est simplement suggéré, jamais obligatoire.' },
+    { q: 'Quel âge faut-il avoir ?', a: 'Au moins 13 ans. Entre 13 et 17 ans, l’accord d’un parent ou tuteur légal est demandé par e-mail.' },
+    { q: 'Comment se déroule un match ?', a: 'Tu fais ton check-in, tu retrouves ton adversaire sur Discord, vous jouez, puis vous déclarez le score avec une capture d’écran. Le détail est dans le règlement.' },
+    { q: 'À quelle heure jouer ?', a: 'Les matchs sont regroupés par zone : Europe de 15 h à 18 h, Amériques de 18 h à 21 h, Océanie de 9 h à 12 h, heure de Bruxelles.' },
+  ] }, { h2: 'Les dons', qa: [
+    { q: 'À quoi servent les dons ?', a: 'Ils soutiennent les enfants des rues et les jeunes mères mineures aux Philippines, ainsi que les enfants victimes d’abus dans le monde. 70 % vont aux partenaires humanitaires, 30 % à la gestion de l’association.' },
+    { q: 'Puis-je recevoir une attestation fiscale ?', a: 'Non, aucune attestation fiscale n’est délivrée.' },
+    { q: 'Je suis mineur, dois-je donner moi-même ?', a: 'Non. Tu peux partager la page de don avec ta famille grâce au bouton prévu à cet effet.' },
+  ] }],
+},
+};

@@ -1,0 +1,17 @@
+---
+import { LOCALES } from '../i18n/locales';
+import { ui } from '../i18n/ui';
+const { lang, slug = '' } = Astro.props;
+const t = ui(lang);
+const href = (code: string, ready: boolean) => `/${ready ? code : 'en'}/${slug ? slug + '/' : ''}`;
+---
+<details class="lang">
+  <summary aria-label={t.lang}>{lang}</summary>
+  <ul>
+    {LOCALES.map((l) => (
+      <li><a href={href(l.code, l.ready)} hreflang={l.ready ? l.code : 'en'} lang={l.code} aria-current={l.code === lang ? 'true' : undefined}>
+        {l.name}{!l.ready && <small>EN</small>}
+      </a></li>
+    ))}
+  </ul>
+</details>

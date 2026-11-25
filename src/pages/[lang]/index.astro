@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import DonateBlock from '../../components/DonateBlock.astro';
+import { READY_CODES } from '../../i18n/locales';
+import { cupPage, homePage } from '../../i18n/pages';
+import { ui } from '../../i18n/ui';
+import { path } from '../../i18n/utils';
+export function getStaticPaths() { return READY_CODES.map((lang) => ({ params: { lang } })); }
+const { lang } = Astro.params as { lang: string };
+const t = ui(lang); const h = homePage(lang); const c = cupPage(lang);
+const hues = ['y', 'b', 'g'];
+---
+<Base lang={lang} title={h.title} description={h.description}>
+  <section class="hero"><div class="wrap">
+    <img class="mascot" src="/img/stream-e.webp" alt="" width="120" height="216" />
+    <div class="kick">Streamers 4 Good Squads</div>
+    <h1>{h.h1}</h1><p class="lead">{h.lead}</p>
+    <div class="cta"><a class="btn" href={path(lang, 'mobile-cup')}>{t.register}</a><a class="btn ghost" href={path(lang, 'mission')}>{h.mission.more}</a></div>
+  </div></section>
+  <section class="alt"><div class="wrap prose" style="text-align:center">
+    <h2>{h.mission.h2}</h2><p class="lead">{h.mission.text}</p>
+    <a class="btn ghost" href={path(lang, 'mission')}>{h.mission.more}</a>
+  </div></section>
+  <section><div class="wrap">
+    <h2>{h.events.h2}</h2>
+    <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+      <div class="card" style="--c:var(--b)"><h3>{h.events.cup.h3}</h3><p>{h.events.cup.text}</p><p><a class="btn" href={path(lang, 'mobile-cup')}>{h.events.cup.cta}</a></p></div>
+      <div class="card" style="--c:var(--g)"><h3>{h.events.stream.h3}</h3><p>{h.events.stream.text}</p></div>
+    </div>
+  </div></section>
+  <section class="alt"><div class="wrap">
+    <h2>{h.help.h2}</h2>
+    <div class="cards">{h.help.items.map((x, i) => <div class="card" style={`--c:var(--${hues[i]})`}><h3>{x.h3}</h3><p>{x.text}</p></div>)}</div>
+  </div></section>
+  <section><div class="wrap"><DonateBlock d={{ ...c.donate, text: lang === 'fr' ? 'Un don, même modeste, soutient les enfants des rues et les jeunes mères mineures aux Philippines, ainsi que les enfants victimes d’abus dans le monde.' : 'A donation, however small, supports street children and underage young mothers in the Philippines, as well as child victims of abuse worldwide.' }} /></div></section>
+</Base>

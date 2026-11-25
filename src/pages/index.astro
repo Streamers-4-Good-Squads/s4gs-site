@@ -1,0 +1,32 @@
+---
+import '../styles/global.css';
+import { READY } from '../i18n/locales';
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Streamers 4 Good Squads</title>
+  <meta name="description" content="Streamers 4 Good Squads: gamers united for children." />
+  {READY.map((l) => <link rel="alternate" hreflang={l.code} href={`https://s4gs.org/${l.code}/`} />)}
+  <link rel="alternate" hreflang="x-default" href="https://s4gs.org/en/" />
+  <script is:inline>(function(){try{var s=localStorage.getItem('s4gs-theme');var d=s?s==='dark':matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=d?'dark':'light'}catch(e){}})();</script>
+</head>
+<body>
+  <main class="hero" style="min-height:100vh;display:grid;place-items:center">
+    <div class="wrap">
+      <img class="mascot" src="/img/stream-e.webp" alt="" width="120" height="216" />
+      <h1>S4GS</h1>
+      <p class="lead" id="sug"></p>
+      <div class="cta">
+        {READY.map((l) => <a class="btn ghost" id={'l-' + l.code} href={`/${l.code}/`} lang={l.code}>{l.name}</a>)}
+      </div>
+    </div>
+  </main>
+  <script is:inline>
+    // Propose la langue du navigateur, sans jamais rediriger de force.
+    var codes=['en','fr'];var m=(navigator.languages||[navigator.language]).map(function(x){return x.slice(0,2)}).find(function(x){return codes.indexOf(x)>-1});
+    if(m){var a=document.getElementById('l-'+m);a.classList.remove('ghost');a.focus({preventScroll:true})}
+  </script>
+</body>
+</html>

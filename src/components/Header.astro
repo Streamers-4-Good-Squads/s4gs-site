@@ -1,0 +1,26 @@
+---
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { ui } from '../i18n/ui';
+import { path } from '../i18n/utils';
+const { lang, slug = '' } = Astro.props;
+const t = ui(lang);
+const cur = (s: string) => (slug === s ? 'page' : undefined);
+---
+<div class="spot">{t.spot}<a href={path(lang, 'mobile-cup')}>{t.register} →</a></div>
+<header class="hd">
+  <div class="wrap">
+    <a class="brand" href={path(lang)}><i aria-hidden="true"></i><span>S4GS</span></a>
+    <nav class="nav" aria-label="Menu">
+      <a class="l" href={path(lang)} aria-current={cur('')}>{t.nav.home}</a>
+      <a class="l" href={path(lang, 'mobile-cup')} aria-current={cur('mobile-cup')}>{t.nav.cup}</a>
+      <a class="l" href={path(lang, 'mission')} aria-current={cur('mission')}>{t.nav.mission}</a>
+      <a class="l" href={path(lang, 'rules')} aria-current={cur('rules')}>{t.nav.rules}</a>
+      <a class="l" href={path(lang, 'faq')} aria-current={cur('faq')}>{t.nav.faq}</a>
+    </nav>
+    <div class="tools">
+      <LanguageSwitcher lang={lang} slug={slug} />
+      <button class="ico" data-theme-toggle aria-label={t.theme} title={t.theme}><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>
+      <button class="ico burger" data-burger aria-label={t.menu} aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    </div>
+  </div>
+</header>

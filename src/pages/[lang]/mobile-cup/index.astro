@@ -1,0 +1,69 @@
+---
+import Base from '../../../layouts/Base.astro';
+import DonateBlock from '../../../components/DonateBlock.astro';
+import { READY_CODES } from '../../../i18n/locales';
+import { cupPage } from '../../../i18n/pages';
+import { ui } from '../../../i18n/ui';
+import { fmtRange } from '../../../i18n/utils';
+import { EVENT } from '../../../data/event';
+import { SITE } from '../../../config/site';
+export function getStaticPaths() { return READY_CODES.map((lang) => ({ params: { lang } })); }
+const { lang } = Astro.params as { lang: string };
+const t = ui(lang); const c = cupPage(lang);
+const form = SITE.formUrl[lang] || SITE.formUrl.en;
+const hues = ['y', 'b', 'g', 'lav', 'y'];
+---
+<Base lang={lang} slug="mobile-cup" title={c.title} description={c.description}>
+  <section class="hero"><div class="wrap">
+    <img class="mascot" src="/img/stream-e.webp" alt="" width="120" height="216" />
+    <div class="kick">{c.hero.kicker}</div>
+    <h1>{c.hero.h1}</h1><p class="lead">{c.hero.lead}</p>
+    <span class="pill">{c.hero.free}</span>
+    <div class="cta"><a class="btn" href="#inscription">{t.register}</a><a class="btn ghost" href={SITE.donationUrl} target="_blank" rel="noopener">{t.donate}</a></div>
+  </div></section>
+
+  <section class="alt"><div class="wrap">
+    <h2>{c.dates.h2}</h2>
+    <ul class="tl">
+      {EVENT.dates.map((d, i) => (
+        <li style={`--c:var(--${hues[i]})`}><b>{fmtRange(d.date, (d as any).end, lang)}</b><span>{c.dates.items[d.id]}</span></li>
+      ))}
+    </ul>
+  </div></section>
+
+  <section><div class="wrap">
+    <h2>{c.games.h2}</h2><p>{c.games.intro}</p>
+    <div class="cards">
+      <div class="card" style="--c:var(--b)"><h3>Clash Royale</h3><p>{c.games.crText}</p></div>
+      <div class="card" style="--c:var(--g)"><h3>Brawl Stars</h3><p>{c.games.bsText}</p></div>
+      <div class="card" style="--c:var(--y)"><h3>{c.games.open}</h3><p>{c.games.openText}</p></div>
+      <div class="card" style="--c:var(--lav)"><h3>{c.games.discovery}</h3><p>{c.games.discoveryText}</p></div>
+    </div>
+    <p class="small">{c.games.mixed}</p>
+  </div></section>
+
+  <section class="alt"><div class="wrap">
+    <h2>{c.zones.h2}</h2><p>{c.zones.intro}</p>
+    <div class="zones">
+      {EVENT.zones.map((z) => (
+        <div class="zone" style={`--c:var(--${z.hue})`}><b>{c.zones.names[z.id]}</b><span>{z.from.replace(':00', ' h')} - {z.to.replace(':00', ' h')}</span><small>{c.zones.tz}</small></div>
+      ))}
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <h2>{c.format.h2}</h2>
+    <ul class="list">{c.format.items.map((i) => <li>{i}</li>)}</ul>
+  </div></section>
+
+  <section class="alt" id="inscription"><div class="wrap"><div class="box">
+    <h2>{c.register.h2}</h2><p>{c.register.text}</p>
+    {SITE.registrations.count > 0 && <p><span class="counter">{SITE.registrations.count}</span><br />{c.register.counter}</p>}
+    {form
+      ? <a class="btn" href={form}>{t.register}</a>
+      : <><a class="btn" aria-disabled="true" href="#inscription">{t.register}</a><p class="small">{c.register.soon}</p></>}
+    <p class="small">{c.register.ages}</p>
+  </div></div></section>
+
+  <section><div class="wrap"><DonateBlock d={c.donate} /></div></section>
+</Base>

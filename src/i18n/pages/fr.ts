@@ -1,0 +1,17 @@
+import type { CupPage, ThanksPage } from './types';
+export const cupFr: CupPage = {
+  title: 'S4GS Mobile Cup 2027 : tournoi Clash Royale et Brawl Stars gratuit',
+  description: 'Un tournoi en ligne gratuit sur Clash Royale et Brawl Stars, du 16 janvier au 31 janvier 2027, pour soutenir les enfants des rues et les jeunes mères mineures. Pré-inscris-toi.',
+  hero: { kicker: 'Streamers 4 Good Squads présente', h1: 'S4GS Mobile Cup 2027', lead: 'Clash Royale et Brawl Stars, trois zones horaires, un seul but : jouer ensemble pour les enfants.', free: 'Participation gratuite' },
+  dates: { h2: 'Les dates à retenir', items: { open: 'Ouverture des inscriptions et du Discord', mini: 'Mini-coupe pour s’entraîner', q1: 'Premier week-end de qualifications', q2: 'Second week-end de qualifications', finals: 'Finales' } },
+  games: { h2: 'Deux jeux, deux divisions', intro: 'Chaque jeu a son tableau, dans chaque zone.', crText: 'Duels en temps réel, ronde suisse puis tableau à élimination directe.', bsText: 'Matchs en équipe de trois ou en solo, selon la division.', open: 'Open', openText: 'Pour celles et ceux qui visent le haut du classement.', discovery: 'Discovery', discoveryText: 'Pour découvrir la compétition dans une ambiance détendue.', mixed: 'Une coupe mixte ou féminine est organisée en parallèle.' },
+  zones: { h2: 'Trois zones, des horaires pour tous', intro: 'Pour que personne ne joue avec un décalage, les matchs sont regroupés par zone. Horaires indiqués à l’heure de Bruxelles.', names: { europe: 'Europe', americas: 'Amériques', oceania: 'Océanie' }, tz: 'heure de Bruxelles' },
+  format: { h2: 'Comment ça se passe', items: ['Cinq rondes suisses pour tout le monde.', 'Les 16 meilleures personnes de chaque tableau passent en élimination directe.', 'Les matchs sont arbitrés et suivis sur Discord.', 'Les mineur·es de 13 à 17 ans participent avec l’accord d’un parent.'] },
+  register: { h2: 'Pré-inscription', text: 'Remplis le formulaire en deux minutes. Tu reçois une confirmation par e-mail, puis les rappels avant chaque match.', soon: 'Les inscriptions ouvrent le 16 décembre. Reviens ici, le bouton s’activera.', counter: 'personnes déjà inscrites', ages: 'Moins de 13 ans : inscription impossible. De 13 à 17 ans : l’e-mail d’un parent est demandé.' },
+  donate: { h2: 'Chaque don compte', text: 'Le tournoi est gratuit. Si tu le peux, un don de 5 € soutient les enfants des rues et les jeunes mères mineures aux Philippines, ainsi que les enfants victimes d’abus dans le monde.', cta: 'Faire un don', use: '70 % des dons vont aux partenaires humanitaires, 30 % à la gestion de l’association.' },
+};
+export const thanksFr: ThanksPage = {
+  title: 'Merci ! Ta pré-inscription est enregistrée', h1: 'Merci, c’est enregistré !', lead: 'Un e-mail de confirmation arrive dans quelques minutes. Pense à vérifier tes courriers indésirables.',
+  next: ['Rejoins le Discord à l’ouverture, le 16 décembre.', 'Prépare ton pseudo et ton tag de joueur.', 'Parle du tournoi à tes amis et à ta famille.'],
+  donate: { h2: 'Un petit coup de pouce ?', text: 'Un don, même modeste, aide directement les enfants que soutient S4GS.', cta: 'Donner', minors: 'Tu as moins de 18 ans ? Pas besoin de payer toi-même : partage la page avec ta famille.', share: 'Partager avec ma famille', shareText: 'Je participe à la S4GS Mobile Cup 2027, un tournoi pour les enfants. Tu peux nous soutenir ici :' },
+};

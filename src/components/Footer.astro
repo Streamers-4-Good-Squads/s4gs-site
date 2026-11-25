@@ -1,0 +1,13 @@
+---
+import { ui } from '../i18n/ui';
+import { SITE } from '../config/site';
+const { lang } = Astro.props; const t = ui(lang);
+---
+<footer class="ft"><div class="wrap">
+  <div><strong>S4GS</strong><br /><span class="small">{t.footer.tagline}</span><br /><span class="small">© {new Date().getFullYear()} {t.footer.rights}</span></div>
+  <nav>
+    <a href={`mailto:${SITE.contactEmail}`}>{t.footer.contact}</a>
+    <a href={`/${lang}/privacy/`}>{t.footer.privacy}</a>
+    <a href="#" data-cookie-settings>{t.footer.cookies}</a>
+  </nav>
+</div></footer>

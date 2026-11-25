@@ -1,0 +1,25 @@
+---
+import Base from '../../../layouts/Base.astro';
+import DonateBlock from '../../../components/DonateBlock.astro';
+import { READY_CODES } from '../../../i18n/locales';
+import { DOC_SLUGS, docPage, cupPage } from '../../../i18n/pages';
+import { ui } from '../../../i18n/ui';
+import { path } from '../../../i18n/utils';
+export function getStaticPaths() { return READY_CODES.flatMap((lang) => DOC_SLUGS.map((doc) => ({ params: { lang, doc } }))); }
+const { lang, doc } = Astro.params as { lang: string; doc: string };
+const d = docPage(lang, doc); const t = ui(lang); const c = cupPage(lang);
+---
+<Base lang={lang} slug={doc} title={d.title} description={d.description} noindex={d.noindex}>
+  <section class="hero" style="padding-block:clamp(40px,7vw,80px)"><div class="wrap"><h1>{d.h1}</h1><p class="lead">{d.lead}</p></div></section>
+  {d.blocks.map((b, i) => (
+    <section class={i % 2 === 0 ? 'alt' : ''}><div class="wrap prose">
+      <h2>{b.h2}</h2>
+      {b.paras?.map((p) => <p>{p}</p>)}
+      {b.items && <ul class="list">{b.items.map((x) => <li>{x}</li>)}</ul>}
+      {b.table && <div class="tw"><table><thead><tr>{b.table.head.map((h) => <th>{h}</th>)}</tr></thead><tbody>{b.table.rows.map((r) => <tr>{r.map((x) => <td>{x}</td>)}</tr>)}</tbody></table></div>}
+      {b.qa && b.qa.map((x) => <details class="qa"><summary>{x.q}</summary><p>{x.a}</p></details>)}
+    </div></section>
+  ))}
+  {d.cta === 'donate' && <section><div class="wrap"><DonateBlock d={c.donate} /></div></section>}
+  {d.cta === 'register' && <section><div class="wrap"><div class="box"><a class="btn" href={path(lang, 'mobile-cup') + '#inscription'}>{t.register}</a></div></div></section>}
+</Base>
