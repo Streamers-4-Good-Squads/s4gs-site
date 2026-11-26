@@ -1,0 +1,6 @@
+---
+import { ui } from '../i18n/ui';
+import { path } from '../i18n/utils';
+const { lang } = Astro.props; const t = ui(lang);
+---
+<aside class="strip"><div class="wrap"><span>{t.strip.text}</span> <a href={path(lang, 'mission')}>{t.strip.link} →</a></div></aside>

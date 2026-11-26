@@ -8,6 +8,6 @@ const { lang } = Astro.props; const t = ui(lang);
   <nav>
     <a href={`mailto:${SITE.contactEmail}`}>{t.footer.contact}</a>
     <a href={`/${lang}/privacy/`}>{t.footer.privacy}</a>
-    <a href="#" data-cookie-settings>{t.footer.cookies}</a>
+    <a href={`/${lang}/cookies/`} data-cookie-settings>{t.footer.cookies}</a>
   </nav>
 </div></footer>

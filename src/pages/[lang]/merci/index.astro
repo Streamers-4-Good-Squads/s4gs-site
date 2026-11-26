@@ -14,6 +14,7 @@ const c = thanksPage(lang);
   </div></section>
   <section class="alt"><div class="wrap">
     <ul class="list">{c.next.map((n) => <li>{n}</li>)}</ul>
+    {SITE.discordUrl && !SITE.discordUrl.includes('REMPLACER') && <p><a class="btn ghost" href={SITE.discordUrl} target="_blank" rel="noopener">Discord</a></p>}
   </div></section>
   <section><div class="wrap"><div class="box">
     <h2>{c.donate.h2}</h2><p>{c.donate.text}</p>
@@ -23,12 +24,14 @@ const c = thanksPage(lang);
       <button class="btn ghost" id="share" type="button" data-text={c.donate.shareText} data-url={SITE.donationUrl}>{c.donate.share}</button>
     </div>
     <p class="small" id="minors" hidden>{c.donate.minors}</p>
+    <p class="small" id="fund">{c.donate.fund}</p>
+    <p class="small">{c.donate.noAdvantage}</p>
     <p class="small"><a href={`/${lang}/mobile-cup/`}>←</a></p>
   </div></div></section>
   <script is:inline>
     // Moins de 18 ans (?a=minor ajouté par le formulaire) : pas de bouton de paiement, partage familial
     var q=new URLSearchParams(location.search).get('a');
-    if(q==='minor'){document.getElementById('pay').hidden=true;document.getElementById('minors').hidden=false}
+    if(q==='minor'){document.getElementById('pay').hidden=true;document.getElementById('minors').hidden=false;document.getElementById('fund').hidden=true}
     document.getElementById('share').addEventListener('click',function(){var b=this,t=b.dataset.text,u=b.dataset.url;
       if(navigator.share){navigator.share({text:t,url:u}).catch(function(){})}else{location.href='https://wa.me/?text='+encodeURIComponent(t+' '+u)}});
   </script>
