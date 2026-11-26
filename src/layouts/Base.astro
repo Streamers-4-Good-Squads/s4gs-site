@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '../styles/design.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import DonateStrip from '../components/DonateStrip.astro';
@@ -31,14 +32,31 @@ const p = (l: string) => `${SITE.url}/${l}/${slug ? slug + '/' : ''}`;
 </head>
 <body>
   <a class="skip" href="#main">{t.skip}</a>
+  <div class="site">
   <Header lang={lang} slug={slug} />
   <main id="main"><slot /></main>
   {!['mission', 'merci', 'parents'].includes(slug) && <DonateStrip lang={lang} />}
   <Footer lang={lang} />
+  </div>
   <script is:inline>
-    document.querySelectorAll('[data-theme-toggle]').forEach(function(b){b.addEventListener('click',function(){var n=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=n;try{localStorage.setItem('s4gs-theme',n)}catch(e){}})});
-    var bg=document.querySelector('[data-burger]');if(bg)bg.addEventListener('click',function(){var n=document.querySelector('.nav');var o=n.classList.toggle('open');bg.setAttribute('aria-expanded',o)});
-    try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(e){if(!localStorage.getItem('s4gs-theme'))document.documentElement.dataset.theme=e.matches?'dark':'light'})}catch(e){}
+    (function(){
+      var root=document.documentElement;
+      function sync(){document.querySelectorAll('[data-theme-toggle]').forEach(function(b){b.setAttribute('aria-checked',root.dataset.theme==='dark')})}
+      sync();
+      document.querySelectorAll('[data-theme-toggle]').forEach(function(b){b.addEventListener('click',function(){var n=root.dataset.theme==='dark'?'light':'dark';root.dataset.theme=n;try{localStorage.setItem('s4gs-theme',n)}catch(e){}sync()})});
+      var bg=document.querySelector('[data-burger]');
+      if(bg)bg.addEventListener('click',function(){var o=!document.querySelector('.links').classList.contains('open');document.querySelectorAll('.links,.navright').forEach(function(n){n.classList.toggle('open',o)});bg.setAttribute('aria-expanded',o)});
+      try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(e){if(!localStorage.getItem('s4gs-theme')){root.dataset.theme=e.matches?'dark':'light';sync()}})}catch(e){}
+      var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var st=document.querySelector('[data-stick]'),cards=[].slice.call(document.querySelectorAll('.sc')),tick=false;
+      function upd(){tick=false;var y=scrollY,h=document.documentElement.scrollHeight-innerHeight;
+        if(st){st.classList.toggle('sm',y>90);st.style.setProperty('--p',h>0?Math.min(1,y/h):0)}
+        cards.forEach(function(c,i){var nx=cards[i+1],d=0;if(nx&&!rm){var a=c.getBoundingClientRect(),b=nx.getBoundingClientRect();d=Math.min(1,Math.max(0,1-(b.top-a.top)/(a.height*.85)))}c.style.setProperty('--d',d.toFixed(3))})}
+      addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(upd)}},{passive:true});addEventListener('resize',upd);upd();
+      var hero=document.querySelector('.hero');
+      if(hero&&!rm&&matchMedia('(pointer:fine)').matches)hero.addEventListener('pointermove',function(e){var r=hero.getBoundingClientRect();hero.style.setProperty('--px',((e.clientX-r.left)/r.width-.5).toFixed(3));hero.style.setProperty('--py',((e.clientY-r.top)/r.height-.5).toFixed(3))});
+      document.querySelectorAll('.card').forEach(function(c){c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')})});
+    })();
   </script>
 </body>
 </html>
