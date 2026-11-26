@@ -20,18 +20,23 @@ const items = [
 const inEvents = ['events', 'mobile-cup', 'rules', 'faq', 'merci', 'parents', 'prizes', 'football-cup'].includes(slug);
 const cur = (s: string) => ((s === 'events' ? inEvents : slug === s) ? 'page' : undefined);
 ---
-<div class="spot">{t.spot}<a href={path(lang, 'mobile-cup')}>{t.register} →</a></div>
-<header class="hd">
-  <div class="wrap">
-    <a class="brand" href={path(lang)}><i aria-hidden="true"></i><span>S4GS</span></a>
-    <nav class="nav" aria-label="Menu">
+<div class="spot"><strong>Mobile Cup</strong><span>{t.spot}</span><a href={path(lang, 'mobile-cup')}>{t.register}</a></div>
+<div class="zebra"></div>
+<header class="stick" data-stick><i class="prog"></i>
+  <nav class="top" aria-label="Menu">
+    <a class="logo" href={path(lang)} aria-label="S4GS"><span class="med"></span><span><b>Streamers</b> <i>4 Good Squads</i></span></a>
+    <button class="burger" data-burger aria-expanded="false" aria-controls="menu">{t.menu}</button>
+    <div class="links" id="menu">
       {items.map((i) => <a class="l" href={path(lang, i.slug)} aria-current={cur(i.slug)}>{i.label}</a>)}
-    </nav>
-    <div class="tools">
-      <a class="btn y sm" href={SITE.donationUrl} target="_blank" rel="noopener">{t.donate}</a>
-      <LanguageSwitcher lang={lang} slug={slug} />
-      <button class="ico" data-theme-toggle aria-label={t.theme} title={t.theme}><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>
-      <button class="ico burger" data-burger aria-label={t.menu} aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
-  </div>
+    <button class="tgl" data-theme-toggle role="switch" aria-checked="false" aria-label={t.theme} title={t.theme}>
+      <svg class="s1" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></g></svg>
+      <svg class="s2" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="currentColor"/></svg>
+      <span class="k"></span>
+    </button>
+    <div class="navright" id="menu-right">
+      <LanguageSwitcher lang={lang} slug={slug} />
+      <a class="pill don" href={SITE.donationUrl} target="_blank" rel="noopener">{t.donate}</a>
+    </div>
+  </nav>
 </header>

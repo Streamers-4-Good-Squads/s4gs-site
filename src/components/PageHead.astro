@@ -2,11 +2,12 @@
 import { ui } from '../i18n/ui';
 import { path } from '../i18n/utils';
 const { lang, head, crumb, sample = '' } = Astro.props; const t = ui(lang);
+const words = String(head.h1).split(' ');
 ---
-<section class="hero" style="padding-block:clamp(40px,7vw,80px)"><div class="wrap">
+<section class="pagehead"><div class="wrap">
   <div class="crumb"><a href={path(lang)}>{t.nav.home}</a> / {crumb}</div>
   <div class="kick">{head.kick}</div>
-  <h1>{head.h1} {sample && <span class="ph">{sample}</span>}</h1>
-  <p class="lead">{head.lead}</p>
+  <h1 class="kin">{words.map((w, i) => <Fragment><span class="w"><span style={`--i:${i}`}>{w}</span></span>{' '}</Fragment>)}{sample && <span class="ph">{sample}</span>}</h1>
+  <p>{head.lead}</p>
   <slot />
 </div></section>
