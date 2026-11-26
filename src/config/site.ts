@@ -4,7 +4,7 @@ export const SITE = {
   donationUrl: 'https://streamlabscharity.com/streamers-4-good-squads',
   discordUrl: 'https://discord.gg/DtjG2xyVCR',
   contactEmail: 'tournoi@s4gs.org',
-  // Siège de l'ASBL (à vérifier : 4130 ou 4000 Liège)
+  // Siège de l'ASBL (code postal 4130 confirmé)
   address: '69 avenue de la Grotte, 4130 Liège, Belgique',
   // Adresse qui reçoit les inscriptions (flux Power Automate ou API du CRM). Vide = mode test, rien n'est envoyé.
   formEndpoint: '',
