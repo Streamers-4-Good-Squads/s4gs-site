@@ -1,0 +1,22 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHead from '../../../components/PageHead.astro';
+import DonateBlock from '../../../components/DonateBlock.astro';
+import { READY_CODES } from '../../../i18n/locales';
+import { assocPage, cupPage } from '../../../i18n/pages';
+import { ui } from '../../../i18n/ui';
+import { path, fmtSpan, fmtDate } from '../../../i18n/utils';
+import { SITE } from '../../../config/site';
+export function getStaticPaths() { return READY_CODES.map((lang) => ({ params: { lang } })); }
+const { lang } = Astro.params as { lang: string };
+const t = ui(lang); const a = assocPage(lang); const c = cupPage(lang);
+const hues = ['y', 'b', 'g'];
+const p = a.transparency; const on = SITE.sections.transparency;
+---
+<Base lang={lang} slug="transparency" title={p.head.title} description={p.head.description} noindex={!on}>
+  <PageHead lang={lang} head={p.head} crumb={t.footer.transparency} sample={on ? '' : p.sample} />
+  <section class="alt"><div class="wrap prose">
+    <ul class="tl">{p.docs.map((d, i) => <li style={`--c:var(--${hues[i % 3]})`}><b>PDF</b><span><strong>{d.t}</strong></span><span class="small">{d.p}</span></li>)}</ul>
+    <p class="small">{p.note}</p>
+  </div></section>
+</Base>

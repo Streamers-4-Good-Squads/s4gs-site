@@ -2,35 +2,49 @@
 import Base from '../../layouts/Base.astro';
 import DonateBlock from '../../components/DonateBlock.astro';
 import { READY_CODES } from '../../i18n/locales';
-import { cupPage, homePage } from '../../i18n/pages';
+import { cupPage, homePage, assocPage } from '../../i18n/pages';
 import { ui } from '../../i18n/ui';
-import { path } from '../../i18n/utils';
+import { path, fmtDate } from '../../i18n/utils';
+import { SITE } from '../../config/site';
 export function getStaticPaths() { return READY_CODES.map((lang) => ({ params: { lang } })); }
 const { lang } = Astro.params as { lang: string };
-const t = ui(lang); const h = homePage(lang); const c = cupPage(lang);
+const t = ui(lang); const h = homePage(lang); const c = cupPage(lang); const a = assocPage(lang); const ah = a.home;
+const on = SITE.sections;
 const hues = ['y', 'b', 'g'];
 ---
 <Base lang={lang} title={h.title} description={h.description}>
   <section class="hero"><div class="wrap">
     <img class="mascot" src="/img/stream-e.webp" alt="" width="120" height="216" />
-    <div class="kick">Streamers 4 Good Squads</div>
-    <h1>{h.h1}</h1><p class="lead">{h.lead}</p>
-    <div class="cta"><a class="btn" href={path(lang, 'mobile-cup')}>{t.register}</a><a class="btn ghost" href={path(lang, 'mission')}>{h.mission.more}</a></div>
-  </div></section>
-  <section class="alt"><div class="wrap prose" style="text-align:center">
-    <h2>{h.mission.h2}</h2><p class="lead">{h.mission.text}</p>
-    <a class="btn ghost" href={path(lang, 'mission')}>{h.mission.more}</a>
+    <div class="kick">{ah.kick}</div>
+    <h1>{ah.h1}</h1><p class="lead">{ah.lead}</p>
+    <div class="cta"><a class="btn" href={SITE.discordUrl} target="_blank" rel="noopener">{ah.join}</a><a class="btn y" href={SITE.donationUrl} target="_blank" rel="noopener">{ah.give}</a></div>
   </div></section>
   <section><div class="wrap">
-    <h2>{h.events.h2}</h2>
+    <div class="head"><div><div class="kick">{ah.assoc.kick}</div><h2>{ah.assoc.h2}</h2><p>{ah.assoc.lead}</p></div><a class="btn ghost" href={path(lang, 'association')}>{ah.assoc.more}</a></div>
+    <div class="cards">{ah.missions.map((m, i) => <div class="card" style={`--c:var(--${hues[i]})`}><h3>{m.h3}</h3><p>{m.text}</p></div>)}</div>
+  </div></section>
+  {on.stats && <section class="alt"><div class="wrap">
+    <div class="kick">{ah.stats.kick}</div><h2>{ah.stats.h2}</h2>
+    <div class="stats">{ah.stats.items.map((s) => <div class="stat"><b>{s.v}</b><span>{s.l}</span></div>)}</div>
+  </div></section>}
+  <section class={on.stats ? '' : 'alt'}><div class="wrap">
+    <div class="head"><div><div class="kick">{ah.events.kick}</div><h2>{ah.events.h2}</h2></div><a class="btn ghost" href={path(lang, 'events')}>{ah.events.all}</a></div>
     <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
       <div class="card" style="--c:var(--b)"><h3>{h.events.cup.h3}</h3><p>{h.events.cup.text}</p><p><a class="btn" href={path(lang, 'mobile-cup')}>{h.events.cup.cta}</a></p></div>
       <div class="card" style="--c:var(--g)"><h3>{h.events.stream.h3}</h3><p>{h.events.stream.text}</p></div>
     </div>
   </div></section>
-  <section class="alt"><div class="wrap">
+  {on.news && <section><div class="wrap">
+    <div class="head"><div><div class="kick">{ah.news.kick}</div><h2>{ah.news.h2}</h2></div><a class="btn ghost" href={path(lang, 'news')}>{ah.news.all}</a></div>
+    <div class="cards">{a.news.posts.map((x, i) => <article class="card" style={`--c:var(--${hues[i % 3]})`}><span class="meta">{fmtDate(x.date, lang, { day: 'numeric', month: 'long', year: 'numeric' })}</span><h3>{x.t}</h3><p>{x.p}</p></article>)}</div>
+  </div></section>}
+  {on.partners && <section class="alt"><div class="wrap">
+    <div class="head"><div><h2>{ah.partners.h2}</h2></div><a class="btn ghost" href={path(lang, 'partners')}>{ah.partners.all}</a></div>
+    <div class="logos">{a.partners.groups.flatMap((g) => g.names).slice(0, 6).map((n) => <div>{n}</div>)}</div>
+  </div></section>}
+  <section><div class="wrap">
     <h2>{h.help.h2}</h2>
     <div class="cards">{h.help.items.map((x, i) => <div class="card" style={`--c:var(--${hues[i]})`}><h3>{x.h3}</h3><p>{x.text}</p></div>)}</div>
   </div></section>
-  <section><div class="wrap"><DonateBlock d={{ ...c.donate, text: lang === 'fr' ? 'Un don, même modeste, soutient les enfants des rues et les jeunes mères mineures aux Philippines, ainsi que les enfants victimes d’abus dans le monde.' : 'A donation, however small, supports street children and underage young mothers in the Philippines, as well as child victims of abuse worldwide.' }} /></div></section>
+  <section class="alt"><div class="wrap"><DonateBlock d={{ ...c.donate, text: lang === 'fr' ? 'Un don, même modeste, soutient les enfants des rues et les jeunes mères mineures aux Philippines, ainsi que les enfants victimes d’abus dans le monde.' : 'A donation, however small, supports street children and underage young mothers in the Philippines, as well as child victims of abuse worldwide.' }} /></div></section>
 </Base>

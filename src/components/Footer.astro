@@ -1,13 +1,32 @@
 ---
 import { ui } from '../i18n/ui';
+import { path } from '../i18n/utils';
 import { SITE } from '../config/site';
 const { lang } = Astro.props; const t = ui(lang);
+const on = SITE.sections;
+const site = [
+  { slug: 'association', label: t.nav.association, show: true },
+  { slug: 'events', label: t.nav.events, show: true },
+  { slug: 'mobile-cup', label: t.footer.cup, show: true },
+  { slug: 'news', label: t.nav.news, show: on.news },
+  { slug: 'streamers', label: t.nav.streamers, show: on.streamers },
+  { slug: 'partners', label: t.nav.partners, show: on.partners },
+  { slug: 'contact', label: t.nav.contact, show: true },
+].filter((i) => i.show);
 ---
 <footer class="ft"><div class="wrap">
-  <div><strong>S4GS</strong><br /><span class="small">{t.footer.tagline}</span><br /><span class="small">© {new Date().getFullYear()} {t.footer.rights}</span></div>
-  <nav>
+  <div><strong>S4GS</strong><br /><span class="small">{t.footer.tagline}</span><br /><span class="small">{SITE.address}</span><br /><span class="small">© {new Date().getFullYear()} {t.footer.rights}</span></div>
+  <nav aria-label={t.footer.site}>
+    <strong class="small">{t.footer.site}</strong>
+    {site.map((i) => <a href={path(lang, i.slug)}>{i.label}</a>)}
+    <a href={path(lang, 'rules')}>{t.footer.rules}</a>
+    <a href={path(lang, 'faq')}>{t.footer.faq}</a>
+  </nav>
+  <nav aria-label={t.footer.legal}>
+    <strong class="small">{t.footer.legal}</strong>
+    <a href={path(lang, 'privacy')}>{t.footer.privacy}</a>
+    <a href={path(lang, 'cookies')} data-cookie-settings>{t.footer.cookies}</a>
+    {on.transparency && <a href={path(lang, 'transparency')}>{t.footer.transparency}</a>}
     <a href={`mailto:${SITE.contactEmail}`}>{t.footer.contact}</a>
-    <a href={`/${lang}/privacy/`}>{t.footer.privacy}</a>
-    <a href={`/${lang}/cookies/`} data-cookie-settings>{t.footer.cookies}</a>
   </nav>
 </div></footer>

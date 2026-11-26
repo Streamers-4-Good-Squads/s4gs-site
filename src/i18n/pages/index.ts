@@ -6,3 +6,5 @@ export const DOC_SLUGS = ['mission', 'rules', 'faq', 'privacy', 'prizes', 'cooki
 export const docPage = (l: string, s: string) => (l === 'fr' ? docsFr : docsEn)[s];
 import { homeFr, homeEn } from './home'; export const homePage = (l: string) => (l === 'fr' ? homeFr : homeEn);
 import { formFr, formEn } from './form'; export const formStrings = (l: string) => (l === 'fr' ? formFr : formEn);
+import { assocFr } from './assoc-fr'; import { assocEn } from './assoc-en';
+export const assocPage = (l: string) => (l === 'fr' ? assocFr : assocEn);

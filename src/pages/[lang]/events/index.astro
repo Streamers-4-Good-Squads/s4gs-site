@@ -1,0 +1,34 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHead from '../../../components/PageHead.astro';
+import DonateBlock from '../../../components/DonateBlock.astro';
+import { READY_CODES } from '../../../i18n/locales';
+import { assocPage, cupPage } from '../../../i18n/pages';
+import { ui } from '../../../i18n/ui';
+import { path, fmtSpan, fmtDate } from '../../../i18n/utils';
+import { SITE } from '../../../config/site';
+export function getStaticPaths() { return READY_CODES.map((lang) => ({ params: { lang } })); }
+const { lang } = Astro.params as { lang: string };
+const t = ui(lang); const a = assocPage(lang); const c = cupPage(lang);
+const hues = ['y', 'b', 'g'];
+const p = a.events;
+const items = p.calendar.items;
+const up = items.filter((x) => !x.past); const past = items.filter((x) => x.past);
+const when = (x: any) => x.label ?? fmtSpan(x.iso, x.end, lang);
+---
+<Base lang={lang} slug="events" title={p.head.title} description={p.head.description}>
+  <PageHead lang={lang} head={p.head} crumb={t.nav.events} />
+  <section class="alt"><div class="wrap"><div class="big">
+    <span class="tag">{p.cup.tag}</span><h2>{p.cup.h3}</h2><p>{p.cup.text}</p>
+    <div class="cta"><a class="btn y" href={path(lang, 'mobile-cup') + '#inscription'}>{p.cup.cta}</a><a class="btn ghost" style="color:inherit;border-color:currentColor" href={path(lang, 'rules')}>{p.cup.rules}</a><a class="btn ghost" style="color:inherit;border-color:currentColor" href={path(lang, 'faq')}>{p.cup.faq}</a></div>
+  </div></div></section>
+  <section><div class="wrap"><div class="card" style="--c:var(--g)"><span class="tag">{p.stream.tag}</span><h2>{p.stream.h3}</h2><p>{p.stream.text}</p></div></div></section>
+  <section class="alt"><div class="wrap prose">
+    <div class="kick">{p.calendar.kick}</div><h2>{p.calendar.h2}</h2>
+    <h3>{p.calendar.upcoming}</h3>
+    <ul class="tl">{up.map((x, i) => <li style={`--c:var(--${hues[i % 3]})`}><b>{when(x)}</b><span><strong>{x.t}</strong>{x.link ? <> | <a href={path(lang, x.link)}>→</a></> : null}</span><span class="small">{x.p}</span></li>)}</ul>
+    <h3 style="margin-top:32px">{p.calendar.past}</h3>
+    <ul class="tl past">{past.map((x) => <li><b>{when(x)}</b><span><strong>{x.t}</strong></span><span class="small">{x.p}</span></li>)}</ul>
+  </div></section>
+  <section><div class="wrap"><DonateBlock d={c.donate} /></div></section>
+</Base>
