@@ -1,0 +1,20 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHead from '../../../components/PageHead.astro';
+import { READY_CODES } from '../../../i18n/locales';
+import { extraPage } from '../../../i18n/pages/extra';
+import { ui } from '../../../i18n/ui';
+import { path } from '../../../i18n/utils';
+import { SITE } from '../../../config/site';
+export function getStaticPaths() { return READY_CODES.map((lang) => ({ params: { lang } })); }
+const { lang } = Astro.params as { lang: string };
+const t = ui(lang); const p = extraPage(lang).participate;
+const hues = ['b', 'g', 'y', 'lav'];
+const href = (c: any) => c.to === 'discord' ? SITE.discordUrl : c.to === 'mail' ? `mailto:${SITE.contactEmail}?subject=${encodeURIComponent(c.subject)}` : path(lang, c.to);
+const ext = (c: any) => c.to === 'discord';
+---
+<Base lang={lang} slug="participate" title={p.head.title} description={p.head.description}>
+  <PageHead lang={lang} head={p.head} crumb={t.footer.participate} />
+  <section class="sec wrap"><div class="grid4">{p.cards.map((c, i) => <article class="card"><div class="ic" style={`background:var(--${hues[i]})`}>{i + 1}</div><h3>{c.h3}</h3><p>{c.text}</p><a class={`pill ${i === 3 ? 'don' : 'pri'}`} href={href(c)} target={ext(c) ? '_blank' : undefined} rel={ext(c) ? 'noopener' : undefined}>{c.cta}</a></article>)}</div></section>
+  <section class="band"><div class="sec wrap" style="text-align:center"><h2>{p.cta.h2}</h2><p style="color:var(--mut);margin:12px auto 22px;max-width:52ch">{p.cta.text}</p><div class="cta" style="justify-content:center"><a class="pill pri" href={`mailto:${SITE.contactEmail}`}>{t.footer.contact}</a><a class="pill sec2" href={SITE.discordUrl} target="_blank" rel="noopener">Discord</a></div></div></section>
+</Base>

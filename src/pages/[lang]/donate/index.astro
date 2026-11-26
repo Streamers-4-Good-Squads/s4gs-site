@@ -1,0 +1,23 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHead from '../../../components/PageHead.astro';
+import { READY_CODES } from '../../../i18n/locales';
+import { extraPage } from '../../../i18n/pages/extra';
+import { ui } from '../../../i18n/ui';
+import { path } from '../../../i18n/utils';
+import { SITE } from '../../../config/site';
+export function getStaticPaths() { return READY_CODES.map((lang) => ({ params: { lang } })); }
+const { lang } = Astro.params as { lang: string };
+const t = ui(lang); const p = extraPage(lang).donate;
+---
+<Base lang={lang} slug="donate" title={p.head.title} description={p.head.description}>
+  <PageHead lang={lang} head={p.head} crumb={t.donate}><div class="cta" style="margin-top:20px"><a class="pill don" href={SITE.donationUrl} target="_blank" rel="noopener">{p.donate.cta}</a></div></PageHead>
+  <section class="sec wrap"><div class="ev">
+    <article class="big"><span class="tag">{p.impact.tag}</span><h3>{p.impact.h3}</h3><p>{p.impact.text}</p></article>
+    <div class="elist">{p.points.map((x, i) => <div class="erow"><div class="date"><b>{i + 1}</b></div><div><h3>{x.h3}</h3><p>{x.text}</p></div></div>)}</div>
+  </div></section>
+  <section class="band"><div class="sec wrap"><div class="ev">
+    <article class="big"><span class="tag">{p.donate.h2}</span><h3>{p.donate.h2}</h3><p>{p.donate.text}</p><a class="pill don" href={SITE.donationUrl} target="_blank" rel="noopener">{p.donate.cta}</a></article>
+    <div class="card"><h3>{p.more.h3}</h3><p>{p.more.text}</p><a class="pill sec2" href={path(lang, 'mission')}>{p.more.cta}</a></div>
+  </div></div></section>
+</Base>
