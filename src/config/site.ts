@@ -2,6 +2,12 @@
 export const SITE = {
   url: 'https://s4gs.org',
   donationUrl: 'https://streamlabscharity.com/streamers-4-good-squads',
+  socials: {
+    facebook: 'https://www.facebook.com/streamersforgood',
+    instagram: 'https://www.instagram.com/s4gsquads_',
+    youtube: 'https://www.youtube.com/@S4GSquads',
+    tiktok: 'https://www.tiktok.com/@s4gs.streamathon',
+  },
   discordUrl: 'https://discord.gg/DtjG2xyVCR',
   contactEmail: 'tournoi@s4gs.org',
   // Siège de l'ASBL (code postal 4130 confirmé)
