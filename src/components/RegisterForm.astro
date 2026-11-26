@@ -1,0 +1,135 @@
+---
+import { formStrings } from '../i18n/pages';
+import { SITE } from '../config/site';
+const { lang, zones } = Astro.props as { lang: string; zones: Record<string, string> };
+const f = formStrings(lang);
+const langs = [['fr', 'Français'], ['en', 'English'], ['de', 'Deutsch'], ['es', 'Español'], ['it', 'Italiano'], ['pl', 'Polski'], ['ro', 'Română'], ['cs', 'Čeština'], ['pt', 'Português']];
+const test = !SITE.formEndpoint;
+---
+<form id="reg" class="form" novalidate data-endpoint={SITE.formEndpoint} data-lang={lang}
+  data-err-email={f.err.email} data-err-tag={f.err.tag} data-err-under13={f.err.under13} data-err-game={f.err.game} data-err-parent={f.err.parent} data-err-network={f.err.network} data-sending={f.sending}>
+  {test && <p class="banner">{f.testBanner}</p>}
+  <a id="thanks" href={`/${lang}/merci/`} hidden>merci</a>
+  <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+  <fieldset><legend>{f.h3.player}</legend>
+    <div class="row">
+      <label>{f.nickname}<input name="nickname" required maxlength="40" autocomplete="nickname" /></label>
+      <label>{f.tag}<input name="tag" required maxlength="20" placeholder="#ABC123" /><small>{f.tagHelp}</small></label>
+    </div>
+    <label>{f.discord}<input name="discord" required maxlength="40" /></label>
+    <div class="row">
+      <label>{f.email}<input type="email" name="email" required autocomplete="email" /><small>{f.emailHelp}</small></label>
+      <label>{f.email2}<input type="email" name="email2" required autocomplete="off" /></label>
+    </div>
+    <div class="row">
+      <label>{f.country}<select name="country" required id="country"><option value="">{f.choose}</option></select></label>
+      <label>{f.zone}<select name="zone" required id="zone">{Object.entries(zones).map(([k, v]) => <option value={k}>{v}</option>)}</select><small>{f.zoneHelp}</small></label>
+    </div>
+    <label>{f.language}<select name="emailLang">{langs.map(([c, n]) => <option value={c} selected={c === lang}>{n}</option>)}</select></label>
+  </fieldset>
+
+  <fieldset><legend>{f.h3.event}</legend>
+    <div class="opts"><span class="lab">{f.games}</span>
+      <label class="chk"><input type="checkbox" name="games" value="clash-royale" /> Clash Royale</label>
+      <label class="chk"><input type="checkbox" name="games" value="brawl-stars" id="bs" /> Brawl Stars</label>
+    </div>
+    <div class="opts"><span class="lab">{f.division}</span>
+      <label class="chk"><input type="radio" name="division" value="open" checked /> {f.open}</label>
+      <label class="chk"><input type="radio" name="division" value="discovery" /> {f.discovery}</label>
+    </div>
+    <div id="bsbox" hidden>
+      <div class="opts"><span class="lab">{f.bsMode}</span>
+        <label class="chk"><input type="radio" name="bsMode" value="solo" checked /> {f.solo}</label>
+        <label class="chk"><input type="radio" name="bsMode" value="team" id="bsteam" /> {f.team}</label>
+      </div>
+      <label id="teamname" hidden>{f.teamName}<input name="teamName" maxlength="40" /></label>
+    </div>
+    <label class="chk"><input type="checkbox" name="mixed" value="yes" /> {f.mixed}</label>
+    <div class="opts"><span class="lab">{f.weekend}</span>
+      <label class="chk"><input type="radio" name="weekend" value="q1" /> {f.q1}</label>
+      <label class="chk"><input type="radio" name="weekend" value="q2" /> {f.q2}</label>
+      <label class="chk"><input type="radio" name="weekend" value="either" checked /> {f.either}</label>
+    </div>
+  </fieldset>
+
+  <fieldset><legend>{f.h3.age}</legend>
+    <div class="opts">
+      <label class="chk"><input type="radio" name="age" value="under13" /> {f.under13}</label>
+      <label class="chk"><input type="radio" name="age" value="13-15" /> {f.a1315}</label>
+      <label class="chk"><input type="radio" name="age" value="16-17" /> {f.a1617}</label>
+      <label class="chk"><input type="radio" name="age" value="18+" required /> {f.a18}</label>
+    </div>
+    <div id="parentbox" hidden><label>{f.parentEmail}<input type="email" name="parentEmail" id="parentEmail" /><small>{f.parentHelp}</small></label></div>
+  </fieldset>
+
+  <fieldset><legend>{f.h3.consents}</legend>
+    <label class="chk"><input type="checkbox" name="consentRules" required /> <span>{f.rules} (<a href={`/${lang}/rules/`} target="_blank" rel="noopener">{f.rulesLink}</a>)</span></label>
+    <label class="chk"><input type="checkbox" name="consentPrivacy" required /> <span>{f.privacy} (<a href={`/${lang}/privacy/`} target="_blank" rel="noopener">{f.privacyLink}</a>)</span></label>
+    <label class="chk"><input type="checkbox" name="consentImage" required /> <span>{f.image}</span></label>
+    <label class="chk"><input type="checkbox" name="newsletter" value="yes" /> <span>{f.newsletter}</span></label>
+  </fieldset>
+
+  <p class="error" id="msg" role="alert" hidden></p>
+  <button class="btn" type="submit" id="go">{f.submit}</button>
+</form>
+
+<script is:inline>
+(function () {
+  var form = document.getElementById('reg'); if (!form) return;
+  var L = form.dataset.lang, $ = function (n) { return form.elements[n]; };
+  var started = Date.now();
+  // Pays, noms traduits par le navigateur
+  var codes = 'AD AE AL AM AR AT AU AZ BA BE BG BO BR BY CA CH CL CN CO CR CY CZ DE DK DO DZ EC EE EG ES FI FJ FR GB GE GR GT HN HR HU ID IE IL IN IS IT JP KR KZ LI LT LU LV MA MD ME MK MT MX MY NC NI NL NO NZ PA PE PF PG PH PL PR PT PY RO RS SE SG SI SK SV TH TN TR UA US UY VE VN ZA'.split(' ');
+  var dn; try { dn = new Intl.DisplayNames([L], { type: 'region' }); } catch (e) {}
+  var list = codes.map(function (c) { return [c, dn ? dn.of(c) : c]; }).sort(function (a, b) { return a[1].localeCompare(b[1], L); });
+  list.forEach(function (x) { var o = document.createElement('option'); o.value = x[0]; o.textContent = x[1]; $('country').appendChild(o); });
+  var OC = 'AU NZ FJ PG NC PF'.split(' '), AM = 'US CA MX AR BO BR CL CO CR DO EC GT HN NI PA PE PR PY SV UY VE'.split(' ');
+  $('country').addEventListener('change', function () { var c = this.value; if (!c) return; $('zone').value = OC.indexOf(c) > -1 ? 'oceania' : AM.indexOf(c) > -1 ? 'americas' : 'europe'; });
+  // Affichages conditionnels
+  var bs = document.getElementById('bs'), bsbox = document.getElementById('bsbox'), team = document.getElementById('teamname');
+  function sync() {
+    bsbox.hidden = !bs.checked;
+    team.hidden = !(bs.checked && form.querySelector('input[name=bsMode]:checked').value === 'team');
+    var age = (form.querySelector('input[name=age]:checked') || {}).value;
+    var minor = age === '13-15' || age === '16-17';
+    document.getElementById('parentbox').hidden = !minor;
+    document.getElementById('parentEmail').required = minor;
+  }
+  form.addEventListener('change', sync); sync();
+  function show(t) { var m = document.getElementById('msg'); m.textContent = t; m.hidden = !t; if (t) m.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); show('');
+    if (!form.reportValidity()) return;
+    var age = form.querySelector('input[name=age]:checked').value;
+    if (age === 'under13') return show(form.dataset.errUnder13);
+    if (age !== '18+' && $('parentEmail').value.trim().toLowerCase() === $('email').value.trim().toLowerCase()) return show(form.dataset.errParent);
+    if ($('email').value.trim().toLowerCase() !== $('email2').value.trim().toLowerCase()) return show(form.dataset.errEmail);
+    if (!/^#[0-9A-Za-z]{3,15}$/.test($('tag').value.trim())) return show(form.dataset.errTag);
+    var games = Array.prototype.map.call(form.querySelectorAll('input[name=games]:checked'), function (x) { return x.value; });
+    if (!games.length) return show(form.dataset.errGame);
+    var thanks = document.getElementById('thanks').href + (age === '18+' ? '' : '?a=minor');
+    // Anti-robot : champ piège rempli ou envoi en moins de 4 secondes
+    if ($('website').value || Date.now() - started < 4000) { location.href = thanks; return; }
+    var q = new URLSearchParams(location.search), src = {};
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'ref'].forEach(function (k) { if (q.get(k)) src[k] = q.get(k); });
+    var data = {
+      version: 1, submittedAt: new Date().toISOString(), pageLang: L, emailLang: $('emailLang').value, source: src,
+      nickname: $('nickname').value.trim(), tag: $('tag').value.trim().toUpperCase(), discord: $('discord').value.trim(),
+      email: $('email').value.trim().toLowerCase(), country: $('country').value, zone: $('zone').value,
+      games: games, division: form.querySelector('input[name=division]:checked').value,
+      brawlStars: games.indexOf('brawl-stars') > -1 ? { mode: form.querySelector('input[name=bsMode]:checked').value, teamName: $('teamName').value.trim() } : null,
+      mixedCup: $('mixed').checked, weekend: form.querySelector('input[name=weekend]:checked').value,
+      ageBracket: age, parentEmail: age !== '18+' ? $('parentEmail').value.trim().toLowerCase() : null,
+      consents: { rules: true, privacy: true, image: true, newsletter: $('newsletter').checked }
+    };
+    var go = document.getElementById('go'); go.dataset.label = go.dataset.label || go.textContent; go.disabled = true; go.textContent = form.dataset.sending;
+    var ep = form.dataset.endpoint;
+    if (!ep) { setTimeout(function () { location.href = thanks; }, 600); return; }
+    // text/plain évite la pré-requête CORS : le flux reçoit le JSON tel quel
+    fetch(ep, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=UTF-8' }, body: JSON.stringify(data) })
+      .then(function () { location.href = thanks; })
+      .catch(function () { go.disabled = false; go.textContent = go.dataset.label; show(form.dataset.errNetwork); });
+  });
+})();
+</script>

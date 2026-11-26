@@ -12,13 +12,37 @@ privacy: {
   title: 'Privacy | Streamers 4 Good Squads', description: 'Privacy and cookie policy of Streamers 4 Good Squads.', noindex: true,
   h1: 'Privacy and cookies', lead: 'Working version to be validated before publication. Items in square brackets are to be completed.',
   blocks: [
-    { h2: 'Who is responsible for your data', paras: ['Streamers 4 Good Squads, a non-profit association under Belgian law (ASBL). Registered office: [address to be completed]. Contact: tournoi@s4gs.org.'] },
+    { h2: 'Who is responsible for your data', paras: ['Streamers 4 Good Squads, a non-profit association under Belgian law (ASBL). Registered office: 69 avenue de la Grotte, 4130 Liège, Belgium. Contact: tournoi@s4gs.org.'] },
     { h2: 'Data we collect', items: ['Nickname, game ID, Discord nickname.', 'Email address, country and language.', 'Chosen game, division and team.', 'Age bracket and, for ages 13 to 17, the email of a parent or legal guardian.', 'Your consents (rules, privacy, optional newsletter).'] },
     { h2: 'Why and on what basis', items: ['Running the tournament and sending you confirmation and reminders: your consent at pre-registration.', 'Obtaining parental consent for minors: the parent or guardian’s consent.', 'Sending the newsletter: your separate, optional consent.', 'Measuring site audience: your consent through the cookie banner.'] },
     { h2: 'Who receives this data', paras: ['Only the tools needed to run the event: [registration form tool, to be completed], Microsoft 365 and SharePoint for management, Discord for communication, and Streamlabs Charity for donations. Payments are made on their pages: S4GS does not see them and collects no banking data.'] },
     { h2: 'How long we keep it', paras: ['[Duration to be set.] Minors’ data and parental consents are deleted as soon as they are no longer needed after the event.'] },
     { h2: 'Your rights', paras: ['You can ask for access to your data, correction, deletion, and withdraw your consent at any time by writing to tournoi@s4gs.org. You may also lodge a complaint with the Belgian Data Protection Authority (autoriteprotectiondonnees.be).'] },
     { h2: 'Cookies', paras: ['The site only uses audience-measurement cookies with your consent. You can change your mind at any time using the “Manage cookies” link at the bottom of the page. [Cookie management tool to be completed.]'] },
+  ] },
+prizes: {
+  title: 'Prizes | S4GS Mobile Cup 2027', description: 'Prizes of the S4GS Mobile Cup 2027, identical in every zone.', noindex: true,
+  h1: 'Prizes', lead: 'Working version, pending the association’s choice of option. Rewards are the same in all three zones.',
+  blocks: [
+    { h2: 'Common rules', items: ['Same value everywhere, in local currency.', 'Brawl Stars trios: the value shown is per person.', 'Minors: prizes are sent through a parent.', 'No cash, unless a sponsor funds it, with written parental consent for minors.', 'The prize pool is published before registration opens, then updated with each new sponsor.'] },
+    { h2: 'Base rewards', table: { head: ['Who', 'Reward'], rows: [['Podium of each bracket', 'Zone champion title, digital trophy, feature on air and on S4GS social media, place in the website Hall of Fame'], ['1st place in each Open division', 'Coaching session with a partner content creator, priority registration for the next edition'], ['Top 16 of each bracket', 'Exclusive Stream-E wallpaper and digital badge, special Discord role'], ['Best play (audience vote)', 'Clip broadcast on all S4GS channels with a credit to the player'], ['Free draw among registrants', 'Guest commentator slot on a final'], ['Fundraising: milestones of 1, 3, 10 and 25 donors', 'Discord role, badge and mention on the website, Stream-E wallpaper and digital certificate, on-air thanks'], ['Fundraising: top 3 in each zone', 'Session with a content creator, digital trophy, on-air feature'], ['Continents Cup', 'Show match broadcast in honour of the winning continent, special Stream-E visual in its colours']] }, paras: ['Digital gift cards and hardware may be added depending on the sponsors found. The fundraising ranking is separate from the sporting ranking: donations fund the mission, never the prizes.'] },
+  ] },
+cookies: {
+  title: 'Cookies | Streamers 4 Good Squads', description: 'The cookies used by the Streamers 4 Good Squads website and how to manage them.', noindex: true,
+  h1: 'Cookies', lead: 'Working version to be validated before publication. The site only uses measurement cookies with your consent.',
+  blocks: [
+    { h2: 'What the site stores without your consent', items: ['Your light or dark theme choice, kept in your browser. It does not leave your device.', 'Your cookie choice, once made.'] },
+    { h2: 'What requires your consent', items: ['Audience measurement (Google Analytics): page views, where visits come from, registrations. It helps us know which actions bring in players.', 'No advertising cookie is set before your consent.'] },
+    { h2: 'External services', paras: ['Donations are made on Streamlabs Charity pages, and conversations take place on Discord. These services have their own rules: read their policies before using them.'] },
+    { h2: 'Changing your mind', paras: ['[Cookie management button to be connected once the tool is chosen.] You can also delete cookies from your browser settings.'] },
+  ] },
+'football-cup': {
+  title: 'Mobile Football Cup 2027 | S4GS', description: 'The S4GS mobile football tournament, in March 2027.', noindex: true,
+  h1: 'Mobile Football Cup 2027', lead: 'Working version: this page will be published after the January tournament closes.',
+  blocks: [
+    { h2: 'Dates', table: { head: ['Stage', 'Dates'], rows: [['Qualifiers, first weekend', '6 and 7 March 2027'], ['Qualifiers, second weekend', '13 and 14 March 2027'], ['Finals', '20 and 21 March 2027']] } },
+    { h2: 'How it is played', paras: ['Friendly match between two designated players, with fixed settings (length, difficulty, allowed teams). They will be published in the rules after the chosen game has been tested.'] },
+    { h2: 'Three zones, like in January', paras: ['Times per zone (Europe, Americas, Oceania) will be confirmed with the rules. Free to enter, donations are optional and support the S4GS mission.'] },
   ] },
 rules: {
   title: 'Rules | S4GS Mobile Cup 2027', description: 'Rules of the S4GS Mobile Cup 2027: registration, match flow, scores, disconnections, disputes and penalties.',

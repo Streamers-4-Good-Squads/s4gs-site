@@ -1,0 +1,77 @@
+# Spécification : réception des inscriptions Mobile Cup par le CRM
+
+Document destiné à l'équipe qui développe le CRM de S4GS. Le site (statique, s4gs.org) envoie chaque pré-inscription au CRM. Rien d'autre n'est à changer côté site : il suffit de renseigner l'adresse dans `formEndpoint` (`src/config/site.ts`).
+
+## 1. Point d'entrée à fournir
+- Une adresse HTTPS qui accepte les requêtes **POST**.
+- Le corps est du JSON envoyé avec le type `text/plain;charset=UTF-8` (choix volontaire : cela évite la pré-requête CORS). Le CRM doit donc lire le corps comme du texte, puis le décoder comme du JSON, sans exiger `application/json`.
+- Répondre **200 ou 204** quand l'inscription est enregistrée. Le site n'en lit pas le contenu, il redirige ensuite vers la page de remerciement.
+- Autoriser l'origine `https://s4gs.org` (et `https://www.s4gs.org`) en CORS pour les réponses.
+
+## 2. Contenu reçu (version 1)
+| Champ | Type | Règle |
+|---|---|---|
+| version | nombre | Vaut 1. À refuser ou signaler si inconnu. |
+| submittedAt | texte ISO 8601 | Date et heure d'envoi, UTC. |
+| pageLang | texte | Langue de la page (fr, en...). |
+| emailLang | texte | Langue des e-mails à envoyer (fr, en, de, es, it, pl, ro, cs, pt). |
+| source | objet | Peut contenir utm_source, utm_medium, utm_campaign, utm_content, ref. Souvent vide. |
+| nickname | texte | Pseudo, 40 caractères maximum. |
+| tag | texte | Identifiant de joueur, commence par #, lettres et chiffres, en majuscules. |
+| discord | texte | Pseudo Discord, 40 caractères maximum. |
+| email | texte | Adresse e-mail en minuscules. |
+| country | texte | Code pays à deux lettres (ISO 3166-1). |
+| zone | texte | europe, americas ou oceania. |
+| games | liste | clash-royale et/ou brawl-stars, au moins un. |
+| division | texte | open ou discovery. |
+| brawlStars | objet ou null | { mode: solo ou team, teamName }, null si Brawl Stars n'est pas choisi. |
+| mixedCup | booléen | Inscription à la coupe mixte ou féminine. |
+| weekend | texte | q1 (16-17 janvier), q2 (23-24 janvier) ou either. |
+| ageBracket | texte | 13-15, 16-17 ou 18+. Les moins de 13 ans ne sont jamais envoyés. |
+| parentEmail | texte ou null | Obligatoire si ageBracket vaut 13-15 ou 16-17, sinon null. |
+| consents | objet | { rules: true, privacy: true, image: true, newsletter: vrai ou faux }. |
+
+## 3. Contrôles côté CRM (ne pas se fier au site)
+- Refuser si rules, privacy ou image ne valent pas true, si l'e-mail ou le tag est mal formé, si ageBracket est autre chose que 13-15, 16-17 ou 18+, si parentEmail manque pour un·e mineur·e, ou si parentEmail est identique à email.
+- Un même e-mail et un même jeu ne créent qu'une inscription : doublon = mise à jour ou rejet silencieux, jamais deux lignes.
+- Limiter le débit par adresse IP, et rejeter les envois dont la taille dépasse quelques Ko.
+- Enregistrer la preuve des consentements : texte accepté (règlement, confidentialité), date, version de la page.
+- Ne jamais renvoyer au navigateur de données personnelles.
+
+## 4. Automatisations attendues après chaque inscription
+1. Créer la fiche personne et l'inscription (statut : en attente).
+2. Envoyer l'e-mail de confirmation depuis tournoi@s4gs.org, dans la langue emailLang : lien vers la plateforme de tournoi, invitation Discord, lien de don pour les majeur·es, lien de partage pour les mineur·es.
+3. Pour un·e mineur·e (13-15 ou 16-17) : e-mail au parent avec un lien personnel vers `https://s4gs.org/<langue>/parents/?t=<jeton>` (jeton de 16 à 128 caractères, lettres, chiffres, tiret, souligné, usage unique ou lié à l'inscription). Le lien de retrait est le même avec `&withdraw=1`. Sans accord avant le check-in, la participation n'est pas validée. Contrôle manuel des cas douteux avant chaque week-end.
+4. Rappels automatiques à J-7, J-1 et H-1 avant chaque week-end de jeu.
+5. Alerte au staff (e-mail ou Discord) si l'enregistrement ou un envoi d'e-mail échoue.
+
+## 5. Accord parental (page `/xx/parents/`)
+La page envoie un second type de message, à une adresse distincte (`consentEndpoint` dans `src/config/site.ts`), même principe (POST, texte brut contenant du JSON, réponse 200 ou 204).
+
+```json
+{
+  "version": 1, "type": "parental-consent", "decision": "accepted",
+  "token": "jeton-du-lien", "pageLang": "fr", "submittedAt": "2026-12-17T09:12:00.000Z",
+  "parentName": "Nom Prénom", "relation": "parent", "contactEmail": "parent@exemple.be",
+  "consents": { "participation": true, "data": true, "image": true, "prizes": true, "fundraising": true }
+}
+```
+- `decision` vaut `accepted`, `refused` ou `withdrawn`. Pour `refused` et `withdrawn`, seuls `token`, `decision`, `pageLang` et `submittedAt` sont envoyés.
+- `relation` vaut `parent` ou `guardian`.
+- Le CRM doit vérifier que le jeton existe et n'est pas déjà utilisé, puis : `accepted` met le statut sur « Accord reçu » et envoie la confirmation ; `refused` met « Non autorisé » ; `withdrawn` retire la personne du tournoi et déclenche la suppression de ses données.
+- Relances au parent à J+3 et J+7 après l'inscription, puis 48 heures avant le premier check-in.
+
+## 6. Compteur d'inscriptions (facultatif)
+Une adresse GET publique qui renvoie uniquement `{ "count": 123 }`, que le site pourra afficher. Pas d'autre donnée.
+
+## 7. Données personnelles
+- Données des mineur·es et accords parentaux : suppression après l'événement, dans le délai de la politique de confidentialité.
+- Aucune donnée bancaire : les dons passent par Streamlabs Charity ou Stripe.
+- Accès restreint aux personnes qui gèrent le tournoi, journal des accès.
+
+## 8. Exemple de test
+```
+curl -X POST "ADRESSE_DU_CRM" \
+  -H "Content-Type: text/plain;charset=UTF-8" \
+  --data '{"version":1,"submittedAt":"2026-12-16T14:03:22.000Z","pageLang":"fr","emailLang":"fr","source":{},"nickname":"Test","tag":"#ABC123","discord":"test","email":"test@exemple.be","country":"BE","zone":"europe","games":["clash-royale"],"division":"open","brawlStars":null,"mixedCup":false,"weekend":"either","ageBracket":"18+","parentEmail":null,"consents":{"rules":true,"privacy":true,"image":true,"newsletter":false}}'
+```

@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import DonateStrip from '../components/DonateStrip.astro';
 import { READY } from '../i18n/locales';
 import { ui } from '../i18n/ui';
 import { SITE } from '../config/site';
@@ -20,7 +21,9 @@ const p = (l: string) => `${SITE.url}/${l}/${slug ? slug + '/' : ''}`;
   <link rel="alternate" hreflang="x-default" href={p('en')} />
   <meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:type" content="website" />
   {noindex && <meta name="robots" content="noindex" />}
-  <link rel="icon" href="/img/logo-pastel.webp" />
+  <link rel="icon" type="image/webp" href="/img/logo-pastel.webp" />
+  <link rel="apple-touch-icon" href="/img/logo-pastel.webp" />
+  <meta name="theme-color" content="#5C2D91" />
   <link rel="preload" href="/fonts/display-100-700.woff2" as="font" type="font/woff2" crossorigin />
   <script is:inline>
     (function(){try{var s=localStorage.getItem('s4gs-theme');var d=s?s==='dark':matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=d?'dark':'light'}catch(e){}})();
@@ -30,6 +33,7 @@ const p = (l: string) => `${SITE.url}/${l}/${slug ? slug + '/' : ''}`;
   <a class="skip" href="#main">{t.skip}</a>
   <Header lang={lang} slug={slug} />
   <main id="main"><slot /></main>
+  {!['mission', 'merci', 'parents'].includes(slug) && <DonateStrip lang={lang} />}
   <Footer lang={lang} />
   <script is:inline>
     document.querySelectorAll('[data-theme-toggle]').forEach(function(b){b.addEventListener('click',function(){var n=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=n;try{localStorage.setItem('s4gs-theme',n)}catch(e){}})});

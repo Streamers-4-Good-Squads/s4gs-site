@@ -7,10 +7,11 @@ import { ui } from '../../../i18n/ui';
 import { fmtRange } from '../../../i18n/utils';
 import { EVENT } from '../../../data/event';
 import { SITE } from '../../../config/site';
+import RegisterForm from '../../../components/RegisterForm.astro';
 export function getStaticPaths() { return READY_CODES.map((lang) => ({ params: { lang } })); }
 const { lang } = Astro.params as { lang: string };
 const t = ui(lang); const c = cupPage(lang);
-const form = SITE.formUrl[lang] || SITE.formUrl.en;
+const zoneLabels = Object.fromEntries(EVENT.zones.map((z) => [z.id, `${c.zones.names[z.id]} (${z.from.replace(':00', ' h')} - ${z.to.replace(':00', ' h')})`]));
 const hues = ['y', 'b', 'g', 'lav', 'y'];
 ---
 <Base lang={lang} slug="mobile-cup" title={c.title} description={c.description}>
@@ -59,10 +60,8 @@ const hues = ['y', 'b', 'g', 'lav', 'y'];
   <section class="alt" id="inscription"><div class="wrap"><div class="box">
     <h2>{c.register.h2}</h2><p>{c.register.text}</p>
     {SITE.registrations.count > 0 && <p><span class="counter">{SITE.registrations.count}</span><br />{c.register.counter}</p>}
-    {form
-      ? <a class="btn" href={form}>{t.register}</a>
-      : <><a class="btn" aria-disabled="true" href="#inscription">{t.register}</a><p class="small">{c.register.soon}</p></>}
     <p class="small">{c.register.ages}</p>
+    <RegisterForm lang={lang} zones={zoneLabels} />
   </div></div></section>
 
   <section><div class="wrap"><DonateBlock d={c.donate} /></div></section>

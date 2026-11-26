@@ -9,7 +9,7 @@ export default defineConfig({
   build: { format: 'directory' },
   integrations: [
     sitemap({
-      filter: (u) => !u.includes('/merci/') && !u.includes('/privacy/'),
+      filter: (u) => !u.includes('/merci/') && !u.includes('/privacy/') && !u.includes('/prizes/') && !u.includes('/cookies/') && !u.includes('/football-cup/') && !u.includes('/parents/'),
       i18n: { defaultLocale: 'en', locales: Object.fromEntries(READY.map((l) => [l.code, l.code])) },
     }),
   ],
