@@ -1,0 +1,20 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHead from '../../../components/PageHead.astro';
+import DonateBlock from '../../../components/DonateBlock.astro';
+import { READY_CODES } from '../../../i18n/locales';
+import { assocPage, cupPage } from '../../../i18n/pages';
+import { ui } from '../../../i18n/ui';
+import { path, fmtSpan, fmtDate } from '../../../i18n/utils';
+import { SITE } from '../../../config/site';
+export function getStaticPaths() { return READY_CODES.map((lang) => ({ params: { lang } })); }
+const { lang } = Astro.params as { lang: string };
+const t = ui(lang); const a = assocPage(lang); const c = cupPage(lang);
+const hues = ['y', 'b', 'g'];
+const p = a.partners; const on = SITE.sections.partners;
+---
+<Base lang={lang} slug="partners" title={p.head.title} description={p.head.description} noindex={!on}>
+  <PageHead lang={lang} head={p.head} crumb={t.nav.partners} sample={on ? '' : p.sample} />
+  {p.groups.map((g, i) => <section class={i % 2 === 0 ? 'alt' : ''}><div class="wrap"><h2>{g.h2}</h2><div class="logos">{g.names.map((n) => <div>{n}</div>)}</div></div></section>)}
+  <section><div class="wrap"><div class="box"><h2>{p.join.h2}</h2><p>{p.join.text}</p><a class="btn" href={`mailto:${SITE.contactEmail}?subject=${encodeURIComponent(p.join.subject)}`}>{p.join.cta}</a></div></div></section>
+</Base>

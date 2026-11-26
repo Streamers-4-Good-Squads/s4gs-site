@@ -1,0 +1,22 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHead from '../../../components/PageHead.astro';
+import DonateBlock from '../../../components/DonateBlock.astro';
+import { READY_CODES } from '../../../i18n/locales';
+import { assocPage, cupPage } from '../../../i18n/pages';
+import { ui } from '../../../i18n/ui';
+import { path, fmtSpan, fmtDate } from '../../../i18n/utils';
+import { SITE } from '../../../config/site';
+export function getStaticPaths() { return READY_CODES.map((lang) => ({ params: { lang } })); }
+const { lang } = Astro.params as { lang: string };
+const t = ui(lang); const a = assocPage(lang); const c = cupPage(lang);
+const hues = ['y', 'b', 'g'];
+const p = a.contact;
+---
+<Base lang={lang} slug="contact" title={p.head.title} description={p.head.description}>
+  <PageHead lang={lang} head={p.head} crumb={t.nav.contact} />
+  <section class="alt"><div class="wrap">
+    <div class="cards">{p.cards.map((x, i) => <div class="card" style={`--c:var(--${hues[i % 3]})`}><h3>{x.h3}</h3><p>{x.text}</p><p><a class="btn ghost" target={x.href ? '_blank' : undefined} rel={x.href ? 'noopener' : undefined} href={x.href === 'discord' ? SITE.discordUrl : `mailto:${SITE.contactEmail}?subject=${encodeURIComponent(x.subject ?? '')}`}>{x.cta}</a></p></div>)}</div>
+    <p class="small" style="margin-top:28px"><strong>{p.address}</strong> : {SITE.address}</p>
+  </div></section>
+</Base>

@@ -1,0 +1,21 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHead from '../../../components/PageHead.astro';
+import DonateBlock from '../../../components/DonateBlock.astro';
+import { READY_CODES } from '../../../i18n/locales';
+import { assocPage, cupPage } from '../../../i18n/pages';
+import { ui } from '../../../i18n/ui';
+import { path, fmtSpan, fmtDate } from '../../../i18n/utils';
+import { SITE } from '../../../config/site';
+export function getStaticPaths() { return READY_CODES.map((lang) => ({ params: { lang } })); }
+const { lang } = Astro.params as { lang: string };
+const t = ui(lang); const a = assocPage(lang); const c = cupPage(lang);
+const hues = ['y', 'b', 'g'];
+const p = a.news; const on = SITE.sections.news;
+---
+<Base lang={lang} slug="news" title={p.head.title} description={p.head.description} noindex={!on}>
+  <PageHead lang={lang} head={p.head} crumb={t.nav.news} sample={on ? '' : p.sample} />
+  <section class="alt"><div class="wrap"><div class="cards">
+    {p.posts.map((x, i) => <article class="card" style={`--c:var(--${hues[i % 3]})`}><span class="meta">{fmtDate(x.date, lang, { day: 'numeric', month: 'long', year: 'numeric' })}</span><h3>{x.t}</h3><p>{x.p}</p></article>)}
+  </div></div></section>
+</Base>
