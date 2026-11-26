@@ -16,6 +16,6 @@ const p = a.news; const on = SITE.sections.news;
 <Base lang={lang} slug="news" title={p.head.title} description={p.head.description} noindex={!on}>
   <PageHead lang={lang} head={p.head} crumb={t.nav.news} sample={on ? '' : p.sample} />
   <section class="alt"><div class="wrap"><div class="cards">
-    {p.posts.map((x, i) => <article class="card" style={`--c:var(--${hues[i % 3]})`}><span class="meta">{fmtDate(x.date, lang, { day: 'numeric', month: 'long', year: 'numeric' })}</span><h3>{x.t}</h3><p>{x.p}</p></article>)}
+    {[...p.posts].sort((a, b) => b.date.localeCompare(a.date)).map((x, i) => <article class="card" style={`--c:var(--${hues[i % 3]})`}>{(x as any).img && <img class="nimg" src={(x as any).img} alt="" loading="lazy" />}<span class="meta">{fmtDate(x.date, lang, { day: 'numeric', month: 'long', year: 'numeric' })}</span><h3>{x.t}</h3><p>{x.p}</p></article>)}
   </div></div></section>
 </Base>

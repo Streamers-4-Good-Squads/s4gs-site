@@ -316,3 +316,4 @@ footer.ft{background:var(--tint);margin-top:0}
 .site .mascot{width:clamp(90px,12vw,130px);display:block;margin:0 0 14px}
 .site .crumb a{color:inherit}
 .site .cta{margin-top:4px}
+.site .nimg{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px;display:block}

@@ -1,0 +1,222 @@
+{
+  "sections": {
+    "news": false,
+    "streamers": false,
+    "partners": false,
+    "transparency": false,
+    "stats": false
+  },
+  "home": {
+    "h1": {
+      "fr": "Gaming. Streaming. Solidarité.",
+      "en": "Gaming. Streaming. Solidarity."
+    },
+    "lead": {
+      "fr": "S4GS est une association qui réunit des streamers du monde entier pour soutenir des causes humanitaires, avec un grand événement chaque année.",
+      "en": "S4GS is a non-profit that brings together streamers from around the world to support humanitarian causes, with one big event every year."
+    }
+  },
+  "stats": [
+    {
+      "v": "0",
+      "l": {
+        "fr": "euros récoltés (exemple)",
+        "en": "euros raised (example)"
+      }
+    },
+    {
+      "v": "0",
+      "l": {
+        "fr": "streamers mobilisés (exemple)",
+        "en": "streamers involved (example)"
+      }
+    },
+    {
+      "v": "0",
+      "l": {
+        "fr": "pays représentés (exemple)",
+        "en": "countries represented (example)"
+      }
+    },
+    {
+      "v": "0",
+      "l": {
+        "fr": "éditions organisées (exemple)",
+        "en": "editions held (example)"
+      }
+    }
+  ],
+  "news": [
+    {
+      "date": "2026-12-01",
+      "img": "",
+      "t": {
+        "fr": "Titre d’actualité, exemple 1",
+        "en": "News headline, example 1"
+      },
+      "p": {
+        "fr": "Deux lignes de résumé pour donner envie de lire l’article.",
+        "en": "Two lines of summary to make people want to read the article."
+      }
+    },
+    {
+      "date": "2026-12-08",
+      "img": "",
+      "t": {
+        "fr": "Titre d’actualité, exemple 2",
+        "en": "News headline, example 2"
+      },
+      "p": {
+        "fr": "Deux lignes de résumé pour donner envie de lire l’article.",
+        "en": "Two lines of summary to make people want to read the article."
+      }
+    },
+    {
+      "date": "2026-12-16",
+      "img": "",
+      "t": {
+        "fr": "Titre d’actualité, exemple 3",
+        "en": "News headline, example 3"
+      },
+      "p": {
+        "fr": "Deux lignes de résumé pour donner envie de lire l’article.",
+        "en": "Two lines of summary to make people want to read the article."
+      }
+    }
+  ],
+  "streamers": [
+    {
+      "n": "Pseudo 1",
+      "role": {
+        "fr": "Streamer",
+        "en": "Streamer"
+      },
+      "region": {
+        "fr": "Europe",
+        "en": "Europe"
+      }
+    },
+    {
+      "n": "Pseudo 2",
+      "role": {
+        "fr": "Cosplayer",
+        "en": "Cosplayer"
+      },
+      "region": {
+        "fr": "Asie",
+        "en": "Asia"
+      }
+    },
+    {
+      "n": "Pseudo 3",
+      "role": {
+        "fr": "Créateur",
+        "en": "Creator"
+      },
+      "region": {
+        "fr": "Amériques",
+        "en": "Americas"
+      }
+    },
+    {
+      "n": "Pseudo 4",
+      "role": {
+        "fr": "Streamer",
+        "en": "Streamer"
+      },
+      "region": {
+        "fr": "Europe",
+        "en": "Europe"
+      }
+    }
+  ],
+  "partners": [
+    {
+      "h2": {
+        "fr": "Partenaires institutionnels",
+        "en": "Institutional partners"
+      },
+      "names": [
+        "Partenaire exemple 1",
+        "Partenaire exemple 2"
+      ]
+    },
+    {
+      "h2": {
+        "fr": "Partenaires communautaires",
+        "en": "Community partners"
+      },
+      "names": [
+        "Partenaire exemple 3",
+        "Partenaire exemple 4",
+        "Partenaire exemple 5"
+      ]
+    },
+    {
+      "h2": {
+        "fr": "Partenaires médias",
+        "en": "Media partners"
+      },
+      "names": [
+        "Partenaire exemple 6",
+        "Partenaire exemple 7"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "iso": "2026-12-16",
+      "end": "2027-01-31",
+      "label": {
+        "fr": "",
+        "en": ""
+      },
+      "t": {
+        "fr": "S4GS Mobile Cup 2027",
+        "en": "S4GS Mobile Cup 2027"
+      },
+      "p": {
+        "fr": "Tournoi mobile gratuit en ligne : Clash Royale et Brawl Stars.",
+        "en": "Free online mobile tournament: Clash Royale and Brawl Stars."
+      },
+      "link": "mobile-cup",
+      "past": false
+    },
+    {
+      "iso": "",
+      "end": "",
+      "label": {
+        "fr": "Avril 2027",
+        "en": "April 2027"
+      },
+      "t": {
+        "fr": "S4GS Streamathon 2027",
+        "en": "S4GS Streamathon 2027"
+      },
+      "p": {
+        "fr": "Week-end exact et lieu à confirmer.",
+        "en": "Exact weekend and venue to be confirmed."
+      },
+      "link": "",
+      "past": false
+    },
+    {
+      "iso": "2026-11-20",
+      "end": "2026-11-22",
+      "label": {
+        "fr": "",
+        "en": ""
+      },
+      "t": {
+        "fr": "S4GS Streamathon 2026",
+        "en": "S4GS Streamathon 2026"
+      },
+      "p": {
+        "fr": "Un week-end de 48 heures de stream, à Namur et en ligne, au profit d’Aid for Youth Philippines.",
+        "en": "A 48-hour stream weekend, in Namur and online, for Aid for Youth Philippines."
+      },
+      "link": "",
+      "past": true
+    }
+  ]
+}
