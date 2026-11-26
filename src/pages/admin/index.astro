@@ -1,0 +1,26 @@
+---
+import '../../styles/global.css';
+import '../../styles/design.css';
+import content from '../../data/content.json';
+---
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Espace équipe | Streamers 4 Good Squads</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="icon" type="image/webp" href="/img/logo-pastel.webp" />
+  <script is:inline>(function(){try{var s=localStorage.getItem('s4gs-theme');var d=s?s==='dark':matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=d?'dark':'light'}catch(e){}})();</script>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <div class="site adm">
+    <header class="ah"><a class="logo" href="../fr/"><span class="med"></span><span><b>Streamers</b> <i>4 Good Squads</i></span></a>
+      <div class="ar"><span id="who" class="small"></span><button class="pill sec2" id="out" hidden>Se déconnecter</button></div></header>
+    <main class="am" id="app"><p class="small">Chargement…</p></main>
+  </div>
+  <script type="application/json" id="seed" set:html={JSON.stringify(content)} />
+  <script is:inline src="https://cdn.jsdelivr.net/npm/@azure/msal-browser@3.28.1/lib/msal-browser.min.js"></script>
+  <script is:inline src="admin.js"></script>
+</body>
+</html>

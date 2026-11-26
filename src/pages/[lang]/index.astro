@@ -56,7 +56,7 @@ const ICONS = [
   </div></section>
   {on.news && <section class="sec wrap">
     <div class="head"><div><div class="kick">{ah.news.kick}</div><h2>{ah.news.h2}</h2></div><a class="pill sec2" href={path(lang, 'news')}>{ah.news.all}</a></div>
-    <div class="grid3">{a.news.posts.map((x) => <article class="card news"><span class="meta">{fmtDate(x.date, lang, { day: 'numeric', month: 'long', year: 'numeric' })}</span><h3>{x.t}</h3><p>{x.p}</p></article>)}</div>
+    <div class="grid3">{[...a.news.posts].sort((x, y) => y.date.localeCompare(x.date)).slice(0, 3).map((x) => <article class="card news">{(x as any).img && <img class="nimg" src={(x as any).img} alt="" loading="lazy" />}<span class="meta">{fmtDate(x.date, lang, { day: 'numeric', month: 'long', year: 'numeric' })}</span><h3>{x.t}</h3><p>{x.p}</p></article>)}</div>
   </section>}
   {on.partners && <section class="alt sec wrap">
     <div class="head"><div><h2>{ah.partners.h2}</h2></div><a class="pill sec2" href={path(lang, 'partners')}>{ah.partners.all}</a></div>

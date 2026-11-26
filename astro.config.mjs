@@ -4,7 +4,7 @@ import { READY } from './src/i18n/locales.ts';
 import { SITE } from './src/config/site.ts';
 
 // Pages non publiques : brouillons, pages de formulaire et rubriques encore en exemple
-const hidden = ['/merci/', '/privacy/', '/prizes/', '/cookies/', '/football-cup/', '/parents/', ...Object.entries(SITE.sections).filter(([k, v]) => !v && k !== 'stats').map(([k]) => `/${k}/`)];
+const hidden = ['/merci/', '/privacy/', '/prizes/', '/cookies/', '/football-cup/', '/parents/', '/admin/', ...Object.entries(SITE.sections).filter(([k, v]) => !v && k !== 'stats').map(([k]) => `/${k}/`)];
 
 export default defineConfig({
   site: 'https://s4gs.org',

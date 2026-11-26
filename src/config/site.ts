@@ -1,3 +1,4 @@
+import content from '../data/content.json';
 // Réglages modifiables sans toucher au design.
 export const SITE = {
   url: 'https://s4gs.org',
@@ -23,5 +24,6 @@ export const SITE = {
   // Rubriques dont le contenu est encore un exemple : tant que la valeur est false, la page est construite
   // mais masquée du menu et du pied de page, non indexée et absente du plan du site.
   // Passer à true quand les vrais contenus sont saisis (src/i18n/pages/assoc-fr.ts et assoc-en.ts).
-  sections: { news: false, streamers: false, partners: false, transparency: false, stats: false },
+  // Les valeurs viennent de src/data/content.json (modifiable depuis /admin/).
+  sections: content.sections as { news: boolean; streamers: boolean; partners: boolean; transparency: boolean; stats: boolean },
 };
