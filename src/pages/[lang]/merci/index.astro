@@ -16,23 +16,40 @@ const c = thanksPage(lang);
     <ul class="list">{c.next.map((n) => <li>{n}</li>)}</ul>
     {SITE.discordUrl && !SITE.discordUrl.includes('REMPLACER') && <p><a class="btn ghost" href={SITE.discordUrl} target="_blank" rel="noopener">Discord</a></p>}
   </div></section>
-  <section><div class="wrap"><div class="box">
-    <h2>{c.donate.h2}</h2><p>{c.donate.text}</p>
-    <div class="amts" aria-hidden="true"><span>5 €</span><span>10 €</span><span>20 €</span><span>{c.donate.free}</span></div>
-    <div class="cta" id="don">
-      <a class="btn y" id="pay" href={SITE.donationUrl} target="_blank" rel="noopener">{c.donate.cta}</a>
-      <button class="btn ghost" id="share" type="button" data-text={c.donate.shareText} data-url={SITE.donationUrl}>{c.donate.share}</button>
+
+  <!-- Moins de 18 ans (?a=minor ajouté par le formulaire) : pas de demande de don, le lien part à l'adresse du parent -->
+  <section id="minor-note" hidden><div class="wrap"><div class="box"><p>{c.donate.parent}</p></div></div></section>
+
+  <!-- 18 ans et plus : la fenêtre de don s'ouvre par-dessus la page, un bouton permet de la rouvrir -->
+  <section id="adult-cta" hidden><div class="wrap" style="text-align:center">
+    <button class="btn y" type="button" id="reopen">{c.donate.reopen}</button>
+  </div></section>
+
+  <dialog class="don" id="don" aria-labelledby="don-h">
+    <div class="box">
+      <button class="x" type="button" data-close aria-label={c.donate.close}>×</button>
+      <h2 id="don-h">{c.donate.h2}</h2><p>{c.donate.text}</p>
+      <div class="amts" aria-hidden="true"><span>5 €</span><span>10 €</span><span>20 €</span><span>{c.donate.free}</span></div>
+      <div class="cta"><a class="btn y" href={SITE.donationUrl} target="_blank" rel="noopener">{c.donate.cta}</a></div>
+      <p class="small">{c.donate.fund}</p>
+      <p class="small">{c.donate.noAdvantage}</p>
+      <p class="small"><button class="link" type="button" data-close>{c.donate.later}</button></p>
     </div>
-    <p class="small" id="minors" hidden>{c.donate.minors}</p>
-    <p class="small" id="fund">{c.donate.fund}</p>
-    <p class="small">{c.donate.noAdvantage}</p>
-    <p class="small"><a href={`/${lang}/mobile-cup/`}>{c.donate.later}</a></p>
-  </div></div></section>
+  </dialog>
+
   <script is:inline>
-    // Moins de 18 ans (?a=minor ajouté par le formulaire) : pas de bouton de paiement, partage familial
-    var q=new URLSearchParams(location.search).get('a');
-    if(q==='minor'){document.getElementById('pay').hidden=true;document.getElementById('minors').hidden=false;document.getElementById('fund').hidden=true}
-    document.getElementById('share').addEventListener('click',function(){var b=this,t=b.dataset.text,u=b.dataset.url;
-      if(navigator.share){navigator.share({text:t,url:u}).catch(function(){})}else{location.href='https://wa.me/?text='+encodeURIComponent(t+' '+u)}});
+  (function () {
+    var minor = new URLSearchParams(location.search).get('a') === 'minor';
+    var d = document.getElementById('don');
+    if (minor) { document.getElementById('minor-note').hidden = false; d.remove(); return; }
+    document.getElementById('adult-cta').hidden = false;
+    var open = function () { if (d.showModal) { if (!d.open) d.showModal(); } else { d.setAttribute('open', ''); } };
+    var close = function () { if (d.close) d.close(); else d.removeAttribute('open'); document.getElementById('reopen').focus(); };
+    d.querySelectorAll('[data-close]').forEach(function (b) { b.addEventListener('click', close); });
+    // Clic sur le fond sombre : ferme la fenêtre
+    d.addEventListener('click', function (e) { if (e.target === d) close(); });
+    document.getElementById('reopen').addEventListener('click', open);
+    setTimeout(open, 900);
+  })();
   </script>
 </Base>

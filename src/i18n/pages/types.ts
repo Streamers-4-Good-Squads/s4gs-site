@@ -12,7 +12,7 @@ export interface CupPage {
 }
 export interface ThanksPage {
   title: string; h1: string; lead: string; next: string[];
-  donate: { h2: string; text: string; cta: string; free: string; minors: string; share: string; shareText: string; later: string; noAdvantage: string; fund: string };
+  donate: { h2: string; text: string; cta: string; free: string; parent: string; close: string; reopen: string; later: string; noAdvantage: string; fund: string };
 }
 export interface HomePage {
   title: string; description: string; h1: string; lead: string;

@@ -78,7 +78,7 @@ faq: {
   ] }, { h2: 'Donations', qa: [
     { q: 'What are donations used for?', a: 'They support street children and underage young mothers in the Philippines, as well as child victims of abuse worldwide. 70% goes to humanitarian partners, 30% to running the association.' },
     { q: 'Can I get a tax certificate?', a: 'No, no tax certificate is issued.' },
-    { q: 'I am under 18, do I have to donate myself?', a: 'No. You can share the donation page with your family using the button provided.' },
+    { q: 'I am under 18, do I have to donate myself?', a: 'No. Along with the consent request, your parent gets an email link to support the mission, if they wish.' },
     { q: 'Does a donation give an advantage in the tournament?', a: 'No, never. Donations fund the mission, and prizes are provided by sponsors or in kind.' },
     { q: 'What is the Continents Cup?', a: 'A fundraising competition between Europe, the Americas and Oceania. Every registered player can create their own Streamlabs Charity page, linked to the S4GS Mobile Cup 2027 team. Each continent’s total is shown on the website and during broadcasts.' },
   ] }],

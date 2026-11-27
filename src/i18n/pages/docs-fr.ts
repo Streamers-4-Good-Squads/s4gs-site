@@ -78,7 +78,7 @@ faq: {
   ] }, { h2: 'Les dons', qa: [
     { q: 'À quoi servent les dons ?', a: 'Ils soutiennent les enfants des rues et les jeunes mères mineures aux Philippines, ainsi que les enfants victimes d’abus dans le monde. 70 % vont aux partenaires humanitaires, 30 % à la gestion de l’association.' },
     { q: 'Puis-je recevoir une attestation fiscale ?', a: 'Non, aucune attestation fiscale n’est délivrée.' },
-    { q: 'J’ai moins de 18 ans, dois-je donner moi-même ?', a: 'Non. Tu peux partager la page de don avec ta famille grâce au bouton prévu à cet effet.' },
+    { q: 'J’ai moins de 18 ans, dois-je donner moi-même ?', a: 'Non. Avec la demande d’accord, ton parent reçoit par e-mail un lien facultatif pour soutenir la mission.' },
     { q: 'Un don donne-t-il un avantage dans le tournoi ?', a: 'Non, jamais. Les dons financent la mission, et les prix sont fournis par des sponsors ou en nature.' },
     { q: 'Qu’est-ce que la Coupe des continents ?', a: 'Une compétition de collecte entre l’Europe, les Amériques et l’Océanie. Chaque personne inscrite peut créer sa page sur Streamlabs Charity, rattachée à l’équipe S4GS Mobile Cup 2027. Le total de chaque continent est affiché sur le site et pendant les diffusions.' },
   ] }],
