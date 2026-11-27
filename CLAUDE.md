@@ -24,7 +24,7 @@ Dépôt : `Streamers-4-Good-Squads/s4gs-site`. Site statique Astro 5 de Streamer
 - Si l'utilisateur dit qu'il ne retrouve pas "le rendu de la première version", comparer visuellement avec l'artefact "Simulateur Site S4GS" avant de répondre. Allan veut voir un aperçu avant intégration pour valider la direction artistique.
 
 ## Pages
-Accueil, L'association, Événements, Actualités / Streamers / Partenaires / Transparence (masquées tant que `sections.* = false`), Contact, Participer, Faire un don, Mobile Cup (+ formulaire de pré-inscription), merci, parents (consentement), et documents : mission, rules, faq, privacy, prizes, cookies, football-cup (certains en noindex en attendant validation).
+Accueil, L'association, Événements, Actualités / Streamers / Partenaires / Transparence (masquées tant que `sections.* = false`), Contact, Participer, Faire un don, Mobile Cup (+ formulaire de pré-inscription), Streamathon (formulaire brouillon, noindex), merci, parents (consentement), et documents : mission, rules, faq, privacy, prizes, cookies, football-cup (certains en noindex en attendant validation).
 Pages de l'ancien site non reprises : article d'actualité, Live (lecteur, planning, jauge) : à faire quand il y aura de vraies actualités ou un événement.
 
 ## Déploiement
@@ -44,9 +44,24 @@ Pages de l'ancien site non reprises : article d'actualité, Live (lecteur, plann
 ## Textes modifiés depuis le site
 `src/data/text-overrides.json` (clé = texte d'origine, par langue) est appliqué en fin de compilation par `integrations/text-overrides.mjs`. Quand un texte source change dans `src/i18n/`, vérifier s'il a une entrée dans ce fichier. Détails : `docs/editeur-equipe.md`.
 
+## Travaux déposés à la main sur main (fin nov. 2026, conversation claude.ai)
+- Mobile Cup alignée sur la stratégie 2027 et le guide technique (documents internes : **ne jamais les ajouter au dépôt, il est public**) : compétition de collecte et Coupe des continents, division Découverte, Brawl Stars en trio ou en solo, deux week-ends de qualifs, zone selon le pays de résidence, mention "non organisé ni soutenu par Supercell". Règlement, FAQ, dotation, mission, pages Don et Football mis à jour.
+- Charte appliquée : pas de point médian, pas de "charity" / "caritatif", pas de tiret long.
+- `/merci/` : fenêtre de don par-dessus la page pour les 18 ans et plus ; pour les mineurs (`?a=minor`), aucune demande de don, message "lien envoyé au parent avec la demande d'accord".
+- `/streamathon/` : formulaire Streamathon 2027 (brouillon, noindex, hors menu). Questions selon le pays pilotées par `src/data/streamathon.ts` (ex. salle calme ou bruyante en Belgique, pas aux Philippines, en ligne seulement ailleurs). Envoi vers `SITE.streamathonEndpoint` (vide = mode test).
+- Mode édition des textes (bouton ✎, code 2005 qui ne protège que l'ouverture), publication via la route `/texts` du Worker (non configuré : bouton "Télécharger le fichier" en attendant). Correction : `public/admin/admin.js` utilise `window.msal` (avec repli `msalBrowser`). Vérifié le 27 nov. 2026 : `public/edit/editor.js` et `integrations/text-overrides.mjs` sont bien sur main.
+
+## Décisions en attente (ne rien trancher seul : demander à Allan)
+- Nom : le site écrit "S4GS", la charte et les documents "S4Gs". Harmoniser ou non ?
+- Page Faire un don : Aid for Youth Philippines retiré au profit du message unique de la stratégie (enfants des rues et jeunes mères mineures seules aux Philippines, enfants victimes d'abus). À remettre ou non ?
+- Formulaire Streamathon : hypothèses à valider (Philippines avec participation sur place, questions matériel et besoins particuliers, créneaux, âge minimum 13 ans avec e-mail parental de 13 à 17 ans).
+- Mode édition : un texte modifié change partout où le même texte apparaît dans la même langue. Restreindre à la page en cours si besoin.
+- Mobile Cup : seuils de la division Découverte, option de dotation (1, 2 ou 3), traductions des 7 autres langues.
+- Page Football Cup : volontairement hors menu, à annoncer seulement après la clôture de janvier.
+
 ## Reste à faire
-- Allan / président : confirmer la date du Streamathon 2027, relire le texte Aid for Youth Philippines, ajouter l'historique 2024 et 2025, choisir l'option de lots, durée de conservation et outil de formulaire pour la politique de confidentialité, identifiants GA4 et Ad Grants + outil de cookies, relecture juridique du règlement, date de livraison du CRM (plan B si après le 16 décembre), DNS et domaine.
+- Allan / président : confirmer la date du Streamathon 2027, ajouter l'historique 2024 et 2025, choisir l'option de lots, durée de conservation et outil de formulaire pour la politique de confidentialité, identifiants GA4 et Ad Grants + outil de cookies, relecture juridique du règlement, date de livraison du CRM (plan B si après le 16 décembre), DNS et domaine.
 - Vérification d'âge à l'inscription (proposée, non lancée) : date de naissance déclarée + lien de confirmation envoyé au parent pour les 13-17 ans (statut "consentement parental en attente" à ajouter à `docs/specification-crm-inscriptions.md`), contrôle ciblé des gagnants, aucune pièce d'identité conservée.
 - Contenus réels pour actualités, streamers, partenaires, transparence, chiffres, puis activer les rubriques.
-- Traductions des 7 autres langues, bannière cookies + GA4, pages de redirection depuis l'ancien site Webflow, branchement du compteur au CRM, `formEndpoint` / `consentEndpoint` quand le CRM est prêt, retirer `noindex` des pages juridiques une fois validées, mise à jour de l'action GitHub (Node 20 déprécié).
+- Traductions des 7 autres langues, bannière cookies + GA4, pages de redirection depuis l'ancien site Webflow, branchement du compteur au CRM, `formEndpoint` / `consentEndpoint` / `streamathonEndpoint` quand le CRM est prêt, retirer `noindex` des pages juridiques une fois validées, mise à jour de l'action GitHub (Node 20 déprécié).
 - Galerie "En images" et Live à reprendre de l'ancien site quand il y aura des photos et un événement.
