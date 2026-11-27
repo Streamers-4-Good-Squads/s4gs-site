@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import textOverrides from './integrations/text-overrides.mjs';
 import { READY } from './src/i18n/locales.ts';
 import { SITE } from './src/config/site.ts';
 
@@ -12,6 +13,7 @@ export default defineConfig({
   trailingSlash: 'always',
   build: { format: 'directory' },
   integrations: [
+    textOverrides(),
     sitemap({
       filter: (u) => !hidden.some((h) => u.includes(h)),
       i18n: { defaultLocale: 'en', locales: Object.fromEntries(READY.map((l) => [l.code, l.code])) },

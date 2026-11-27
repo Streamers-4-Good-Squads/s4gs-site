@@ -2,6 +2,7 @@
 // Vérifie la connexion Microsoft (organisation + domaine @s4gs.org), puis écrit dans le dépôt GitHub.
 
 const CONTENT_PATH = 'src/data/content.json';
+const TEXTS_PATH = 'src/data/text-overrides.json';
 const MAX_JSON = 300 * 1024, MAX_IMG = 1500 * 1024;
 
 const b64url = (s) => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/').padEnd(Math.ceil(s.length / 4) * 4, '=')), (c) => c.charCodeAt(0));
@@ -67,6 +68,21 @@ function check(c) {
   return { sections, home, stats, news, streamers, partners, events };
 }
 
+// Textes modifiés depuis le site : { "fr": { "texte d'origine": "nouveau texte" }, ... }
+function checkTexts(c) {
+  if (!c || typeof c !== 'object' || Array.isArray(c)) throw new Error('Textes invalides');
+  const out = {};
+  for (const [lang, map] of Object.entries(c)) {
+    if (!/^[a-z]{2}$/.test(lang) || !map || typeof map !== 'object' || Array.isArray(map)) throw new Error('Textes invalides');
+    out[lang] = {};
+    for (const [k, v] of Object.entries(map)) {
+      if (typeof k !== 'string' || typeof v !== 'string' || !k.trim() || !v.trim() || k.length > 2000 || v.length > 2000) throw new Error('Textes invalides');
+      out[lang][k] = v;
+    }
+  }
+  return out;
+}
+
 export default {
   async fetch(req, env) {
     const origin = req.headers.get('Origin') || '';
@@ -91,6 +107,22 @@ export default {
         const clean = check(content);
         const r = await gh(env, `contents/${CONTENT_PATH}`, { method: 'PUT', body: JSON.stringify({ message: `Contenu modifié depuis l'espace équipe (${email})`, content: toB64(JSON.stringify(clean, null, 2) + '\n'), sha, branch: env.GH_BRANCH }) });
         if (r.status === 409 || r.status === 422) return json({ error: 'Quelqu’un a publié entre-temps : rechargez la page puis recommencez.' }, 409);
+        if (!r.ok) return json({ error: 'Publication impossible (' + r.status + ')' }, 502);
+        return json({ sha: (await r.json()).content.sha });
+      }
+      if (url.pathname === '/texts' && req.method === 'GET') {
+        const r = await gh(env, `contents/${TEXTS_PATH}?ref=${env.GH_BRANCH}`);
+        if (!r.ok) return json({ error: 'Lecture impossible (' + r.status + ')' }, 502);
+        const f = await r.json();
+        return json({ content: JSON.parse(fromB64(f.content)), sha: f.sha });
+      }
+      if (url.pathname === '/texts' && req.method === 'PUT') {
+        const raw = await req.text();
+        if (raw.length > MAX_JSON) return json({ error: 'Contenu trop volumineux' }, 413);
+        const { content, sha } = JSON.parse(raw);
+        const clean = checkTexts(content);
+        const r = await gh(env, `contents/${TEXTS_PATH}`, { method: 'PUT', body: JSON.stringify({ message: `Textes modifiés depuis le site (${email})`, content: toB64(JSON.stringify(clean, null, 2) + '\n'), sha, branch: env.GH_BRANCH }) });
+        if (r.status === 409 || r.status === 422) return json({ error: 'Quelqu’un a publié entre-temps : recommencez.' }, 409);
         if (!r.ok) return json({ error: 'Publication impossible (' + r.status + ')' }, 502);
         return json({ sha: (await r.json()).content.sha });
       }

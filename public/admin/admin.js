@@ -23,7 +23,7 @@
       show('<div class="box2"><h1>Espace équipe</h1><p class="warn">Connexion pas encore configurée.</p><p class="small">Il manque l’identifiant de l’organisation Microsoft, celui de l’application et l’adresse du service de publication (fichier public/admin/config.json).</p></div>');
       return;
     }
-    msal = new msalBrowser.PublicClientApplication({ auth: { clientId: cfg.clientId, authority: 'https://login.microsoftonline.com/' + cfg.tenantId, redirectUri: location.origin + location.pathname }, cache: { cacheLocation: 'sessionStorage' } });
+    msal = new (window.msal || window.msalBrowser).PublicClientApplication({ auth: { clientId: cfg.clientId, authority: 'https://login.microsoftonline.com/' + cfg.tenantId, redirectUri: location.origin + location.pathname }, cache: { cacheLocation: 'sessionStorage' } });
     msal.initialize().then(function () { return msal.handleRedirectPromise(); }).then(function (res) {
       var acc = (res && res.account) || msal.getAllAccounts()[0];
       if (!acc) return askLogin();

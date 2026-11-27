@@ -41,6 +41,9 @@ Pages de l'ancien site non reprises : article d'actualité, Live (lecteur, plann
 ## Espace équipe (éditeur)
 `/admin/` (aperçu sans connexion : `/admin/?demo=1`) édite `content.json`, connexion Microsoft limitée à @s4gs.org, publication par un Cloudflare Worker (`worker/`) qui commit sur GitHub. Mise en route détaillée : `docs/editeur-equipe.md`. **À configurer** : inscription d'application Microsoft Entra (par un admin du compte Microsoft 365), jeton GitHub limité au dépôt (Contents read/write), compte Cloudflare, puis renseigner `public/admin/config.json` et `worker/wrangler.toml`. Tant que ce n'est pas fait, `/admin/` affiche "connexion pas encore configurée".
 
+## Textes modifiés depuis le site
+`src/data/text-overrides.json` (clé = texte d'origine, par langue) est appliqué en fin de compilation par `integrations/text-overrides.mjs`. Quand un texte source change dans `src/i18n/`, vérifier s'il a une entrée dans ce fichier. Détails : `docs/editeur-equipe.md`.
+
 ## Reste à faire
 - Allan / président : confirmer la date du Streamathon 2027, relire le texte Aid for Youth Philippines, ajouter l'historique 2024 et 2025, choisir l'option de lots, durée de conservation et outil de formulaire pour la politique de confidentialité, identifiants GA4 et Ad Grants + outil de cookies, relecture juridique du règlement, date de livraison du CRM (plan B si après le 16 décembre), DNS et domaine.
 - Vérification d'âge à l'inscription (proposée, non lancée) : date de naissance déclarée + lien de confirmation envoyé au parent pour les 13-17 ans (statut "consentement parental en attente" à ajouter à `docs/specification-crm-inscriptions.md`), contrôle ciblé des gagnants, aucune pièce d'identité conservée.
