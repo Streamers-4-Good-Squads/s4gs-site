@@ -59,6 +59,14 @@ Pages de l'ancien site non reprises : article d'actualité, Live (lecteur, plann
 - Mobile Cup : seuils de la division Découverte, option de dotation (1, 2 ou 3), traductions des 7 autres langues.
 - Page Football Cup : volontairement hors menu, à annoncer seulement après la clôture de janvier.
 
+## CRM (détails dans `docs/specification-crm-inscriptions.md`)
+- E-mail de demande d'accord parental : il contient le lien de don (plus de lien de partage envoyé à la personne mineure).
+- Prévoir la réception des pré-inscriptions Streamathon (`type: streamer-registration`) : réponses par pays dans le champ `answers`.
+- Le déclencheur HTTP de Power Automate est probablement premium : envisager le Worker Cloudflare comme relais vers SharePoint (Microsoft Graph).
+
+## Mise en route de l'espace équipe (Eric)
+- Dans Microsoft Entra, ajouter l'adresse de redirection `.../edit/auth.html` en plus de `.../admin/` (voir `docs/editeur-equipe.md`, étape 1).
+
 ## Reste à faire
 - Allan / président : confirmer la date du Streamathon 2027, ajouter l'historique 2024 et 2025, choisir l'option de lots, durée de conservation et outil de formulaire pour la politique de confidentialité, identifiants GA4 et Ad Grants + outil de cookies, relecture juridique du règlement, date de livraison du CRM (plan B si après le 16 décembre), DNS et domaine.
 - Vérification d'âge à l'inscription (proposée, non lancée) : date de naissance déclarée + lien de confirmation envoyé au parent pour les 13-17 ans (statut "consentement parental en attente" à ajouter à `docs/specification-crm-inscriptions.md`), contrôle ciblé des gagnants, aucune pièce d'identité conservée.
