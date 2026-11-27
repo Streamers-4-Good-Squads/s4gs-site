@@ -19,13 +19,13 @@ Une requête POST, corps JSON (type `text/plain`, pour éviter la pré-requête 
   "country": "BE",
   "zone": "europe",
   "games": ["clash-royale", "brawl-stars"],
-  "division": "open",
-  "brawlStars": { "mode": "team", "teamName": "Les Tests" },
+  "divisions": { "clash-royale": "open", "brawl-stars": "discovery" },
+  "brawlStars": { "mode": "team", "teamName": "Les Tests", "teammates": ["#DEF456", "#GHI789"] },
   "mixedCup": false,
   "weekend": "either",
-  "ageBracket": "13-17",
+  "ageBracket": "13-15",
   "parentEmail": "parent@exemple.be",
-  "consents": { "rules": true, "privacy": true, "newsletter": false }
+  "consents": { "rules": true, "privacy": true, "image": true, "newsletter": false }
 }
 ```
 `ageBracket` vaut `18+` ou `13-17` (moins de 13 ans : rien n'est envoyé). `brawlStars` et `parentEmail` valent `null` quand ils ne s'appliquent pas.

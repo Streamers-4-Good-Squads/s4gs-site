@@ -23,8 +23,8 @@ Document destiné à l'équipe qui développe le CRM de S4GS. Le site (statique,
 | country | texte | Code pays à deux lettres (ISO 3166-1). |
 | zone | texte | europe, americas ou oceania. |
 | games | liste | clash-royale et/ou brawl-stars, au moins un. |
-| division | texte | open ou discovery. |
-| brawlStars | objet ou null | { mode: solo ou team, teamName }, null si Brawl Stars n'est pas choisi. |
+| divisions | objet | { "clash-royale": open, discovery ou null, "brawl-stars": open, discovery ou null }. Une division par jeu choisi, null pour un jeu non choisi. |
+| brawlStars | objet ou null | { mode: solo ou team, teamName: texte (3 à 25 caractères) ou null, teammates: liste de 2 identifiants de joueur ou null }. teamName et teammates sont remplis seulement si mode vaut team. null si Brawl Stars n'est pas choisi. |
 | mixedCup | booléen | Inscription à la coupe mixte ou féminine. |
 | weekend | texte | q1 (16-17 janvier), q2 (23-24 janvier) ou either. |
 | ageBracket | texte | 13-15, 16-17 ou 18+. Les moins de 13 ans ne sont jamais envoyés. |
@@ -32,14 +32,15 @@ Document destiné à l'équipe qui développe le CRM de S4GS. Le site (statique,
 | consents | objet | { rules: true, privacy: true, image: true, newsletter: vrai ou faux }. |
 
 ## 3. Contrôles côté CRM (ne pas se fier au site)
-- Refuser si rules, privacy ou image ne valent pas true, si l'e-mail ou le tag est mal formé, si ageBracket est autre chose que 13-15, 16-17 ou 18+, si parentEmail manque pour une personne mineure, ou si parentEmail est identique à email.
+- Refuser si rules, privacy ou image ne valent pas true, si l'e-mail ou le tag est mal formé, si ageBracket est autre chose que 13-15, 16-17 ou 18+, si parentEmail manque pour une personne mineure, si parentEmail est identique à email, si country n'est pas un pays des trois zones (Russie et Biélorussie exclues), ou si une division manque pour un jeu choisi.
 - Un même e-mail et un même jeu ne créent qu'une inscription : doublon = mise à jour ou rejet silencieux, jamais deux lignes.
 - Limiter le débit par adresse IP, et rejeter les envois dont la taille dépasse quelques Ko.
-- Enregistrer la preuve des consentements : texte accepté (règlement, confidentialité), date, version de la page.
+- Enregistrer la preuve des consentements : texte accepté (règlement et code de conduite, confidentialité, image), date, version de la page.
 - Ne jamais renvoyer au navigateur de données personnelles.
 
 ## 4. Automatisations attendues après chaque inscription
-1. Créer la fiche personne et l'inscription (statut : en attente).
+1. Créer la fiche personne et l'inscription, avec un identifiant unique. Statut « Inscription validée » pour les 18 ans et plus, « En attente d'accord parental » pour les 13-17 ans. Les autres statuts possibles sont « Accord reçu » et « Non autorisé » (section 5). Seules les inscriptions « Inscription validée » ou « Accord reçu » sont exportées vers la plateforme de tournoi.
+   Brawl Stars en équipe : chaque membre remplit le formulaire ; rapprocher les trois inscriptions grâce à teammates et signaler au staff une équipe incomplète avant le check-in.
 2. Envoyer l'e-mail de confirmation depuis tournoi@s4gs.org, dans la langue emailLang : lien vers la plateforme de tournoi, invitation Discord, lien de don pour les personnes majeures. Pour les personnes mineures : aucun lien de don ni de partage (le lien de don passe par l'e-mail au parent, voir point 3).
 3. Pour une personne mineure (13-15 ou 16-17) : e-mail au parent contenant le lien de don de l'association (et non plus un lien de partage envoyé à la personne mineure) et un lien personnel vers `https://s4gs.org/<langue>/parents/?t=<jeton>` (jeton de 16 à 128 caractères, lettres, chiffres, tiret, souligné, usage unique ou lié à l'inscription). Le lien de retrait est le même avec `&withdraw=1`. Sans accord avant le check-in, la participation n'est pas validée. Contrôle manuel des cas douteux avant chaque week-end.
 4. Rappels automatiques à J-7, J-1 et H-1 avant chaque week-end de jeu.
@@ -96,5 +97,5 @@ Une adresse GET publique qui renvoie uniquement `{ "count": 123 }`, que le site 
 ```
 curl -X POST "ADRESSE_DU_CRM" \
   -H "Content-Type: text/plain;charset=UTF-8" \
-  --data '{"version":1,"submittedAt":"2026-12-16T14:03:22.000Z","pageLang":"fr","emailLang":"fr","source":{},"nickname":"Test","tag":"#ABC123","discord":"test","email":"test@exemple.be","country":"BE","zone":"europe","games":["clash-royale"],"division":"open","brawlStars":null,"mixedCup":false,"weekend":"either","ageBracket":"18+","parentEmail":null,"consents":{"rules":true,"privacy":true,"image":true,"newsletter":false}}'
+  --data '{"version":1,"submittedAt":"2026-12-16T14:03:22.000Z","pageLang":"fr","emailLang":"fr","source":{},"nickname":"Test","tag":"#ABC123","discord":"test","email":"test@exemple.be","country":"BE","zone":"europe","games":["clash-royale"],"divisions":{"clash-royale":"open","brawl-stars":null},"brawlStars":null,"mixedCup":false,"weekend":"either","ageBracket":"18+","parentEmail":null,"consents":{"rules":true,"privacy":true,"image":true,"newsletter":false}}'
 ```
