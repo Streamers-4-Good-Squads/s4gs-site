@@ -1,0 +1,15 @@
+---
+import Base from '../../../layouts/Base.astro';
+import StreamathonForm from '../../../components/StreamathonForm.astro';
+import { READY_CODES } from '../../../i18n/locales';
+import { streamathonStrings } from '../../../i18n/pages/streamathon';
+export function getStaticPaths() { return READY_CODES.map((lang) => ({ params: { lang } })); }
+const { lang } = Astro.params as { lang: string };
+const s = streamathonStrings(lang);
+---
+<!-- Brouillon : page non indexée et absente du menu tant que la date du Streamathon 2027 n'est pas confirmée -->
+<Base lang={lang} slug="streamathon" title={s.title} description={s.description} noindex>
+  <section class="hero" style="padding-block:clamp(40px,7vw,80px)"><div class="wrap"><h1>{s.h1}</h1><p class="lead">{s.lead}</p></div></section>
+  <section class="alt"><div class="wrap prose">{s.intro.map((x) => <p>{x}</p>)}</div></section>
+  <section><div class="wrap prose"><StreamathonForm lang={lang} /></div></section>
+</Base>

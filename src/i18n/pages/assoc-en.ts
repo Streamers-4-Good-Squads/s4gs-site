@@ -6,7 +6,7 @@ export const assocEn: AssocStrings = {
     join: 'Join the community', give: 'Donate', cupBtn: 'Pre-register for the Mobile Cup',
     assoc: { kick: 'The association', h2: 'One community, several missions', lead: 'Gaming and streaming for solidarity, all year long.', more: 'Discover the association' },
     missions: [
-      { h3: 'Raise funds', text: 'Run charity events, online and in person, to support carefully chosen humanitarian partners.' },
+      { h3: 'Raise funds', text: 'Run fundraising events, online and in person, to support carefully chosen humanitarian partners.' },
       { h3: 'Bring people together', text: 'Connect streamers, players and partners around shared projects all year.' },
       { h3: 'Raise awareness', text: 'Share the causes we back and the positive power of video games.' },
     ],
@@ -65,7 +65,7 @@ export const assocEn: AssocStrings = {
       { h2: 'Community partners', names: ['Example partner 3', 'Example partner 4', 'Example partner 5'] },
       { h2: 'Media partners', names: ['Example partner 6', 'Example partner 7'] },
     ],
-    join: { h2: 'Become a partner', text: 'Visibility with an engaged community, presence on our materials, a link to a charitable project.', cta: 'Write to us', subject: 'Partnership with S4GS' },
+    join: { h2: 'Become a partner', text: 'Visibility with an engaged community, presence on our materials, a link to humanitarian activities.', cta: 'Write to us', subject: 'Partnership with S4GS' },
   },
   contact: {
     head: { title: 'Contact | Streamers 4 Good Squads', description: 'Contact Streamers 4 Good Squads: questions, partnerships, press, taking part.', kick: 'Get in touch', h1: 'Contact', lead: 'A question, an idea, a wish to take part? Here is how to reach us.' },

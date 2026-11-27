@@ -6,7 +6,7 @@ export const assocFr: AssocStrings = {
     join: 'Rejoindre la communauté', give: 'Faire un don', cupBtn: 'Je me pré-inscris à la Mobile Cup',
     assoc: { kick: 'L’association', h2: 'Une communauté, plusieurs missions', lead: 'Le jeu vidéo et le streaming au service de la solidarité, toute l’année.', more: 'Découvrir l’association' },
     missions: [
-      { h3: 'Récolter des fonds', text: 'Organiser des événements caritatifs, en ligne et en présence, pour soutenir des partenaires humanitaires choisis avec soin.' },
+      { h3: 'Récolter des fonds', text: 'Organiser des événements de collecte de fonds, en ligne et en présence, pour soutenir des partenaires humanitaires choisis avec soin.' },
       { h3: 'Fédérer la communauté', text: 'Réunir streamers, joueurs et partenaires autour de projets communs, toute l’année.' },
       { h3: 'Sensibiliser', text: 'Faire connaître les causes soutenues et le pouvoir positif du jeu vidéo.' },
     ],

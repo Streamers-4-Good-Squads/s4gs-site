@@ -4,7 +4,7 @@ const { d } = Astro.props;
 ---
 <div class="box">
   <h2>{d.h2}</h2><p>{d.text}</p>
-  <div class="amts" aria-hidden="true"><span>5 €</span><span>10 €</span><span>20 €</span></div>
+  <div class="amts" aria-hidden="true"><span>5 €</span><span>10 €</span><span>20 €</span>{d.free && <span>{d.free}</span>}</div>
   <a class="btn y" href={SITE.donationUrl} target="_blank" rel="noopener">{d.cta}</a>
   {d.use && <p class="small">{d.use}</p>}
 </div>

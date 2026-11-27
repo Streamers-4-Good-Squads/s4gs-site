@@ -6,11 +6,13 @@ export interface CupPage {
   zones: { h2: string; intro: string; names: Record<string, string>; tz: string };
   format: { h2: string; items: string[] };
   register: { h2: string; text: string; soon: string; counter: string; ages: string };
-  donate: { h2: string; text: string; cta: string; use: string };
+  fund: { h2: string; intro: string; items: string[]; continents: string; minors: string };
+  donate: { h2: string; text: string; cta: string; use: string; free: string };
+  disclaimer: string;
 }
 export interface ThanksPage {
   title: string; h1: string; lead: string; next: string[];
-  donate: { h2: string; text: string; cta: string; minors: string; share: string; shareText: string; later: string; noAdvantage: string; fund: string };
+  donate: { h2: string; text: string; cta: string; free: string; minors: string; share: string; shareText: string; later: string; noAdvantage: string; fund: string };
 }
 export interface HomePage {
   title: string; description: string; h1: string; lead: string;

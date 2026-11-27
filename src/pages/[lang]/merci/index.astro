@@ -18,7 +18,7 @@ const c = thanksPage(lang);
   </div></section>
   <section><div class="wrap"><div class="box">
     <h2>{c.donate.h2}</h2><p>{c.donate.text}</p>
-    <div class="amts" aria-hidden="true"><span>5 €</span><span>10 €</span><span>20 €</span></div>
+    <div class="amts" aria-hidden="true"><span>5 €</span><span>10 €</span><span>20 €</span><span>{c.donate.free}</span></div>
     <div class="cta" id="don">
       <a class="btn y" id="pay" href={SITE.donationUrl} target="_blank" rel="noopener">{c.donate.cta}</a>
       <button class="btn ghost" id="share" type="button" data-text={c.donate.shareText} data-url={SITE.donationUrl}>{c.donate.share}</button>
@@ -26,7 +26,7 @@ const c = thanksPage(lang);
     <p class="small" id="minors" hidden>{c.donate.minors}</p>
     <p class="small" id="fund">{c.donate.fund}</p>
     <p class="small">{c.donate.noAdvantage}</p>
-    <p class="small"><a href={`/${lang}/mobile-cup/`}>←</a></p>
+    <p class="small"><a href={`/${lang}/mobile-cup/`}>{c.donate.later}</a></p>
   </div></div></section>
   <script is:inline>
     // Moins de 18 ans (?a=minor ajouté par le formulaire) : pas de bouton de paiement, partage familial

@@ -17,6 +17,9 @@ export const SITE = {
   formEndpoint: '',
   // Adresse qui reçoit les accords parentaux (même principe). Vide = mode test.
   consentEndpoint: '',
+  // Adresse qui reçoit les pré-inscriptions des streamers au Streamathon 2027. Vide = mode test.
+  // Questions selon le pays : src/data/streamathon.ts
+  streamathonEndpoint: '',
   // Ouverture des inscriptions (heure de Bruxelles)
   registrationsOpen: '2026-12-16',
   // Compteur d'inscriptions : mis à jour à la main ou par un script quotidien

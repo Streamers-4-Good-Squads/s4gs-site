@@ -65,4 +65,13 @@ const hues = ['y', 'b', 'g', 'lav', 'y'];
   </div></div></section>
 
   <section><div class="wrap"><DonateBlock d={c.donate} /></div></section>
+
+  <section class="alt" id="collecte"><div class="wrap">
+    <h2>{c.fund.h2}</h2><p>{c.fund.intro}</p>
+    <ul class="list">{c.fund.items.map((i) => <li>{i}</li>)}</ul>
+    <div class="box"><p>{c.fund.continents}</p></div>
+    <p class="small">{c.fund.minors}</p>
+  </div></section>
+
+  <section><div class="wrap"><p class="small">{c.disclaimer}</p></div></section>
 </Base>

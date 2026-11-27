@@ -1,0 +1,171 @@
+---
+import { streamathonStrings } from '../i18n/pages/streamathon';
+import { STREAMATHON } from '../data/streamathon';
+import { SITE } from '../config/site';
+const { lang } = Astro.props as { lang: 'fr' | 'en' | string };
+const s = streamathonStrings(lang);
+const k = (lang === 'fr' ? 'fr' : 'en') as 'fr' | 'en';
+const langs = [['fr', 'Français'], ['en', 'English'], ['de', 'Deutsch'], ['es', 'Español'], ['it', 'Italiano'], ['pl', 'Polski'], ['ro', 'Română'], ['cs', 'Čeština'], ['pt', 'Português'], ['tl', 'Filipino']];
+const platforms = [['twitch', 'Twitch'], ['youtube', 'YouTube'], ['tiktok', 'TikTok'], ['kick', 'Kick'], ['other', s.other]];
+const venues = Object.fromEntries(Object.entries(STREAMATHON.onSite).map(([c, v]) => [c, v[k]]));
+const test = !SITE.streamathonEndpoint;
+---
+<form id="st" class="form" novalidate data-endpoint={SITE.streamathonEndpoint} data-lang={lang} data-event={STREAMATHON.id}
+  data-venues={JSON.stringify(venues)} data-sending={s.sending} data-err={JSON.stringify(s.err)}>
+  {test && <p class="banner">{s.testBanner}</p>}
+  <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+  <fieldset><legend>{s.h.you}</legend>
+    <label>{s.nickname}<input name="nickname" required maxlength="40" autocomplete="nickname" /></label>
+    <div class="row">
+      <label>{s.email}<input type="email" name="email" required autocomplete="email" /></label>
+      <label>{s.email2}<input type="email" name="email2" required autocomplete="off" /></label>
+    </div>
+    <div class="row">
+      <label>{s.country}<select name="country" required id="st-country"><option value="">{s.choose}</option></select></label>
+      <label>{s.language}<select name="emailLang">{langs.map(([c, n]) => <option value={c} selected={c === lang}>{n}</option>)}</select></label>
+    </div>
+    <div class="opts"><span class="lab">{s.platforms}</span>
+      {platforms.map(([v, n]) => <label class="chk"><input type="checkbox" name="platforms" value={v} /> {n}</label>)}
+    </div>
+    <label>{s.channel}<input type="url" name="channel" required maxlength="200" placeholder="https://" /><small>{s.channelHelp}</small></label>
+  </fieldset>
+
+  <fieldset><legend>{s.h.event}</legend>
+    <p class="small" id="st-pick">{s.pickCountry}</p>
+    <div class="opts" id="st-mode" hidden><span class="lab">{s.mode}</span>
+      <label class="chk"><input type="radio" name="mode" value="onsite" /> <span>{s.onsite}<span id="st-venue"></span></span></label>
+      <label class="chk"><input type="radio" name="mode" value="online" /> {s.online}</label>
+    </div>
+    <p class="small" id="st-online" hidden>{s.onlineOnly}</p>
+
+    {STREAMATHON.questions.map((q) => (
+      <div class="q" hidden data-id={q.id} data-type={q.type} data-label={q.label[k]} data-required={q.required ? '1' : ''}
+        data-countries={(q.countries || []).join(' ')} data-mode={q.mode || ''}>
+        {q.type === 'radio' || q.type === 'checkbox' ? (
+          <div class="opts"><span class="lab">{q.label[k]}</span>
+            {q.options?.map((o) => <label class="chk"><input type={q.type} name={`q-${q.id}`} value={o.value} /> <span>{o.label[k]}</span></label>)}
+            {q.help && <small>{q.help[k]}</small>}
+          </div>
+        ) : (
+          <label>{q.label[k]}
+            {q.type === 'textarea' ? <textarea name={`q-${q.id}`} rows="3" maxlength="1000"></textarea> : <input name={`q-${q.id}`} maxlength="200" />}
+            {q.help && <small>{q.help[k]}</small>}
+          </label>
+        )}
+      </div>
+    ))}
+
+    <div class="opts"><span class="lab">{s.slots}</span>
+      {Object.entries(s.slot).map(([v, n]) => <label class="chk"><input type="checkbox" name="slots" value={v} /> {n}</label>)}
+    </div>
+  </fieldset>
+
+  <fieldset><legend>{s.h.age}</legend>
+    <div class="opts">
+      <label class="chk"><input type="radio" name="age" value="under13" /> {s.under13}</label>
+      <label class="chk"><input type="radio" name="age" value="13-15" /> {s.a1315}</label>
+      <label class="chk"><input type="radio" name="age" value="16-17" /> {s.a1617}</label>
+      <label class="chk"><input type="radio" name="age" value="18+" required /> {s.a18}</label>
+    </div>
+    <div id="st-parent" hidden><label>{s.parentEmail}<input type="email" name="parentEmail" /><small>{s.parentHelp}</small></label></div>
+  </fieldset>
+
+  <fieldset><legend>{s.h.more}</legend>
+    <label>{s.idea}<textarea name="idea" rows="3" maxlength="1000"></textarea></label>
+  </fieldset>
+
+  <fieldset><legend>{s.h.consents}</legend>
+    <label class="chk"><input type="checkbox" name="consentPrivacy" required /> <span>{s.privacy} (<a href={`/${lang}/privacy/`} target="_blank" rel="noopener">{s.privacyLink}</a>)</span></label>
+    <label class="chk"><input type="checkbox" name="consentImage" required /> <span>{s.image}</span></label>
+    <label class="chk"><input type="checkbox" name="newsletter" value="yes" /> <span>{s.newsletter}</span></label>
+  </fieldset>
+
+  <p class="error" id="st-msg" role="alert" hidden></p>
+  <button class="btn" type="submit" id="st-go">{s.submit}</button>
+</form>
+<p class="ok" id="st-ok" role="status" hidden>{s.done}</p>
+
+<script is:inline>
+(function () {
+  var form = document.getElementById('st'); if (!form) return;
+  var L = form.dataset.lang, E = JSON.parse(form.dataset.err), V = JSON.parse(form.dataset.venues);
+  var $ = function (n) { return form.elements[n]; }, started = Date.now();
+  // Pays, noms traduits par le navigateur
+  var codes = 'AD AE AL AM AR AT AU AZ BA BE BG BO BR CA CH CL CO CR CY CZ DE DK DO DZ EC EE EG ES FI FJ FR GB GE GR GT HN HR HU ID IE IL IN IS IT JP KR KZ LI LT LU LV MA MD ME MK MT MX MY NC NI NL NO NZ PA PE PF PG PH PL PR PT PY RO RS SE SG SI SK SV TH TN TR UA US UY VE VN ZA'.split(' ');
+  var dn; try { dn = new Intl.DisplayNames([L], { type: 'region' }); } catch (e) {}
+  codes.map(function (c) { return [c, dn ? dn.of(c) : c]; }).sort(function (a, b) { return a[1].localeCompare(b[1], L); })
+    .forEach(function (x) { var o = document.createElement('option'); o.value = x[0]; o.textContent = x[1]; $('country').appendChild(o); });
+
+  var qs = [].slice.call(form.querySelectorAll('.q'));
+  function checked(n) { return (form.querySelector('input[name="' + n + '"]:checked') || {}).value; }
+  function modeNow() { var c = $('country').value; if (!c) return ''; return V[c] ? (checked('mode') || '') : 'online'; }
+  function visible(q) {
+    var c = $('country').value, m = modeNow(), cs = q.dataset.countries ? q.dataset.countries.split(' ') : [];
+    if (!c) return false;
+    if (cs.length && cs.indexOf(c) < 0) return false;
+    return !q.dataset.mode || q.dataset.mode === m;
+  }
+  function sync() {
+    var c = $('country').value, site = !!V[c];
+    document.getElementById('st-pick').hidden = !!c;
+    document.getElementById('st-mode').hidden = !site;
+    document.getElementById('st-online').hidden = !c || site;
+    document.getElementById('st-venue').textContent = site ? (L === 'fr' ? ' : ' : ': ') + V[c] : '';
+    if (!site) form.querySelectorAll('input[name=mode]').forEach(function (i) { i.checked = false; });
+    qs.forEach(function (q) { q.hidden = !visible(q); });
+    var age = checked('age'), minor = age === '13-15' || age === '16-17';
+    document.getElementById('st-parent').hidden = !minor; $('parentEmail').required = minor;
+  }
+  form.addEventListener('change', sync); sync();
+
+  function show(t) { var m = document.getElementById('st-msg'); m.textContent = t; m.hidden = !t; if (t) m.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+  function answer(q) {
+    var n = 'q-' + q.dataset.id, t = q.dataset.type;
+    if (t === 'radio') return checked(n) || '';
+    if (t === 'checkbox') return [].map.call(form.querySelectorAll('input[name="' + n + '"]:checked'), function (i) { return i.value; });
+    return form.elements[n].value.trim();
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); show('');
+    if (!form.reportValidity()) return;
+    var email = $('email').value.trim().toLowerCase();
+    if (email !== $('email2').value.trim().toLowerCase()) return show(E.email);
+    var plats = [].map.call(form.querySelectorAll('input[name=platforms]:checked'), function (i) { return i.value; });
+    if (!plats.length) return show(E.platform);
+    var c = $('country').value;
+    if (V[c] && !checked('mode')) return show(E.mode);
+    var answers = {};
+    for (var i = 0; i < qs.length; i++) {
+      var q = qs[i]; if (!visible(q)) continue;
+      var a = answer(q);
+      if (q.dataset.required && (!a || !a.length)) return show(E.required.replace('{q}', q.dataset.label));
+      answers[q.dataset.id] = a;
+    }
+    var slots = [].map.call(form.querySelectorAll('input[name=slots]:checked'), function (i) { return i.value; });
+    if (!slots.length) return show(E.slot);
+    var age = checked('age');
+    if (age === 'under13') return show(E.under13);
+    var parent = age !== '18+' ? $('parentEmail').value.trim().toLowerCase() : null;
+    if (parent && parent === email) return show(E.parent);
+    var ok = function () { form.hidden = true; var d = document.getElementById('st-ok'); d.hidden = false; d.scrollIntoView({ block: 'center', behavior: 'smooth' }); };
+    // Anti-robot : champ piège rempli ou envoi en moins de 4 secondes
+    if ($('website').value || Date.now() - started < 4000) return ok();
+    var q2 = new URLSearchParams(location.search), src = {};
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'ref'].forEach(function (k) { if (q2.get(k)) src[k] = q2.get(k); });
+    var data = {
+      version: 1, type: 'streamer-registration', event: form.dataset.event, submittedAt: new Date().toISOString(),
+      pageLang: L, emailLang: $('emailLang').value, source: src,
+      nickname: $('nickname').value.trim(), email: email, country: c, platforms: plats, channel: $('channel').value.trim(),
+      participation: modeNow(), slots: slots, ageBracket: age, parentEmail: parent,
+      answers: answers, idea: $('idea').value.trim(),
+      consents: { privacy: true, image: true, newsletter: $('newsletter').checked }
+    };
+    var ep = form.dataset.endpoint, go = document.getElementById('st-go');
+    if (!ep) { console.info('Streamathon (mode test)', data); return ok(); }
+    var label = go.textContent; go.disabled = true; go.textContent = form.dataset.sending;
+    fetch(ep, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=UTF-8' }, body: JSON.stringify(data) })
+      .then(ok).catch(function () { go.disabled = false; go.textContent = label; show(E.network); });
+  });
+})();
+</script>
