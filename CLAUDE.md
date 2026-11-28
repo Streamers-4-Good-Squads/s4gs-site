@@ -87,6 +87,7 @@ Pages de l'ancien site non reprises : article d'actualité, Live (lecteur, plann
 - Le déclencheur HTTP de Power Automate est probablement premium : envisager le Worker Cloudflare comme relais vers SharePoint (Microsoft Graph).
 
 ## Mise en route de l'espace équipe (Eric)
+- **Fait le 29 nov. 2026 (Allan)** : application Entra « S4Gs espace d'équipe » créée (locataire `f5b0644a-d552-4b9f-9701-a9c59cb4ab5c`, client `f3212788-4df3-44e5-a6f9-e96b6cf15dd6`), 4 adresses de retour SPA (github.io et s4gs.org, `/admin/` et `/edit/auth.html`). Identifiants renseignés dans `public/admin/config.json` et `worker/wrangler.toml`. **Reste** : jeton GitHub (secret `GH_TOKEN`), déploiement du Worker Cloudflare, puis `workerUrl` dans `config.json`.
 - Dans Microsoft Entra, ajouter l'adresse de redirection `.../edit/auth.html` en plus de `.../admin/` (voir `docs/editeur-equipe.md`, étape 1).
 
 ## Reste à faire

@@ -4,8 +4,8 @@ compatibility_date = "2024-11-01"
 
 [vars]
 # Identifiants Microsoft Entra (voir docs/editeur-equipe.md)
-TENANT_ID = ""
-CLIENT_ID = ""
+TENANT_ID = "f5b0644a-d552-4b9f-9701-a9c59cb4ab5c"
+CLIENT_ID = "f3212788-4df3-44e5-a6f9-e96b6cf15dd6"
 # Seules les adresses de ce domaine peuvent se connecter
 EMAIL_DOMAIN = "s4gs.org"
 # Liste facultative d'adresses autorisées, séparées par des virgules. Vide = tout le domaine.
