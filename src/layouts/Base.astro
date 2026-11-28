@@ -64,9 +64,9 @@ const p = (l: string) => `${SITE.url}/${l}/${slug ? slug + '/' : ''}`;
       document.querySelectorAll('.card').forEach(function(c){c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')})});
     })();
   </script>
-  <!-- Mode édition des textes (code demandé, publication via l'espace équipe) : public/edit/editor.js -->
+  <!-- Mode édition (textes et couleurs) réservé à l'équipe : connexion Microsoft @s4gs.org, publication via l'espace équipe. public/edit/editor.js -->
   <a id="s4e-src" href="/edit/editor.js" hidden></a>
-  <button class="s4e-btn" type="button" id="s4e-btn" aria-label={lang === 'fr' ? 'Mode édition' : 'Edit mode'} title={lang === 'fr' ? 'Mode édition' : 'Edit mode'}>✎</button>
+  <button class="s4e-btn" type="button" id="s4e-btn" aria-label={lang === 'fr' ? 'Modifier le site (équipe S4Gs)' : 'Edit the site (S4Gs team)'} title={lang === 'fr' ? 'Modifier le site (équipe S4Gs)' : 'Edit the site (S4Gs team)'}>✎</button>
   <script is:inline>
     document.getElementById('s4e-btn').addEventListener('click',function(){if(window.S4E)return S4E.start();var s=document.createElement('script');s.src=document.getElementById('s4e-src').href;s.onload=function(){S4E.start()};document.body.appendChild(s)});
   </script>
