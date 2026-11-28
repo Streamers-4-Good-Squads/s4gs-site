@@ -4,11 +4,12 @@ import '../styles/design.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import DonateStrip from '../components/DonateStrip.astro';
+import Videos from '../components/Videos.astro';
 import { READY } from '../i18n/locales';
 import { ui } from '../i18n/ui';
 import { SITE } from '../config/site';
 interface Props { lang: string; title: string; description: string; slug?: string; noindex?: boolean }
-const { lang, title, description, slug = '', noindex = false } = Astro.props;
+const { lang, title, description, slug = '', noindex = false, noVideos = false } = Astro.props;
 const t = ui(lang);
 const p = (l: string) => `${SITE.url}/${l}/${slug ? slug + '/' : ''}`;
 ---
@@ -34,7 +35,7 @@ const p = (l: string) => `${SITE.url}/${l}/${slug ? slug + '/' : ''}`;
   <a class="skip" href="#main">{t.skip}</a>
   <div class="site">
   <Header lang={lang} slug={slug} />
-  <main id="main"><slot /></main>
+  <main id="main"><slot />{!noVideos && <Videos lang={lang} slug={slug} />}</main>
   {!['mission', 'merci', 'parents'].includes(slug) && <DonateStrip lang={lang} />}
   <Footer lang={lang} />
   </div>

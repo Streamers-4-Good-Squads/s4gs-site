@@ -6,4 +6,5 @@ export const fr: UI = {
   strip: { text: 'Chaque don soutient les enfants que nous aidons.', link: 'Notre mission' },
   spot: 'Mobile Cup 2027 : un tournoi gratuit pour une bonne cause',
   footer: { tagline: 'Des joueuses et des joueurs unis pour les enfants.', site: 'Le site', legal: 'Informations légales', privacy: 'Confidentialité', cookies: 'Gérer mes cookies', contact: 'Contact', follow: 'Nous suivre', participate: 'Participer', donate: 'Faire un don', rights: 'Streamers 4 Good Squads, ASBL belge', supercell: 'La S4Gs Mobile Cup n’est ni organisée, ni soutenue, ni sponsorisée par Supercell.', transparency: 'Transparence', rules: 'Règlement de la Mobile Cup', faq: 'FAQ', mission: 'Notre mission', cup: 'Mobile Cup 2027' },
+  video: { h2: 'En vidéo', play: 'Lire la vidéo', open: 'Voir sur YouTube', notice: 'Lecteur YouTube, chargé seulement au clic' },
 };

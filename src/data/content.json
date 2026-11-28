@@ -177,7 +177,7 @@
         "fr": "Week-end exact et lieu à confirmer.",
         "en": "Exact weekend and venue to be confirmed."
       },
-      "link": "",
+      "link": "streamathon",
       "past": false
     },
     {
@@ -195,7 +195,7 @@
         "fr": "Un week-end de 48 heures de stream, à Namur et en ligne, au profit d’Aid for Youth Philippines.",
         "en": "A 48-hour stream weekend, in Namur and online, for Aid for Youth Philippines."
       },
-      "link": "",
+      "link": "streamathon-2026",
       "past": true
     }
   ]

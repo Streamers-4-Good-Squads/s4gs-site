@@ -35,6 +35,7 @@ cookies: {
   blocks: [
     { h2: 'What the site stores without your consent', items: ['Your light or dark theme choice, kept in your browser. It does not leave your device.', 'Your cookie choice, once made.'] },
     { h2: 'What requires your consent', items: ['Audience measurement (Google Analytics): page views, where visits come from, registrations. It helps us know which actions bring in players.', 'No advertising cookie is set before your consent.'] },
+    { h2: 'YouTube videos', paras: ['Videos on this website are loaded from YouTube (in youtube-nocookie.com mode) only when you click “Play the video”. Before that click, no data is sent to YouTube. After it, YouTube applies its own rules.'] },
     { h2: 'External services', paras: ['Donations are made on Streamlabs Charity pages, and conversations take place on Discord. These services have their own rules: read their policies before using them.'] },
     { h2: 'Changing your mind', paras: ['[Cookie management button to be connected once the tool is chosen.] You can also delete cookies from your browser settings.'] },
   ] },

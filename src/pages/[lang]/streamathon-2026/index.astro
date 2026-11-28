@@ -1,0 +1,25 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHead from '../../../components/PageHead.astro';
+import Videos from '../../../components/Videos.astro';
+import { READY_CODES } from '../../../i18n/locales';
+import { s2026Page } from '../../../i18n/pages/s2026';
+import { ui } from '../../../i18n/ui';
+import { path } from '../../../i18n/utils';
+export function getStaticPaths() { return READY_CODES.map((lang) => ({ params: { lang } })); }
+const { lang } = Astro.params as { lang: string };
+const t = ui(lang); const p = s2026Page(lang);
+---
+<Base lang={lang} slug="streamathon-2026" title={p.head.title} description={p.head.description} noVideos>
+  <PageHead lang={lang} head={p.head} crumb={t.nav.events} />
+  <section class="alt"><div class="wrap prose">
+    <h2>{p.about.h2}</h2>
+    {p.about.paras.map((x) => <p>{x}</p>)}
+    <p><a class="pill sec2" href={path(lang, 'mission') + '#aid-for-youth'}>{p.about.cta}</a></p>
+  </div></section>
+  <Videos lang={lang} slug="streamathon-2026" />
+  <section class="alt"><div class="wrap"><div class="box">
+    <h2>{p.next.h2}</h2><p>{p.next.text}</p>
+    <a class="btn" href={path(lang, 'streamathon')}>{p.next.cta}</a>
+  </div></div></section>
+</Base>
