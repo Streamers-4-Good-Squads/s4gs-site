@@ -31,9 +31,9 @@ Renseigner `public/admin/config.json` : `tenantId`, `clientId`, `workerUrl`. Pub
 - Le règlement et les pages juridiques ne passent pas par cet outil.
 
 
-## Mode édition du site : textes et couleurs (bouton crayon)
+## Mode édition du site : textes et couleurs
 
-Sur chaque page, un bouton discret en bas à gauche (✎) ouvre le mode édition. **Il faut se connecter avec un compte Microsoft @s4gs.org** (fenêtre Microsoft, une seule fois par session) : tout autre compte est refusé. Il n'y a plus de code.
+Aucun bouton n'est visible pour le public. Sur n'importe quelle page, le raccourci **Ctrl + Alt + F6** ouvre le mode édition. Sur téléphone ou tablette (sans clavier), ajouter **`#modifier`** à la fin de l'adresse de la page (par exemple `.../fr/mission/#modifier`) puis valider. Sur un ordinateur portable, il peut falloir maintenir la touche Fn pour F6 ; sous Linux, Ctrl+Alt+F6 peut être intercepté par le système : utiliser alors `#modifier`. **Il faut se connecter avec un compte Microsoft @s4gs.org** (fenêtre Microsoft, une seule fois par session) : tout autre compte est refusé. Il n'y a plus de code.
 
 La barre du bas propose deux onglets :
 - **Textes** : les textes modifiables sont entourés, on clique dessus et on tape.
