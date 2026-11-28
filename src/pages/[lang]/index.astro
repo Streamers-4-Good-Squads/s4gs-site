@@ -18,6 +18,8 @@ const ICONS = [
   '<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.300 2.700-6 6-6s6 2.700 6 6"/><circle cx="17.500" cy="9" r="2.500"/><path d="M17 14c2.500 0 4.500 2 4.500 4.500"/>',
   '<path d="M3 10v4h3l7 4V6L6 10H3z"/><path d="M16.500 8.500a5 5 0 0 1 0 7"/><path d="M19 6a8.500 8.500 0 0 1 0 12"/>',
 ];
+import { missions } from '../../data/missions';
+const orgId = (n: string) => missions(lang).orgs.find((o) => o.name === n)?.id;
 ---
 <Base lang={lang} title={h.title} description={h.description}>
   <section class="hero"><div class="wrap sec"><div class="in">
@@ -60,7 +62,7 @@ const ICONS = [
   </section>}
   {on.partners && <section class="alt sec wrap">
     <div class="head"><div><h2>{ah.partners.h2}</h2></div><a class="pill sec2" href={path(lang, 'partners')}>{ah.partners.all}</a></div>
-    <div class="logos">{a.partners.groups.flatMap((g) => g.names).slice(0, 6).map((n) => <div>{n}</div>)}</div>
+    <div class="logos">{a.partners.groups.flatMap((g) => g.names).slice(0, 6).map((n) => (orgId(n) ? <a href={path(lang, 'mission') + '#' + orgId(n)}>{n}</a> : <div>{n}</div>))}</div>
   </section>}
   <section class="sec wrap">
     <div class="head"><div><h2>{h.help.h2}</h2></div></div>

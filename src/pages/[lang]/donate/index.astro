@@ -11,13 +11,34 @@ const { lang } = Astro.params as { lang: string };
 const t = ui(lang); const p = extraPage(lang).donate;
 ---
 <Base lang={lang} slug="donate" title={p.head.title} description={p.head.description}>
-  <PageHead lang={lang} head={p.head} crumb={t.donate}><div class="cta" style="margin-top:20px"><a class="pill don" href={SITE.donationUrl} target="_blank" rel="noopener">{p.donate.cta}</a></div></PageHead>
+  <PageHead lang={lang} head={p.head} crumb={t.donate}><div class="cta" style="margin-top:20px"><a class="pill don" href="#donner">{p.ways.jump}</a></div></PageHead>
   <section class="sec wrap"><div class="ev">
     <article class="big"><span class="tag">{p.impact.tag}</span><h3>{p.impact.h3}</h3><p>{p.impact.text}</p></article>
     <div class="elist">{p.points.map((x, i) => <div class="erow"><div class="date"><b>{i + 1}</b></div><div><h3>{x.h3}</h3><p>{x.text}</p></div></div>)}</div>
   </div></section>
-  <section class="band"><div class="sec wrap"><div class="ev">
-    <article class="big"><span class="tag">{p.donate.h2}</span><h3>{p.donate.h2}</h3><p>{p.donate.text}</p><a class="pill don" href={SITE.donationUrl} target="_blank" rel="noopener">{p.donate.cta}</a></article>
-    <div class="card"><h3>{p.more.h3}</h3><p>{p.more.text}</p><a class="pill sec2" href={path(lang, 'mission')}>{p.more.cta}</a></div>
-  </div></div></section>
+  <section class="band" id="donner"><div class="sec wrap">
+    <div class="head"><h2>{p.ways.h2}</h2><p>{p.donate.text}</p></div>
+    <div class="grid3 ways">
+      <article class="card"><div class="ic" style="background:var(--y)">1</div><h3>{p.ways.list[0].h3}</h3><p>{p.ways.list[0].text}</p><a class="pill don" href={SITE.donationUrl} target="_blank" rel="noopener">{p.ways.list[0].cta}</a></article>
+      <article class="card"><div class="ic" style="background:var(--b)">2</div><h3>{p.ways.list[1].h3}</h3><p>{p.ways.list[1].text}</p>
+        {SITE.stripe.paymentLink
+          ? <a class="pill pri" href={SITE.stripe.paymentLink} target="_blank" rel="noopener">{p.ways.list[1].cta}</a>
+          : <div id="stripe-box"><button class="pill pri" type="button" id="stripe-go">{p.ways.list[1].cta}</button></div>}
+      </article>
+      <article class="card"><div class="ic" style="background:var(--g)">3</div><h3>{p.ways.list[2].h3}</h3><p>{p.ways.list[2].text}</p><a class="pill pri" href={SITE.paypalUrl} target="_blank" rel="noopener">{p.ways.list[2].cta}</a></article>
+    </div>
+    <p class="small" style="margin-top:18px">{p.ways.note}</p>
+  </div></section>
+  <section class="sec wrap"><div class="card"><h3>{p.more.h3}</h3><p>{p.more.text}</p><a class="pill sec2" href={path(lang, 'mission')}>{p.more.cta}</a></div></section>
+  {!SITE.stripe.paymentLink && (
+    <script is:inline define:vars={{ id: SITE.stripe.buyButtonId, key: SITE.stripe.publishableKey }}>
+      // Le script de Stripe n'est chargé qu'à la demande : aucun appel à Stripe tant que le bouton n'est pas utilisé.
+      document.getElementById('stripe-go').addEventListener('click', function () {
+        var box = document.getElementById('stripe-box'), s = document.createElement('script');
+        s.async = true; s.src = 'https://js.stripe.com/v3/buy-button.js';
+        s.onload = function () { var b = document.createElement('stripe-buy-button'); b.setAttribute('buy-button-id', id); b.setAttribute('publishable-key', key); box.replaceChildren(b); };
+        document.head.appendChild(s);
+      });
+    </script>
+  )}
 </Base>

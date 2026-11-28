@@ -24,7 +24,7 @@ Dépôt : `Streamers-4-Good-Squads/s4gs-site`. Site statique Astro 5 de Streamer
 - Si l'utilisateur dit qu'il ne retrouve pas "le rendu de la première version", comparer visuellement avec l'artefact "Simulateur Site S4GS" avant de répondre. Allan veut voir un aperçu avant intégration pour valider la direction artistique.
 
 ## Pages
-Accueil, L'association, Événements, Actualités / Streamers / Partenaires / Transparence (masquées tant que `sections.* = false`), Contact, Participer, Faire un don, Mobile Cup (+ formulaire de pré-inscription), Streamathon (formulaire brouillon, noindex), merci, parents (consentement), et documents : mission, rules, faq, privacy, prizes, cookies, football-cup (certains en noindex en attendant validation).
+Accueil, L'association, Événements, Partenaires (active), Actualités / Streamers / Transparence (masquées tant que `sections.* = false`), Contact, Participer, Faire un don, Mobile Cup (+ formulaire de pré-inscription), Streamathon (formulaire brouillon, noindex), merci, parents (consentement), et documents : mission, rules, faq, privacy, prizes, cookies, football-cup (certains en noindex en attendant validation).
 Pages de l'ancien site non reprises : article d'actualité, Live (lecteur, planning, jauge) : à faire quand il y aura de vraies actualités ou un événement.
 
 ## Déploiement
@@ -51,9 +51,14 @@ Pages de l'ancien site non reprises : article d'actualité, Live (lecteur, plann
 - `/streamathon/` : formulaire Streamathon 2027 (brouillon, noindex, hors menu). Questions selon le pays pilotées par `src/data/streamathon.ts` (ex. salle calme ou bruyante en Belgique, pas aux Philippines, en ligne seulement ailleurs). Envoi vers `SITE.streamathonEndpoint` (vide = mode test).
 - Mode édition des textes (bouton ✎, code 2005 qui ne protège que l'ouverture), publication via la route `/texts` du Worker (non configuré : bouton "Télécharger le fichier" en attendant). Correction : `public/admin/admin.js` utilise `window.msal` (avec repli `msalBrowser`). Vérifié le 27 nov. 2026 : `public/edit/editor.js` et `integrations/text-overrides.mjs` sont bien sur main.
 
+## Décisions prises (Éric, 28 nov. 2026)
+- Nom affiché : **S4Gs** partout dans les textes (les noms techniques, polices `S4GS Display` et adresses restent tels quels).
+- Bouton « Faire un don » de l'en-tête : mène à `/donate/`, qui propose dans l'ordre Streamlabs Charity, Stripe (montant libre, unique ou mensuel, en euros) puis PayPal (`SITE.stripe`, `SITE.paypalUrl`). Liens génériques : pendant les événements, chaque joueur a sa propre page de collecte.
+- Partenaires humanitaires officiels : Aid for Youth Philippines, ChildHope Philippines, ECPAT Philippines, présentés sur la page Mission dans cet ordre (`src/data/missions.ts`), liens vers leurs sites dans une fenêtre (nouvel onglet, la page reste ouverte). Rubrique Partenaires activée avec ces trois noms (liens vers Mission).
+- Rapports d'activité publiés sur le site après chaque assemblée générale annuelle (rubrique Transparence à activer à ce moment).
+- Menu : sous-menus déroulants « À propos » / « About us » (L'association, Notre mission, Partenaires, Transparence si active, Participer, Faire un don, Contact) et « Événements » (Mobile Cup 2027, Streamers et Actualités si actives), dans `src/components/Header.astro`.
+
 ## Décisions en attente (ne rien trancher seul : demander à Allan)
-- Nom : le site écrit "S4GS", la charte et les documents "S4Gs". Harmoniser ou non ?
-- Page Faire un don : Aid for Youth Philippines retiré au profit du message unique de la stratégie (enfants des rues et jeunes mères mineures seules aux Philippines, enfants victimes d'abus). À remettre ou non ?
 - Formulaire Streamathon : hypothèses à valider (Philippines avec participation sur place, questions matériel et besoins particuliers, créneaux, âge minimum 13 ans avec e-mail parental de 13 à 17 ans).
 - Mode édition : un texte modifié change partout où le même texte apparaît dans la même langue. Restreindre à la page en cours si besoin.
 - Mobile Cup : seuils de la division Découverte, option de dotation (1, 2 ou 3), traductions des 7 autres langues.
@@ -74,4 +79,5 @@ Pages de l'ancien site non reprises : article d'actualité, Live (lecteur, plann
 - Traductions des 7 autres langues, bannière cookies + GA4, pages de redirection depuis l'ancien site Webflow, branchement du compteur au CRM, `formEndpoint` / `consentEndpoint` / `streamathonEndpoint` quand le CRM est prêt, retirer `noindex` des pages juridiques une fois validées, mise à jour de l'action GitHub (Node 20 déprécié).
 - Écarts avec la stratégie 2027 et ses annexes, en attente de contenu ou de décision : guide pas à pas pour créer sa page de collecte Streamlabs Charity (lien à ajouter sur `/merci/`), paliers du compteur d'inscriptions (bonus débloqués), règle de changement de deck entre les manches (Clash Royale, « à confirmer » dans le guide), pays limites de la liste du formulaire (Turquie, Caucase, Kazakhstan, Israël retirés faute de mention dans la stratégie : à confirmer). Les documents internes prévoient encore un bouton « Partage avec ta famille » pour les mineurs : à mettre à jour côté président (le site envoie le lien de don au parent).
 - Formulaire Mobile Cup (27 nov. 2026) : une division par jeu (`divisions`), identifiants des deux coéquipiers Brawl Stars (`brawlStars.teammates`), pays limités aux trois zones hors Russie et Biélorussie, case « règlement et code de conduite ». Format décrit dans `docs/specification-crm-inscriptions.md`.
+- Liens partenaires confirmés par Éric : `https://childhope.org.ph/` et `https://ecpat.org/` (site du réseau international ECPAT). Chiffre « 96 % des 12-17 ans en ligne » : source sur le site d'ECPAT selon Éric. Lien Stripe direct renseigné dans `SITE.stripe.paymentLink` (28 nov. 2026) : la page Don n'utilise plus le bouton intégré ni le script Stripe.
 - Galerie "En images" et Live à reprendre de l'ancien site quand il y aura des photos et un événement.

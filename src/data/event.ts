@@ -1,6 +1,6 @@
 // Données de l'événement (valeurs du guide technique, version du 25/11/2026).
 export const EVENT = {
-  name: 'S4GS Mobile Cup 2027',
+  name: 'S4Gs Mobile Cup 2027',
   games: ['clash-royale', 'brawl-stars'] as const,
   dates: [
     { id: 'open', date: '2026-12-16' },

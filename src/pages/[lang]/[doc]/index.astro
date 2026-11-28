@@ -5,9 +5,11 @@ import { READY_CODES } from '../../../i18n/locales';
 import { DOC_SLUGS, docPage, cupPage } from '../../../i18n/pages';
 import { ui } from '../../../i18n/ui';
 import { path } from '../../../i18n/utils';
+import { missions } from '../../../data/missions';
 export function getStaticPaths() { return READY_CODES.flatMap((lang) => DOC_SLUGS.map((doc) => ({ params: { lang, doc } }))); }
 const { lang, doc } = Astro.params as { lang: string; doc: string };
 const d = docPage(lang, doc); const t = ui(lang); const c = cupPage(lang);
+const m = doc === 'mission' ? missions(lang) : null;
 ---
 <Base lang={lang} slug={doc} title={d.title} description={d.description} noindex={d.noindex}>
   <section class="hero" style="padding-block:clamp(40px,7vw,80px)"><div class="wrap"><h1>{d.h1}</h1><p class="lead">{d.lead}</p></div></section>
@@ -20,6 +22,45 @@ const d = docPage(lang, doc); const t = ui(lang); const c = cupPage(lang);
       {b.qa && b.qa.map((x) => <details class="qa"><summary>{x.q}</summary><p>{x.a}</p></details>)}
     </div></section>
   ))}
+  {m && (
+    <section class="band orgs"><div class="sec wrap">
+      <div class="head"><h2>{m.h2}</h2><p>{m.intro}</p></div>
+      {m.orgs.map((o) => (
+        <article class="org prose" id={o.id}>
+          <h3>{o.name}</h3><p class="tagl">{o.tagline}</p>
+          {o.paras.map((x) => <p>{x}</p>)}
+          {o.secs?.map((s) => <>
+            <h4>{s.h3}</h4>
+            {s.quote && <blockquote>{s.quote}</blockquote>}
+            {s.paras?.map((x) => <p>{x}</p>)}
+            {s.items && <ul class="list">{s.items.map((x) => <li>{x}</li>)}</ul>}
+            {s.after?.map((x) => <p>{x}</p>)}
+          </>)}
+          {o.url && <>
+            <p><button class="pill sec2" type="button" data-org-open={o.id}>{m.site} : {o.name}</button></p>
+            <dialog class="don" id={`dlg-${o.id}`} aria-labelledby={`dlgh-${o.id}`}>
+              <div class="box">
+                <button class="x" type="button" data-close aria-label={m.close}>×</button>
+                <h2 id={`dlgh-${o.id}`}>{o.name}</h2>
+                <p>{m.dialog.replace('{name}', o.name)}</p>
+                <p class="small">{o.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}</p>
+                <div class="cta"><a class="btn" href={o.url} target="_blank" rel="noopener" data-close>{m.open}</a></div>
+              </div>
+            </dialog>
+          </>}
+        </article>
+      ))}
+    </div></section>
+  )}
+  {m && <script is:inline>
+    document.querySelectorAll('[data-org-open]').forEach(function (b) {
+      var d = document.getElementById('dlg-' + b.dataset.orgOpen);
+      b.addEventListener('click', function () { if (d.showModal) d.showModal(); else d.setAttribute('open', ''); });
+      var close = function () { if (d.close) d.close(); else d.removeAttribute('open'); b.focus(); };
+      d.querySelectorAll('[data-close]').forEach(function (x) { x.addEventListener('click', close); });
+      d.addEventListener('click', function (e) { if (e.target === d) close(); });
+    });
+  </script>}
   {d.cta === 'donate' && <section><div class="wrap"><DonateBlock d={c.donate} /></div></section>}
   {d.cta === 'register' && <section><div class="wrap"><div class="box"><a class="btn" href={path(lang, 'mobile-cup') + '#inscription'}>{t.register}</a></div></div></section>}
 </Base>
