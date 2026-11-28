@@ -14,7 +14,7 @@ export const SITE = {
     facebook: 'https://www.facebook.com/streamersforgood',
     instagram: 'https://www.instagram.com/s4gsquads_',
     youtube: 'https://www.youtube.com/@S4GSquads',
-    tiktok: 'https://www.tiktok.com/@s4gs.streamathon',
+    tiktok: 'https://www.tiktok.com/@s4gsquads_',
   },
   discordUrl: 'https://discord.gg/ry5AaASSy4',
   contactEmail: 'tournoi@s4gs.org',

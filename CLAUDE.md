@@ -67,7 +67,7 @@ Pages de l'ancien site non reprises : article d'actualité, Live (lecteur, plann
 - **Aucune mention de Philia Haven ni de PlayFest** (anciens noms), nulle part.
 - Chiffres de l'accueil : 30 000 repas, 3 continents, 100+ streamers, 15 M de personnes en **portée potentielle** (formulation à garder).
 - Page Streamers : pas de fiches par streamer, renvoi vers les réseaux de S4Gs (onglet Streamers retiré de `/admin/`).
-- Discord : `https://discord.gg/ry5AaASSy4`. Réseaux : uniquement les nouveaux comptes (`@S4GSquads`, `@s4gs.streamathon`...), jamais les anciens comptes PlayFest.
+- Discord : `https://discord.gg/ry5AaASSy4`. Réseaux : uniquement les nouveaux comptes (YouTube `@S4GSquads`, TikTok `@s4gsquads_`, Instagram `s4gsquads_`...), jamais les anciens comptes PlayFest.
 - Adresses e-mail de contact : à choisir page par page (demander à Allan).
 - Conditions d'utilisation : page `/terms/` (brouillon noindex, relecture juridique avant publication).
 - Comptes à rebours : `src/components/Countdown.astro`, étapes datées avec fuseau, disparition automatique après la date de fin (Mobile Cup : jusqu'au 31 janv. 2027).
