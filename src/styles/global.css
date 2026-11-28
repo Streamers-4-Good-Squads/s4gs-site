@@ -115,3 +115,14 @@ dialog.don .cta{justify-content:center}
 .yt figcaption{margin-top:8px;font-size:14px}
 @media (prefers-reduced-motion:reduce){.yt-ic{transition:none}}
 @media (max-width:560px){.yt-ic{width:52px;height:52px;top:42%}.yt-n{display:none}.yt-t{font-size:16px}}
+/* Compte à rebours (disparaît seul après l'événement) */
+.cdown{display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin:14px 0 4px;padding:10px 18px;border-radius:16px;background:var(--card);border:1.5px solid var(--edge)}
+.cdown[hidden]{display:none}
+.cd-l{font-weight:700;color:var(--mut);font-size:14px}
+.cd-v{font-family:var(--display);font-weight:700;font-size:clamp(18px,2.6vw,24px);font-variant-numeric:tabular-nums;color:var(--ink)}
+/* Guide de la collecte (page Mobile Cup) */
+.gsteps{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:14px;counter-reset:g;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))}
+.gsteps li{counter-increment:g;background:var(--card);border:1.5px solid var(--edge);border-radius:18px;padding:18px 18px 16px}
+.gsteps li::before{content:counter(g);display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--y);color:#070B1A;font-family:var(--display);font-weight:700;margin-bottom:10px}
+.gsteps h3{font-size:1rem;margin:0 0 6px}.gsteps p{margin:0;font-size:15px}
+.msg{font-style:italic;border-left:4px solid var(--y);padding-left:12px}

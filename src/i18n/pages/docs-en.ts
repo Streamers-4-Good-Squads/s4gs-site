@@ -21,6 +21,21 @@ privacy: {
     { h2: 'Your rights', paras: ['You can ask for access to your data, correction, deletion, and withdraw your consent at any time by writing to tournoi@s4gs.org. You may also lodge a complaint with the Belgian Data Protection Authority (autoriteprotectiondonnees.be).'] },
     { h2: 'Cookies', paras: ['The site only uses audience-measurement cookies with your consent. You can change your mind at any time using the “Manage cookies” link at the bottom of the page. [Cookie management tool to be completed.]'] },
   ] },
+terms: {
+  title: 'Terms of use | Streamers 4 Good Squads', description: 'Terms of use of the Streamers 4 Good Squads ASBL website.', noindex: true,
+  h1: 'Terms of use', lead: 'Working version, to be validated before publication.',
+  blocks: [
+    { h2: 'Website publisher', paras: ['This website is published by Streamers 4 Good Squads ASBL, a non-profit association under Belgian law, enterprise number BE1036.153.802. Registered office: 69 avenue de la Grotte, 4130 Liège, Belgium.', 'The website is hosted by GitHub Pages, a service of GitHub, Inc. (United States).'] },
+    { h2: 'Purpose', paras: ['These terms govern the use of this website. By browsing it, you accept them. The rules of each event, such as the Mobile Cup rules, apply in addition.'] },
+    { h2: 'Content and intellectual property', items: ['The texts, visuals, logo and the Stream-E mascot belong to S4Gs or are used with permission. Any reproduction requires our written consent.', 'The trademarks mentioned (including Supercell, Clash Royale, Brawl Stars, Twitch, YouTube) belong to their owners. S4Gs is neither affiliated with nor endorsed by these companies.'] },
+    { h2: 'Forms', items: ['Information sent through the forms must be accurate and concern you, or a person for whom you are the parent or legal guardian.', 'Automated or abusive submissions, or submissions on behalf of someone else, are forbidden.', 'Data is processed as described in the privacy policy.'] },
+    { h2: 'Donations', items: ['Donations are made on external platforms (Streamlabs Charity, Stripe, PayPal), under their own terms. S4Gs never sees or stores any bank details.', 'No tax receipt is issued.', 'A donation never gives an advantage in our competitions.'] },
+    { h2: 'Links to other websites', paras: ['This website contains links to external websites and platforms. S4Gs does not control their content and is not responsible for it.'] },
+    { h2: 'Liability', paras: ['We take care to publish accurate information, including event dates, which may nevertheless change. S4Gs cannot be held liable for temporary unavailability of the website or for any damage linked to its use.'] },
+    { h2: 'Changes', paras: ['These terms may be updated. The version online is the one that applies.'] },
+    { h2: 'Applicable law', paras: ['These terms are governed by Belgian law. In the event of a dispute, and failing an amicable solution, the courts of Liège have jurisdiction.'] },
+    { h2: 'Contact', paras: ['For any question about these terms: tournoi@s4gs.org.'] },
+  ] },
 prizes: {
   title: 'Prizes | S4Gs Mobile Cup 2027', description: 'Prizes of the S4Gs Mobile Cup 2027, identical in every zone.', noindex: true,
   h1: 'Prizes', lead: 'Working version, pending the association’s choice of option. Rewards are the same in all three zones.',

@@ -1,10 +1,10 @@
 {
   "sections": {
     "news": false,
-    "streamers": false,
+    "streamers": true,
     "partners": true,
     "transparency": false,
-    "stats": false
+    "stats": true
   },
   "home": {
     "h1": {
@@ -12,37 +12,37 @@
       "en": "Gaming. Streaming. Solidarity."
     },
     "lead": {
-      "fr": "S4Gs est une association qui réunit des streamers du monde entier pour soutenir des causes humanitaires, avec un grand événement chaque année.",
-      "en": "S4Gs is a non-profit that brings together streamers from around the world to support humanitarian causes, with one big event every year."
+      "fr": "Depuis 2024, S4Gs réunit des streamers du monde entier pour soutenir des causes humanitaires, avec des événements tout au long de l’année.",
+      "en": "Since 2024, S4Gs has brought together streamers from around the world to support humanitarian causes, with events throughout the year."
     }
   },
   "stats": [
     {
-      "v": "0",
+      "v": "30 000",
       "l": {
-        "fr": "euros récoltés (exemple)",
-        "en": "euros raised (example)"
+        "fr": "repas déjà distribués",
+        "en": "meals already distributed"
       }
     },
     {
-      "v": "0",
+      "v": "3",
       "l": {
-        "fr": "streamers mobilisés (exemple)",
-        "en": "streamers involved (example)"
+        "fr": "continents mobilisés",
+        "en": "continents involved"
       }
     },
     {
-      "v": "0",
+      "v": "100+",
       "l": {
-        "fr": "pays représentés (exemple)",
-        "en": "countries represented (example)"
+        "fr": "streamers mobilisés",
+        "en": "streamers involved"
       }
     },
     {
-      "v": "0",
+      "v": "15 M",
       "l": {
-        "fr": "éditions organisées (exemple)",
-        "en": "editions held (example)"
+        "fr": "de personnes en portée potentielle",
+        "en": "people in potential reach"
       }
     }
   ],
@@ -133,13 +133,30 @@
   "partners": [
     {
       "h2": {
-        "fr": "Partenaires humanitaires",
-        "en": "Humanitarian partners"
+        "fr": "Partenaires permanents",
+        "en": "Long-term partners"
       },
       "names": [
-        "Aid for Youth Philippines",
-        "ChildHope Philippines",
-        "ECPAT Philippines"
+        "haca.studio",
+        "Aid for Youth Philippines"
+      ]
+    },
+    {
+      "h2": {
+        "fr": "Streamathon 2027 : partenaires de l’événement",
+        "en": "Streamathon 2027: event partners"
+      },
+      "names": [
+        "Top Gaming"
+      ]
+    },
+    {
+      "h2": {
+        "fr": "Streamathon 2026 : partenaires de l’événement",
+        "en": "Streamathon 2026: event partners"
+      },
+      "names": [
+        "Top Gaming"
       ]
     }
   ],
@@ -192,8 +209,8 @@
         "en": "S4Gs Streamathon 2026"
       },
       "p": {
-        "fr": "Un week-end de 48 heures de stream, à Namur et en ligne, au profit d’Aid for Youth Philippines.",
-        "en": "A 48-hour stream weekend, in Namur and online, for Aid for Youth Philippines."
+        "fr": "Un week-end de 48 heures de stream, à Namur dans les locaux de Pixiels, à Manille au CIIT College et en ligne, au profit d’Aid for Youth Philippines.",
+        "en": "A 48-hour stream weekend, in Namur at Pixiels’ premises, in Manila at CIIT College and online, for Aid for Youth Philippines."
       },
       "link": "streamathon-2026",
       "past": true
