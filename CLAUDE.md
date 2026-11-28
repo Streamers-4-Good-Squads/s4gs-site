@@ -1,102 +1,116 @@
-# Site S4GS : notes pour Claude
+# Site S4Gs : notes pour Claude
 
-Dépôt : `Streamers-4-Good-Squads/s4gs-site`. Site statique Astro 5 de Streamers 4 Good Squads (ASBL belge). Responsable côté site : Allan Pinet (EU Stream Coordinator, francophone). Répondre en français, ton professionnel et direct, sans tirets longs (pas de "—" dans les textes ni les documents produits : utiliser "-", "|" ou une virgule).
+Dépôt public `Streamers-4-Good-Squads/s4gs-site` : site statique Astro 5 de **Streamers 4 Good Squads ASBL** (association belge). Responsable côté site : Allan Pinet (EU Stream Coordinator, francophone). Président et administrateur Microsoft 365 : Éric.
 
-## Contexte
-- Refonte du site à partir des documents du président ("2027 Mobile Cup") et de l'ancienne maquette "Simulateur Site S4GS" (artefact claude.ai, design de référence).
-- Événement principal : **S4GS Mobile Cup 2027**, tournoi mobile gratuit en ligne (Clash Royale, Brawl Stars), du 16 déc. 2026 au 31 janv. 2027. Pré-inscriptions ouvertes le **16 décembre 2026** (`SITE.registrationsOpen`). Âge minimum 13 ans, consentement parental de 13 à 17 ans.
-- Autres événements : Streamathon 2027 (avril 2027, **à confirmer**), Streamathon 2026 (20-22 nov. 2026, passé, au profit d'Aid for Youth Philippines).
-- Siège : 69 avenue de la Grotte, 4130 Liège (code postal 4130 confirmé).
-- Ne pas réutiliser les noms de partenaires de la maquette (exemples, dont RTBF iXPé : relation non établie).
+**Règles de rédaction** : répondre en français, ton professionnel et direct. Jamais de tiret long (« — ») dans les textes ni les documents : utiliser « - », « | » ou une virgule. Pas de point médian (écrire « celles et ceux », « personne mineure »), jamais « charity » ni « caritatif ». Nom affiché **S4Gs** (pas « S4GS ») dans tous les textes visibles. Toute nouvelle chaîne existe en fr et en.
 
-## Technique
-- Astro 5, `output: static`, `trailingSlash: 'always'`, format directory. Sitemap filtré par la liste `hidden` d'`astro.config.mjs`.
-- Langues : 9 prévues (`src/i18n/locales.ts`), seulement **fr et en prêtes** (`READY`). Autres : à traduire plus tard. hreflang géré par `Base.astro`.
-- Textes : `src/i18n/ui/{fr,en,types}.ts` (interface), `src/i18n/pages/*` (pages : `assoc-*`, `home`, `docs-*`, `form`, `extra.ts` pour Participer et Don). Toute nouvelle chaîne doit exister en fr et en.
-- Réglages : `src/config/site.ts` (URL de don Streamlabs, Discord, réseaux sociaux, adresse, e-mail `tournoi@s4gs.org`, `formEndpoint` et `consentEndpoint` vides = mode test, compteur d'inscriptions, `sections`).
-- **Contenus modifiables** : `src/data/content.json` (accueil, chiffres, actualités, événements, streamers, partenaires, rubriques visibles). `assocPage()` (`src/i18n/pages/index.ts`) les fusionne avec les textes de base. `SITE.sections` vient de ce fichier : une rubrique à `false` est construite mais masquée (menu, pied de page, sitemap, noindex).
-- Thème : `html[data-theme="dark"|"light"]`, mémorisé dans `localStorage` (`s4gs-theme`).
+## 1. Repères essentiels
+- Siège : 69 avenue de la Grotte, 4130 Liège, Belgique. Numéro d'entreprise **BE1036.153.802** (pied de page, conditions d'utilisation).
+- Mission (message unique, repris partout) : soutenir les enfants des rues et les jeunes mères mineures seules aux Philippines, et les enfants victimes d'abus dans le monde. Dons : 70 % aux partenaires humanitaires, 30 % à la gestion, aucune attestation fiscale.
+- Historique : dire seulement « depuis 2024 », sans détail par édition.
+- **Interdits absolus sur le site** : toute mention de **Philia Haven** ou de **PlayFest** (anciens noms), de l'**HEAJ** (Haute École Albert Jacquard), des anciens comptes sociaux PlayFest, des noms de partenaires de l'ancienne maquette (dont RTBF iXPé).
+- Documents internes (stratégie Mobile Cup 2027, guide technique, annexes formulaire et dotation) : **ne jamais les ajouter au dépôt, il est public**. Ils ne sont pas dans le dépôt : les redemander à Allan si besoin.
 
-## Design (fidèle à l'ancien simulateur)
-- `src/styles/global.css` (base, formulaires, tableaux, FAQ) puis `src/styles/design.css` (design de l'ancien site, porté tel quel : conteneur `.site` avec requêtes de conteneur `cqi`, bandeau `.spot`, en-tête `.stick` avec médaillon, bascule soleil/lune `.tgl`, hero animé `.hero`/`.vis`, bandeau `.mq`, cartes empilées `.stk/.sc`, bandes `.band`, `.big`, `.card`, pied de page `.ft`).
-- Respecter `prefers-reduced-motion`. Lisibilité avant tout (jamais de texte sur une couleur proche). Pas de photos de remplissage rayées en public.
-- Les pages sont en `<Base>` + `<PageHead>` ; les sections utilisent `.sec`, `.wrap`, `.head`, `.kick`, `.pill`.
-- Si l'utilisateur dit qu'il ne retrouve pas "le rendu de la première version", comparer visuellement avec l'artefact "Simulateur Site S4GS" avant de répondre. Allan veut voir un aperçu avant intégration pour valider la direction artistique.
+## 2. Événements
+- **S4Gs Mobile Cup 2027** (événement principal) : tournoi mobile gratuit en ligne, Clash Royale (1c1) et Brawl Stars (3c3, trio ou solo), divisions Open et Découverte, trois zones (Europe 15-18 h, Amériques 18-21 h, Océanie 9-12 h, heure de Bruxelles) selon le pays de résidence. Pré-inscriptions le **16 déc. 2026** (`SITE.registrationsOpen`), mini-coupe 27-28 déc., qualifs 16-17 et 23-24 janv., finales 30-31 janv. 2027 (`src/data/event.ts`). 13 ans minimum, accord parental de 13 à 17 ans. Compétition de collecte par continent (Coupe des continents) sur Streamlabs Charity. Mention obligatoire : non organisé ni soutenu par Supercell.
+- **Streamathon 2026** (passé, 20-22 nov. 2026) : à Namur dans les locaux de Pixiels, à Manille au CIIT College, et en ligne, au profit d'Aid for Youth Philippines. Page `/streamathon-2026/` avec vidéo.
+- **Streamathon 2027** : avril 2027, date et lieu **à confirmer**. Formulaire streamers `/streamathon/` (brouillon noindex). Pays : suivre la carte qu'Allan doit transmettre, n'en lister aucun avant.
+- **Mobile Football Cup 2027** (mars 2027, jeu EA) : page `/football-cup/` en noindex, **hors menu jusqu'après la clôture de janvier** (règle Supercell : ne pas promouvoir un autre éditeur pendant la Mobile Cup).
 
-## Pages
-Accueil, L'association, Événements, Partenaires (active), Actualités / Streamers / Transparence (masquées tant que `sections.* = false`), Contact, Participer, Faire un don, Mobile Cup (+ formulaire de pré-inscription), Streamathon (formulaire brouillon, noindex), merci, parents (consentement), et documents : mission, rules, faq, privacy, prizes, cookies, football-cup (certains en noindex en attendant validation).
-Pages de l'ancien site non reprises : article d'actualité, Live (lecteur, planning, jauge) : à faire quand il y aura de vraies actualités ou un événement.
+## 3. Technique
+- Astro 5, `output: static`, `trailingSlash: 'always'`, format directory. Sitemap filtré par la liste `hidden` d'`astro.config.mjs` (pages noindex et rubriques inactives).
+- Langues : 9 prévues (`src/i18n/locales.ts`), seulement **fr et en prêtes** (`READY`). hreflang et x-default (en) dans `Base.astro`.
+- **Racine `/`** (`src/pages/index.astro`) : pas de page de choix. Redirection immédiate vers la dernière langue utilisée (`localStorage` `s4gs-lang`, écrit par `Base.astro`), sinon la langue du navigateur si prête, sinon l'anglais, en conservant `?utm_...` et l'ancre.
+- Textes : `src/i18n/ui/{fr,en,types}.ts` (interface : menu, pied de page, vidéo, compte à rebours), `src/i18n/pages/*` : `fr.ts`/`en.ts`/`types.ts` (Mobile Cup et `/merci/`), `assoc-*` (accueil, association, événements, partenaires, streamers...), `docs-*` (pages documents), `form.ts` (formulaire Mobile Cup), `parents.ts`, `streamathon.ts`, `s2026.ts`, `extra.ts` (Participer, Faire un don), `home.ts`.
+- Pages documents (`src/pages/[lang]/[doc]/`, `DOC_SLUGS`) : mission, rules, faq, privacy, terms, prizes, cookies, football-cup.
+- Thème clair/sombre : `html[data-theme]`, `localStorage` `s4gs-theme`.
 
-## Déploiement
-- GitHub Pages via Actions (`.github/workflows/deploy.yml`) à chaque push sur `main`, Node 20. URL provisoire : `https://streamers-4-good-squads.github.io/s4gs-site/` (le script `scripts/prefix-base.mjs` préfixe les liens avec `/s4gs-site`).
-- **Quand le domaine s4gs.org est branché sur Pages : créer la variable de dépôt `PAGES_AT_ROOT=true`** (sinon les liens restent préfixés). Domaine géré chez IONOS (enregistrement TXT de vérification, domaine personnalisé dans Pages, bascule vers le 10 décembre, Eric comme second propriétaire).
-- Le cache de GitHub Pages dure environ 10 minutes, page par page : ajouter `?v=N` pour contourner avant de conclure à un bug.
+### Réglages (`src/config/site.ts`)
+- Dons : `donationUrl` (Streamlabs Charity), `stripe.paymentLink` (lien direct, montant libre, euros), `paypalUrl`, `fundraisingUrl` (page d'équipe « S4Gs Mobile Cup 2027 » sur Streamlabs, **vide pour l'instant**).
+- `socials` (Facebook `streamersforgood`, Instagram `s4gsquads_`, YouTube `@S4GSquads`, TikTok `@s4gsquads_`), `discordUrl` (`discord.gg/ry5AaASSy4`). Uniquement les nouveaux comptes.
+- `contactEmail` (`tournoi@s4gs.org`, utilisé partout pour l'instant ; les adresses à afficher page par page restent **à choisir par Allan**), `address`.
+- `formEndpoint`, `consentEndpoint`, `streamathonEndpoint` : vides = mode test (rien n'est envoyé). À renseigner quand le CRM est prêt.
+- `registrationsOpen`, `registrations` (compteur, mis à jour à la main), `sections` (vient de `content.json`).
 
-## Façon de travailler avec GitHub
-- Ne jamais pousser sur `main` directement : branche, commit, PR, puis demander à Allan de fusionner. `gh pr create` échoue (GraphQL bloqué) : utiliser `gh api repos/Streamers-4-Good-Squads/s4gs-site/pulls -f title=... -f head=... -f base=main -f body=...`.
-- Dépôt en clone superficiel : pousser avec `git -c push.negotiate=true push`. Les alertes de hook "commits non poussés" sont des faux positifs : vérifier avec `git ls-remote --heads origin <branche>` et comparer à `git rev-parse HEAD`.
-- Vérifier le rendu avec Playwright (build, serveur local sur `dist`, captures clair, sombre, mobile 390 px) avant de proposer une PR. Lancer `npm run build` avant chaque commit.
-- Messages de commit : ajouter les lignes de coattribution demandées par l'environnement.
+### Données (`src/data/`)
+- `content.json` (modifiable depuis `/admin/`) : accueil, chiffres, actualités, événements, partenaires, `sections`. `assocPage()` (`src/i18n/pages/index.ts`) le fusionne avec les textes de base. Une rubrique à `false` est construite mais masquée (pied de page, sitemap, noindex, mention « Exemple »). État actuel : `partners`, `streamers`, `stats` à true ; `news`, `transparency` à false. Le Worker valide la structure de ce fichier : ajouter un champ demande de mettre à jour `worker/src/index.js` et `public/admin/admin.js`.
+- `missions.ts` : partenaires humanitaires de la page Mission (Aid for Youth Philippines, ChildHope Philippines, ECPAT Philippines, dans cet ordre), fr/en, liens `https://childhope.org.ph/` et `https://ecpat.org/` ouverts depuis une fenêtre (nouvel onglet).
+- `videos.json` : vidéos YouTube par page (clé = slug, plusieurs vidéos possibles, `url` + `title` fr/en).
+- `event.ts` (dates et zones Mobile Cup), `streamathon.ts` (questions du formulaire Streamathon selon le pays et le mode), `text-overrides.json` (textes modifiés depuis le site, voir § 7).
 
-## Espace équipe (éditeur)
-`/admin/` (aperçu sans connexion : `/admin/?demo=1`) édite `content.json`, connexion Microsoft limitée à @s4gs.org, publication par un Cloudflare Worker (`worker/`) qui commit sur GitHub. Mise en route détaillée : `docs/editeur-equipe.md`. **À configurer** : inscription d'application Microsoft Entra (par un admin du compte Microsoft 365), jeton GitHub limité au dépôt (Contents read/write), compte Cloudflare, puis renseigner `public/admin/config.json` et `worker/wrangler.toml`. Tant que ce n'est pas fait, `/admin/` affiche "connexion pas encore configurée".
+### Composants (`src/components/`)
+- `Header.astro` : menu avec sous-menus déroulants (survol ou bouton flèche sur ordinateur, liste en retrait sur mobile, Échap et clic extérieur ferment). « À propos » : L'association, Notre mission, Partenaires, Transparence (si active), Participer, Faire un don, Contact. « Événements » : Mobile Cup 2027, Streamathon 2027, Streamathon 2026, Streamers, Actualités (toujours affichées, à la demande d'Allan). Bouton « Faire un don » vers `/donate/`.
+- `Footer.astro` : liens, réseaux, pages légales (dont Conditions d'utilisation), « © Streamers 4 Good Squads ASBL | Numéro d'entreprise BE1036.153.802 », mention Supercell.
+- `RegisterForm.astro` : pré-inscription Mobile Cup (pays des trois zones hors Russie et Biélorussie, une division par jeu, coéquipiers Brawl Stars, tranche d'âge et e-mail parental). Format des données : `docs/specification-crm-inscriptions.md`.
+- `StreamathonForm.astro`, `YouTube.astro` (lecteur chargé seulement au clic, puis youtube-nocookie.com), `Videos.astro` (section « En vidéo », ajoutée automatiquement par `Base.astro`, sauf `noVideos`), `Countdown.astro` (étapes datées avec fuseau, retiré automatiquement après la date de fin), `DonateBlock`, `DonateStrip` (bandeau vers Mission), `PageHead`, `LanguageSwitcher`.
 
-## Textes modifiés depuis le site
-`src/data/text-overrides.json` (clé = texte d'origine, par langue) est appliqué en fin de compilation par `integrations/text-overrides.mjs`. Quand un texte source change dans `src/i18n/`, vérifier s'il a une entrée dans ce fichier. Détails : `docs/editeur-equipe.md`.
+## 4. Pages
+| Page | Adresse | État |
+|---|---|---|
+| Accueil | `/fr/` | public, chiffres clés actifs |
+| L'association, Événements, Contact, Participer | `/fr/association/` etc. | public |
+| Faire un don | `/fr/donate/` | public : Streamlabs, puis carte (Stripe), puis PayPal |
+| Notre mission | `/fr/mission/` | public, présentation des trois partenaires humanitaires |
+| Partenaires | `/fr/partners/` | public : « Partenaires permanents » (haca.studio, Aid for Youth Philippines), puis un groupe par événement « <Événement> : partenaires de l'événement » (Top Gaming, Streamathon 2026 et 2027). ChildHope et ECPAT seulement sur Mission |
+| Streamers | `/fr/streamers/` | public : pas de fiches, renvoi vers les réseaux et vers `/streamathon/` |
+| Actualités, Transparence | `/fr/news/`, `/fr/transparency/` | masquées (exemples). Transparence : rapports d'activité publiés après chaque assemblée générale annuelle |
+| Mobile Cup | `/fr/mobile-cup/` | public : compte à rebours, formulaire, compétition de collecte, guide de collecte (`#guide-collecte`) |
+| Règlement, FAQ | `/fr/rules/`, `/fr/faq/` | public (règlement : version de travail, code de conduite inclus) |
+| Streamathon 2026 | `/fr/streamathon-2026/` | public, vidéo |
+| Streamathon 2027 (formulaire) | `/fr/streamathon/` | dans le menu, mais noindex (hypothèses à valider) |
+| Confidentialité, Conditions d'utilisation, Cookies, Dotation, Football Cup | `/fr/privacy/` etc. | noindex en attente de validation |
+| Confirmation, Accord parental | `/fr/merci/`, `/fr/parents/` | noindex. `/merci/` : fenêtre de don pour les 18+ ; `?a=minor` : aucune demande de don, lien de don envoyé au parent |
+| Espace équipe | `/admin/` | voir § 6 |
 
-## Travaux déposés à la main sur main (fin nov. 2026, conversation claude.ai)
-- Mobile Cup alignée sur la stratégie 2027 et le guide technique (documents internes : **ne jamais les ajouter au dépôt, il est public**) : compétition de collecte et Coupe des continents, division Découverte, Brawl Stars en trio ou en solo, deux week-ends de qualifs, zone selon le pays de résidence, mention "non organisé ni soutenu par Supercell". Règlement, FAQ, dotation, mission, pages Don et Football mis à jour.
-- Charte appliquée : pas de point médian, pas de "charity" / "caritatif", pas de tiret long.
-- `/merci/` : fenêtre de don par-dessus la page pour les 18 ans et plus ; pour les mineurs (`?a=minor`), aucune demande de don, message "lien envoyé au parent avec la demande d'accord".
-- `/streamathon/` : formulaire Streamathon 2027 (brouillon, noindex, hors menu). Questions selon le pays pilotées par `src/data/streamathon.ts` (ex. salle calme ou bruyante en Belgique, pas aux Philippines, en ligne seulement ailleurs). Envoi vers `SITE.streamathonEndpoint` (vide = mode test).
-- Mode édition des textes (bouton ✎, code 2005 qui ne protège que l'ouverture), publication via la route `/texts` du Worker (non configuré : bouton "Télécharger le fichier" en attendant). Correction : `public/admin/admin.js` utilise `window.msal` (avec repli `msalBrowser`). Vérifié le 27 nov. 2026 : `public/edit/editor.js` et `integrations/text-overrides.mjs` sont bien sur main.
+Pages non reprises de l'ancienne maquette : article d'actualité, Live, galerie « En images » (à faire quand il y aura des contenus).
 
-## Décisions prises (Éric, 28 nov. 2026)
-- Nom affiché : **S4Gs** partout dans les textes (les noms techniques, polices `S4GS Display` et adresses restent tels quels).
-- Bouton « Faire un don » de l'en-tête : mène à `/donate/`, qui propose dans l'ordre Streamlabs Charity, Stripe (montant libre, unique ou mensuel, en euros) puis PayPal (`SITE.stripe`, `SITE.paypalUrl`). Liens génériques : pendant les événements, chaque joueur a sa propre page de collecte.
-- Partenaires humanitaires officiels : Aid for Youth Philippines, ChildHope Philippines, ECPAT Philippines, présentés sur la page Mission dans cet ordre (`src/data/missions.ts`), liens vers leurs sites dans une fenêtre (nouvel onglet, la page reste ouverte). Rubrique Partenaires (content.json, modifiable depuis `/admin/`) : un groupe « Partenaires permanents » (haca.studio, Aid for Youth Philippines), puis un groupe par événement intitulé « <Événement> : partenaires de l’événement » (Top Gaming pour les Streamathon 2026 et 2027). ChildHope et ECPAT ne sont que sur la page Mission. Un nom identique à un partenaire de `missions.ts` devient un lien vers sa présentation.
-- Rapports d'activité publiés sur le site après chaque assemblée générale annuelle (rubrique Transparence à activer à ce moment).
-- Menu : sous-menus déroulants « À propos » / « About us » (L'association, Notre mission, Partenaires, Transparence si active, Participer, Faire un don, Contact) et « Événements » (Mobile Cup 2027, Streamathon 2027, Streamathon 2026, Streamers, Actualités), dans `src/components/Header.astro`. Streamers et Actualités sont dans le menu à la demande d'Allan même si leur rubrique n'est pas activée : elles gardent la mention « Exemple » et le noindex jusqu'à la saisie des vrais contenus. Football Cup hors menu jusqu'après janvier (règle Supercell).
-- Vidéos YouTube : `src/data/videos.json`, clé = slug de la page (ex. `streamathon-2026`, `mobile-cup`, `mission`), plusieurs vidéos possibles par page (`url` YouTube de tout format, `title` fr/en). La section « En vidéo » s'affiche automatiquement en bas de la page (`Base.astro`), ou à l'endroit choisi avec `<Videos>` et `noVideos` sur `<Base>`. Lecteur `src/components/YouTube.astro` : rien n'est chargé depuis YouTube avant le clic, puis youtube-nocookie.com. Pas encore modifiable depuis `/admin/` (à ajouter au Worker et à l'éditeur si besoin).
-- Page Streamathon 2026 : `/streamathon-2026/` (`src/i18n/pages/s2026.ts`), avec la vidéo de l'édition.
+## 5. Design (fidèle à l'ancien simulateur)
+- `src/styles/global.css` (base, formulaires, tableaux, FAQ, lecteur vidéo, compte à rebours, guide de collecte, partenaires de Mission) puis `src/styles/design.css` (design de l'ancien site porté tel quel : conteneur `.site` avec requêtes de conteneur `cqi`, `.spot`, en-tête `.stick`, bascule `.tgl`, `.hero`, `.band`, `.big`, `.card`, `.logos`, `.ft`, menus déroulants `.dd`).
+- Pages en `<Base>` + `<PageHead>`, sections `.sec`, `.wrap`, `.head`, `.kick`, `.pill`.
+- Respecter `prefers-reduced-motion`, lisibilité avant tout, pas de photos de remplissage en public. En français, espaces insécables avant `:` `?` `!` et dans les guillemets dans les titres et textes longs.
+- Si Allan ne retrouve pas « le rendu de la première version », comparer avec l'artefact claude.ai « Simulateur Site S4GS ». Allan veut un aperçu (captures) avant intégration.
 
-## Décisions d'Allan après le check-up de l'ancien site Webflow (28 nov. 2026)
-- Nom officiel : **Streamers 4 Good Squads ASBL** (avec un s). Numéro d'entreprise **BE1036.153.802** (pied de page, conditions d'utilisation).
-- Historique : seulement « depuis 2024 », sans détail par édition.
-- Streamathon 2026 : à Namur **dans les locaux de Pixiels**, à Manille au CIIT College, et en ligne. **L'HEAJ (Haute École Albert Jacquard) ne doit apparaître nulle part sur le site.**
-- **Aucune mention de Philia Haven ni de PlayFest** (anciens noms), nulle part.
-- Chiffres de l'accueil : 30 000 repas, 3 continents, 100+ streamers, 15 M de personnes en **portée potentielle** (formulation à garder).
-- Page Streamers : pas de fiches par streamer, renvoi vers les réseaux de S4Gs (onglet Streamers retiré de `/admin/`).
-- Discord : `https://discord.gg/ry5AaASSy4`. Réseaux : uniquement les nouveaux comptes (YouTube `@S4GSquads`, TikTok `@s4gsquads_`, Instagram `s4gsquads_`...), jamais les anciens comptes PlayFest.
-- Adresses e-mail de contact : à choisir page par page (demander à Allan).
-- Conditions d'utilisation : page `/terms/` (brouillon noindex, relecture juridique avant publication).
-- Comptes à rebours : `src/components/Countdown.astro`, étapes datées avec fuseau, disparition automatique après la date de fin (Mobile Cup : jusqu'au 31 janv. 2027).
-- Pays du Streamathon : suivre la carte qu'Allan doit transmettre (ne pas lister de pays avant).
-- Domaine : même adresse s4gs.org, l'ancien site disparaît, pas de redirections depuis les anciennes adresses Webflow.
-- Arrivée sur le site : plus de page de choix de langue. `src/pages/index.astro` redirige aussitôt vers la dernière langue utilisée (`localStorage` `s4gs-lang`, enregistrée par `Base.astro`), sinon la langue du navigateur si elle est prête (`READY`), sinon l'anglais. Les paramètres `?utm_...` sont conservés. Le sélecteur de langue reste dans l'en-tête.
+## 6. Espace équipe et mode édition
+- `/admin/` (aperçu `/admin/?demo=1`) édite `content.json` (onglets Accueil, Rubriques, Actualités, Événements, Partenaires, Chiffres). Connexion Microsoft limitée à @s4gs.org, publication par un Cloudflare Worker (`worker/`) qui commit sur GitHub. Le crayon ✎ en bas de chaque page (code 2005, qui ne protège que l'ouverture) modifie les textes, publiés via la route `/texts` du Worker (`public/edit/editor.js`). Procédure complète : `docs/editeur-equipe.md`.
+- **Fait (29 nov. 2026)** : application Entra « S4Gs espace d'équipe », locataire `f5b0644a-d552-4b9f-9701-a9c59cb4ab5c`, client `f3212788-4df3-44e5-a6f9-e96b6cf15dd6`, 4 adresses de retour SPA (`https://streamers-4-good-squads.github.io/s4gs-site/admin/`, `.../edit/auth.html`, `https://s4gs.org/admin/`, `https://s4gs.org/edit/auth.html`). Identifiants dans `public/admin/config.json` et `worker/wrangler.toml` (non secrets).
+- **Reste** : consentement administrateur dans Entra (si pas fait), jeton GitHub fine-grained (dépôt `s4gs-site`, Contents read/write) enregistré comme secret `GH_TOKEN` du Worker (jamais dans le dépôt ni dans la conversation), déploiement du Worker `s4gs-admin` (le fichier `worker/src/index.js` est autonome : copier-coller possible dans le tableau de bord Cloudflare, avec les variables de `wrangler.toml`), puis `workerUrl` dans `config.json`. Tant que `workerUrl` est vide, `/admin/` affiche « connexion pas encore configurée » et le mode édition propose « Télécharger le fichier ».
+- Vidéos et streamers ne sont pas gérés par `/admin/`.
 
-## Décisions en attente (ne rien trancher seul : demander à Allan)
-- Formulaire Streamathon : hypothèses à valider (Philippines avec participation sur place, questions matériel et besoins particuliers, créneaux, âge minimum 13 ans avec e-mail parental de 13 à 17 ans).
-- Mode édition : un texte modifié change partout où le même texte apparaît dans la même langue. Restreindre à la page en cours si besoin.
-- Mobile Cup : seuils de la division Découverte, option de dotation (1, 2 ou 3), traductions des 7 autres langues.
-- Page Football Cup : volontairement hors menu, à annoncer seulement après la clôture de janvier.
+## 7. Textes modifiés depuis le site
+`src/data/text-overrides.json` (clé = texte d'origine, par langue) est appliqué en fin de compilation par `integrations/text-overrides.mjs`. Un texte modifié change partout où le même texte apparaît dans la même langue. Quand un texte source change dans `src/i18n/`, vérifier s'il a une entrée dans ce fichier.
 
-## CRM (détails dans `docs/specification-crm-inscriptions.md`)
-- E-mail de demande d'accord parental : il contient le lien de don (plus de lien de partage envoyé à la personne mineure).
-- Prévoir la réception des pré-inscriptions Streamathon (`type: streamer-registration`) : réponses par pays dans le champ `answers`.
-- Le déclencheur HTTP de Power Automate est probablement premium : envisager le Worker Cloudflare comme relais vers SharePoint (Microsoft Graph).
+## 8. Déploiement
+- GitHub Pages via Actions (`.github/workflows/deploy.yml`) à chaque push sur `main`, Node 20 (déprécié, à mettre à jour). URL provisoire : `https://streamers-4-good-squads.github.io/s4gs-site/` : `scripts/prefix-base.mjs` préfixe les attributs `href`/`src` avec `/s4gs-site` (pas les chaînes JavaScript : passer par un lien caché, comme le font la racine et le bouton ✎).
+- **Domaine s4gs.org** (IONOS, Éric second propriétaire) : remplace l'ancien site Webflow à la même adresse, sans redirections des anciennes adresses. Bascule prévue vers le 10 décembre (TXT de vérification, domaine personnalisé dans Pages, A/AAAA/www, sans toucher aux enregistrements e-mail). **Ensuite créer la variable de dépôt `PAGES_AT_ROOT=true`**, sinon les liens restent préfixés.
+- Cache GitHub Pages d'environ 10 minutes par page : ajouter `?v=N` avant de conclure à un bug.
 
-## Mise en route de l'espace équipe (Eric)
-- **Fait le 29 nov. 2026 (Allan)** : application Entra « S4Gs espace d'équipe » créée (locataire `f5b0644a-d552-4b9f-9701-a9c59cb4ab5c`, client `f3212788-4df3-44e5-a6f9-e96b6cf15dd6`), 4 adresses de retour SPA (github.io et s4gs.org, `/admin/` et `/edit/auth.html`). Identifiants renseignés dans `public/admin/config.json` et `worker/wrangler.toml`. **Reste** : jeton GitHub (secret `GH_TOKEN`), déploiement du Worker Cloudflare, puis `workerUrl` dans `config.json`.
-- Dans Microsoft Entra, ajouter l'adresse de redirection `.../edit/auth.html` en plus de `.../admin/` (voir `docs/editeur-equipe.md`, étape 1).
+## 9. Façon de travailler
+- Ne jamais pousser sur `main` : branche (celle indiquée par l'environnement), commit, PR, puis demander à Allan de fusionner. Si la PR précédente est fusionnée, repartir de `origin/main` ; si elle est encore ouverte, ajouter les commits à la même branche (vérifier avec `git merge-base --is-ancestor`).
+- PR : outil GitHub de l'environnement (MCP `create_pull_request`, `update_pull_request`) ; à défaut `gh api repos/Streamers-4-Good-Squads/s4gs-site/pulls -f title=... -f head=... -f base=main -f body=...` (`gh pr create` échoue).
+- Clone superficiel : pousser avec `git -c push.negotiate=true push`, vérifier avec `git ls-remote --heads origin <branche>`. Jamais de push forcé.
+- `npm run build` avant chaque commit, puis vérification Playwright (serveur local sur `dist`, captures clair, sombre, mobile 390 px). Pour l'adresse provisoire, tester une copie de `dist` passée par `prefix-base.mjs`. Pour les comptes à rebours, simuler la date avec `page.clock`.
+- Réseau de l'environnement cloud : les domaines extérieurs doivent être autorisés dans les réglages de l'environnement (s4gs.org, childhope.org.ph, ecpat.org, buy.stripe.com, streamlabscharity.com, tiktok.com ont été vérifiés).
+- Messages de commit et PR : lignes de coattribution demandées par l'environnement, jamais d'identifiant de modèle.
 
-## Reste à faire
-- Allan / président : confirmer la date du Streamathon 2027, ajouter l'historique 2024 et 2025, choisir l'option de lots, durée de conservation et outil de formulaire pour la politique de confidentialité, identifiants GA4 et Ad Grants + outil de cookies, relecture juridique du règlement, date de livraison du CRM (plan B si après le 16 décembre), DNS et domaine.
-- Vérification d'âge à l'inscription (proposée, non lancée) : date de naissance déclarée + lien de confirmation envoyé au parent pour les 13-17 ans (statut "consentement parental en attente" à ajouter à `docs/specification-crm-inscriptions.md`), contrôle ciblé des gagnants, aucune pièce d'identité conservée.
-- Contenus réels pour actualités, streamers, partenaires, transparence, chiffres, puis activer les rubriques.
-- Traductions des 7 autres langues, bannière cookies + GA4, branchement du compteur au CRM, `formEndpoint` / `consentEndpoint` / `streamathonEndpoint` quand le CRM est prêt, retirer `noindex` des pages juridiques une fois validées, mise à jour de l'action GitHub (Node 20 déprécié).
-- Écarts avec la stratégie 2027 et ses annexes, en attente de contenu ou de décision : paliers du compteur d'inscriptions (bonus débloqués), règle de changement de deck entre les manches (Clash Royale, « à confirmer » dans le guide), pays limites de la liste du formulaire (Turquie, Caucase, Kazakhstan, Israël retirés faute de mention dans la stratégie : à confirmer). Les documents internes prévoient encore un bouton « Partage avec ta famille » pour les mineurs : à mettre à jour côté président (le site envoie le lien de don au parent).
-- Guide de la collecte : section « Guide : crée ta page de collecte » sur la page Mobile Cup (`#guide-collecte`), liée depuis `/merci/`. **À renseigner** : `SITE.fundraisingUrl` (page de l'équipe « S4Gs Mobile Cup 2027 » sur Streamlabs Charity, à créer par Éric) ; tant qu'il est vide, le bouton est remplacé par « lien publié à l'ouverture des inscriptions ». Libellés Streamlabs cités dans le guide (Join Now!, Start Fundraising, Choose an Event, Set My Goal Amount, Copy Link) relevés sur streamlabscharity.com le 28 nov. 2026 : à revérifier si l'interface change. Âge minimum d'un compte collecteur Streamlabs encore inconnu (le guide renvoie au parent pour les moins de 18 ans).
-- Formulaire Mobile Cup (27 nov. 2026) : une division par jeu (`divisions`), identifiants des deux coéquipiers Brawl Stars (`brawlStars.teammates`), pays limités aux trois zones hors Russie et Biélorussie, case « règlement et code de conduite ». Format décrit dans `docs/specification-crm-inscriptions.md`.
-- Liens partenaires confirmés par Éric : `https://childhope.org.ph/` et `https://ecpat.org/` (site du réseau international ECPAT). Chiffre « 96 % des 12-17 ans en ligne » : source sur le site d'ECPAT selon Éric. Lien Stripe direct renseigné dans `SITE.stripe.paymentLink` (28 nov. 2026) : la page Don n'utilise plus le bouton intégré ni le script Stripe.
-- Galerie "En images" et Live à reprendre de l'ancien site quand il y aura des photos et un événement.
+## 10. CRM et inscriptions
+Détails : `docs/specification-crm-inscriptions.md` (format JSON en `text/plain`, statuts « Inscription validée », « En attente d'accord parental », « Accord reçu », « Non autorisé », accord parental, Streamathon, relais) et `docs/formulaire-power-automate.md`.
+- L'e-mail de demande d'accord parental contient le lien de don (aucun lien de partage envoyé à la personne mineure).
+- Pré-inscriptions Streamathon (`type: streamer-registration`) : réponses par pays dans `answers`.
+- Le déclencheur HTTP de Power Automate est probablement premium : piste du Worker Cloudflare comme relais vers SharePoint (Microsoft Graph).
+
+## 11. Décisions en attente (demander à Allan, ne rien trancher seul)
+- Formulaire Streamathon : participation sur place aux Philippines, questions matériel et besoins particuliers, créneaux, âge minimum 13 ans avec e-mail parental de 13 à 17 ans.
+- Mobile Cup : seuils de la division Découverte, option de dotation (1, 2 ou 3), règle de changement de deck entre les manches, paliers du compteur d'inscriptions, pays limites retirés du formulaire (Turquie, Caucase, Kazakhstan, Israël).
+- Adresses e-mail de contact à afficher page par page.
+- Mode édition : restreindre une modification à la page en cours si besoin.
+- Vidéos supplémentaires (clips, présentations) : liens et pages à fournir.
+
+## 12. Reste à faire
+- **Avant le 16 décembre** : CRM ou plan B (endpoints), domaine s4gs.org puis `PAGES_AT_ROOT`, `SITE.fundraisingUrl` (campagne d'équipe Streamlabs à créer par Éric, et vérifier l'âge minimum d'un compte collecteur), relecture juridique (règlement, confidentialité avec durée de conservation et outil de formulaire, conditions d'utilisation) puis retrait des noindex, fin de la mise en route de l'espace équipe (§ 6).
+- Bannière cookies compatible Consent Mode et GA4 (identifiants GA4 et Ad Grants à fournir), compteur d'inscriptions branché au CRM.
+- Contenus réels pour Actualités et Transparence, puis activer ces rubriques.
+- Traductions des 7 autres langues (relecture native obligatoire pour les textes juridiques).
+- Vérification d'âge renforcée (proposée, non lancée) : date de naissance déclarée, confirmation par le parent pour les 13-17 ans, contrôle ciblé des gagnants, aucune pièce d'identité conservée.
+- Documents internes à mettre à jour côté président : le bouton « Partage avec ta famille » pour les mineurs a été remplacé par le lien de don envoyé au parent.
+- Libellés Streamlabs cités dans le guide de collecte (Join Now!, Start Fundraising, Choose an Event, Set My Goal Amount, Copy Link), relevés le 28 nov. 2026 : revérifier si l'interface change.
+- Mise à jour de l'action GitHub (Node 20), page Football Cup à publier après janvier, galerie et Live quand il y aura des contenus.
