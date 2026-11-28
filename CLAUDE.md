@@ -75,6 +75,7 @@ Pages non reprises de l'ancienne maquette : article d'actualité, Live, galerie 
 - **Fait (29 nov. 2026)** : application Entra « S4Gs espace d'équipe », locataire `f5b0644a-d552-4b9f-9701-a9c59cb4ab5c`, client `f3212788-4df3-44e5-a6f9-e96b6cf15dd6`, 4 adresses de retour SPA (`https://streamers-4-good-squads.github.io/s4gs-site/admin/`, `.../edit/auth.html`, `https://s4gs.org/admin/`, `https://s4gs.org/edit/auth.html`). Identifiants dans `public/admin/config.json` et `worker/wrangler.toml` (non secrets).
 - **Fait (29 nov. 2026)** : jeton GitHub fine-grained (dépôt `s4gs-site`, Contents read/write, expire le **29/11/2027** : à renouveler avant, puis mettre à jour le secret), Worker Cloudflare `s4gs-admin` déployé à **`https://s4gs-admin.s4gsquads.workers.dev`** (compte Cloudflare d'Allan, 6 variables texte + secret `GH_TOKEN`), `workerUrl` renseigné dans `config.json`. Contrôles faits : origine étrangère refusée (403), appel sans connexion refusé (401), CORS correct.
 - **Reste** : consentement administrateur dans Entra si pas fait, premier test de connexion et de publication réelle depuis `/admin/` après fusion. Le Worker n'est pas déployé automatiquement : toute modification de `worker/src/index.js` doit être recopiée dans l'éditeur Cloudflare (Edit code, Deploy).
+- Le script du mode édition est chargé à l'adresse `/edit/editor.js?v=<BUILD>` (`src/config/build.ts`, change à chaque compilation) : pas d'ancienne version en cache après une mise à jour.
 - Vidéos et streamers ne sont pas gérés par `/admin/`.
 
 ## 7. Textes modifiés depuis le site

@@ -5,11 +5,13 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import DonateStrip from '../components/DonateStrip.astro';
 import Videos from '../components/Videos.astro';
+import { BUILD } from '../config/build';
 import { READY } from '../i18n/locales';
 import { ui } from '../i18n/ui';
 import { SITE } from '../config/site';
 interface Props { lang: string; title: string; description: string; slug?: string; noindex?: boolean }
 const { lang, title, description, slug = '', noindex = false, noVideos = false } = Astro.props;
+// Version de la compilation : l'adresse du script du mode édition change à chaque publication (pas d'ancienne version en cache)
 const t = ui(lang);
 const p = (l: string) => `${SITE.url}/${l}/${slug ? slug + '/' : ''}`;
 ---
@@ -65,7 +67,7 @@ const p = (l: string) => `${SITE.url}/${l}/${slug ? slug + '/' : ''}`;
     })();
   </script>
   <!-- Mode édition (textes et couleurs) réservé à l'équipe : connexion Microsoft @s4gs.org, publication via l'espace équipe. public/edit/editor.js -->
-  <a id="s4e-src" href="/edit/editor.js" hidden></a>
+  <a id="s4e-src" href={`/edit/editor.js?v=${BUILD}`} hidden></a>
   <button class="s4e-btn" type="button" id="s4e-btn" aria-label={lang === 'fr' ? 'Modifier le site (équipe S4Gs)' : 'Edit the site (S4Gs team)'} title={lang === 'fr' ? 'Modifier le site (équipe S4Gs)' : 'Edit the site (S4Gs team)'}>✎</button>
   <script is:inline>
     document.getElementById('s4e-btn').addEventListener('click',function(){if(window.S4E)return S4E.start();var s=document.createElement('script');s.src=document.getElementById('s4e-src').href;s.onload=function(){S4E.start()};document.body.appendChild(s)});
