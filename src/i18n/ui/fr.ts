@@ -1,7 +1,7 @@
 import type { UI } from './types';
 export const fr: UI = {
   skip: 'Aller au contenu',
-  nav: { home: 'Accueil', association: 'L’association', events: 'Événements', news: 'Actualités', streamers: 'Streamers', partners: 'Partenaires', contact: 'Contact', submenu: 'Afficher le sous-menu' },
+  nav: { home: 'Accueil', association: 'L’association', events: 'Événements', news: 'Actualités', streamers: 'Streamers', partners: 'Partenaires', contact: 'Contact', about: 'À propos', submenu: 'Afficher le sous-menu' },
   register: 'Je me pré-inscris', donate: 'Faire un don', theme: 'Changer de thème', lang: 'Langue', menu: 'Menu',
   strip: { text: 'Chaque don soutient les enfants que nous aidons.', link: 'Notre mission' },
   spot: 'Mobile Cup 2027 : un tournoi gratuit pour une bonne cause',

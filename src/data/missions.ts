@@ -5,8 +5,8 @@ type Sec = { h3: string; quote?: string; paras?: string[]; items?: string[]; aft
 export type Org = { id: string; name: string; url?: string; tagline: string; paras: string[]; secs?: Sec[] };
 type Strings = { h2: string; intro: string; site: string; dialog: string; open: string; close: string; orgs: Org[] };
 
-// À FAIRE CONFIRMER : adresses des sites officiels (non vérifiables depuis l'environnement de développement).
-const URLS = { childhope: 'https://childhope.org.ph/', ecpat: 'https://ecpat.org.ph/' };
+// Adresses confirmées par Éric (28 nov. 2026). ECPAT : site du réseau international.
+const URLS = { childhope: 'https://childhope.org.ph/', ecpat: 'https://ecpat.org/' };
 
 const fr: Strings = {
   h2: 'Nos partenaires sur le terrain',

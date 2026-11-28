@@ -1,7 +1,7 @@
 import type { UI } from './types';
 export const en: UI = {
   skip: 'Skip to content',
-  nav: { home: 'Home', association: 'The association', events: 'Events', news: 'News', streamers: 'Streamers', partners: 'Partners', contact: 'Contact', submenu: 'Show submenu' },
+  nav: { home: 'Home', association: 'The association', events: 'Events', news: 'News', streamers: 'Streamers', partners: 'Partners', contact: 'Contact', about: 'About us', submenu: 'Show submenu' },
   register: 'Pre-register', donate: 'Donate', theme: 'Switch theme', lang: 'Language', menu: 'Menu',
   strip: { text: 'Every donation supports the children we help.', link: 'Our mission' },
   spot: 'Mobile Cup 2027: a free tournament for a good cause',

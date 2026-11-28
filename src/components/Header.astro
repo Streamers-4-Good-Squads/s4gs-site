@@ -10,12 +10,15 @@ const on = SITE.sections;
 type Item = { slug: string; label: string; show?: boolean; also?: string[]; sub?: Item[] };
 const items: Item[] = [
   { slug: '', label: t.nav.home },
-  { slug: 'association', label: t.nav.association, sub: [
+  // « À propos » regroupe l'association et le contact
+  { slug: 'association', label: t.nav.about, sub: [
+    { slug: 'association', label: t.nav.association },
     { slug: 'mission', label: t.footer.mission },
     { slug: 'partners', label: t.nav.partners, show: on.partners },
     { slug: 'transparency', label: t.footer.transparency, show: on.transparency },
     { slug: 'participate', label: t.footer.participate },
     { slug: 'donate', label: t.footer.donate },
+    { slug: 'contact', label: t.nav.contact },
   ] },
   // La Mobile Cup, ses pages juridiques et le formulaire appartiennent à la rubrique Événements
   { slug: 'events', label: t.nav.events, sub: [
@@ -23,7 +26,6 @@ const items: Item[] = [
     { slug: 'streamers', label: t.nav.streamers, show: on.streamers },
     { slug: 'news', label: t.nav.news, show: on.news },
   ] },
-  { slug: 'contact', label: t.nav.contact },
 ];
 const visible = (l: Item[]) => l.filter((i) => i.show !== false).map((i) => ({ ...i, sub: i.sub ? visible(i.sub) : undefined }));
 const menu = visible(items);
