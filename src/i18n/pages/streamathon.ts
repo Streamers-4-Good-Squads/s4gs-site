@@ -1,9 +1,9 @@
 // Page et formulaire de pré-inscription des streamers au Streamathon 2027.
 const fr = {
   title: 'Streamathon 2027 : pré-inscription des streamers | Streamers 4 Good Squads',
-  description: 'Pré-inscris-toi comme streamer au S4GS Streamathon 2027, sur place ou en ligne.',
+  description: 'Pré-inscris-toi comme streamer au S4Gs Streamathon 2027, sur place ou en ligne.',
   h1: 'Streamathon 2027 : stream avec nous',
-  lead: 'Un week-end de 48 heures de stream pour la mission de S4GS. Date et lieux à confirmer : ta pré-inscription nous aide à préparer l’édition.',
+  lead: 'Un week-end de 48 heures de stream pour la mission de S4Gs. Date et lieux à confirmer : ta pré-inscription nous aide à préparer l’édition.',
   intro: [
     'Le Streamathon est ouvert aux streamers de toutes les plateformes. Selon ton pays, tu pourras nous rejoindre sur place ou participer en ligne depuis chez toi.',
     'Cette pré-inscription ne t’engage à rien : nous te recontacterons dès que les dates et les lieux seront confirmés.',
@@ -21,8 +21,8 @@ const fr = {
   parentEmail: 'E-mail d’un parent ou tuteur légal', parentHelp: 'Nous lui demanderons son accord avant ta participation.',
   idea: 'Une idée d’animation ou de défi pour ton stream ? (facultatif)',
   privacy: 'J’accepte la politique de confidentialité', privacyLink: 'lire',
-  image: 'J’accepte que mes streams pendant l’événement soient relayés par S4GS',
-  newsletter: 'Je veux recevoir la newsletter de S4GS (facultatif)',
+  image: 'J’accepte que mes streams pendant l’événement soient relayés par S4Gs',
+  newsletter: 'Je veux recevoir la newsletter de S4Gs (facultatif)',
   submit: 'Me pré-inscrire', sending: 'Envoi…',
   done: 'Merci, ta pré-inscription est enregistrée ! Nous te recontactons dès que les dates et les lieux sont confirmés.',
   testBanner: 'Mode test : les réponses ne sont envoyées nulle part tant que le CRM n’est pas branché.',
@@ -40,9 +40,9 @@ const fr = {
 
 const en: typeof fr = {
   title: 'Streamathon 2027: streamer pre-registration | Streamers 4 Good Squads',
-  description: 'Pre-register as a streamer for the S4GS Streamathon 2027, on site or online.',
+  description: 'Pre-register as a streamer for the S4Gs Streamathon 2027, on site or online.',
   h1: 'Streamathon 2027: stream with us',
-  lead: 'A 48-hour stream weekend for the S4GS mission. Date and venues to be confirmed: your pre-registration helps us prepare.',
+  lead: 'A 48-hour stream weekend for the S4Gs mission. Date and venues to be confirmed: your pre-registration helps us prepare.',
   intro: [
     'The Streamathon is open to streamers from every platform. Depending on your country, you can join us on site or take part online from home.',
     'This pre-registration does not commit you to anything: we will get back to you as soon as dates and venues are confirmed.',
@@ -60,8 +60,8 @@ const en: typeof fr = {
   parentEmail: 'Email of a parent or legal guardian', parentHelp: 'We will ask for their consent before you take part.',
   idea: 'An idea for a challenge or segment on your stream? (optional)',
   privacy: 'I accept the privacy policy', privacyLink: 'read',
-  image: 'I agree that S4GS may share my streams during the event',
-  newsletter: 'I want to receive the S4GS newsletter (optional)',
+  image: 'I agree that S4Gs may share my streams during the event',
+  newsletter: 'I want to receive the S4Gs newsletter (optional)',
   submit: 'Pre-register', sending: 'Sending…',
   done: 'Thank you, your pre-registration is saved! We will get back to you as soon as dates and venues are confirmed.',
   testBanner: 'Test mode: answers are not sent anywhere until the CRM is connected.',

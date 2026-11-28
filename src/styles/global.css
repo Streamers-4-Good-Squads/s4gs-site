@@ -93,3 +93,10 @@ dialog.don .cta{justify-content:center}
 .s4e-btn{position:fixed;left:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:60;width:34px;height:34px;border-radius:999px;border:1.5px solid var(--edge);background:var(--card);color:var(--mut);font-size:16px;line-height:1;opacity:.3;cursor:pointer;transition:opacity .2s}
 .s4e-btn:hover,.s4e-btn:focus-visible{opacity:1}
 @media print{.s4e-btn{display:none}}
+/* Page Notre mission : présentations des partenaires humanitaires */
+.orgs .org{background:var(--card);border:1.5px solid var(--edge);border-radius:22px;padding:clamp(20px,4vw,36px);margin-top:22px;scroll-margin-top:110px}
+.orgs .org h3{margin:0}.orgs .org .tagl{color:var(--mut);font-weight:700;margin-top:4px}
+.orgs .org h4{margin:24px 0 8px;font-size:1.05rem}
+.orgs .org blockquote{margin:8px 0 12px;padding:10px 16px;border-left:4px solid var(--y);font-style:italic;background:var(--tint);border-radius:0 12px 12px 0}
+.orgs .org .pill,.ways .pill{white-space:normal;text-align:center}
+#stripe-box{display:grid}#stripe-box .pill{width:100%}

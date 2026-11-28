@@ -46,6 +46,10 @@ const p = (l: string) => `${SITE.url}/${l}/${slug ? slug + '/' : ''}`;
       document.querySelectorAll('[data-theme-toggle]').forEach(function(b){b.addEventListener('click',function(){var n=root.dataset.theme==='dark'?'light':'dark';root.dataset.theme=n;try{localStorage.setItem('s4gs-theme',n)}catch(e){}sync()})});
       var bg=document.querySelector('[data-burger]');
       if(bg)bg.addEventListener('click',function(){var o=!document.querySelector('.links').classList.contains('open');document.querySelectorAll('.links,.navright').forEach(function(n){n.classList.toggle('open',o)});bg.setAttribute('aria-expanded',o)});
+      // Sous-menus : le bouton ouvre ou ferme, Échap et un clic ailleurs ferment
+      var dds=[].slice.call(document.querySelectorAll('.dd'));function shut(x){dds.forEach(function(d){if(d!==x){d.classList.remove('open');d.querySelector('.ddb').setAttribute('aria-expanded','false')}})}
+      dds.forEach(function(d){var b=d.querySelector('.ddb');b.addEventListener('click',function(e){e.stopPropagation();var o=!d.classList.contains('open');shut(d);d.classList.toggle('open',o);b.setAttribute('aria-expanded',o)})});
+      document.addEventListener('click',function(e){if(!e.target.closest('.dd'))shut()});document.addEventListener('keydown',function(e){if(e.key==='Escape'){var o=document.querySelector('.dd.open');shut();if(o)o.querySelector('.ddb').focus()}});
       try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(e){if(!localStorage.getItem('s4gs-theme')){root.dataset.theme=e.matches?'dark':'light';sync()}})}catch(e){}
       var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
       var st=document.querySelector('[data-stick]'),cards=[].slice.call(document.querySelectorAll('.sc')),tick=false;

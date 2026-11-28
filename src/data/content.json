@@ -2,7 +2,7 @@
   "sections": {
     "news": false,
     "streamers": false,
-    "partners": false,
+    "partners": true,
     "transparency": false,
     "stats": false
   },
@@ -12,8 +12,8 @@
       "en": "Gaming. Streaming. Solidarity."
     },
     "lead": {
-      "fr": "S4GS est une association qui réunit des streamers du monde entier pour soutenir des causes humanitaires, avec un grand événement chaque année.",
-      "en": "S4GS is a non-profit that brings together streamers from around the world to support humanitarian causes, with one big event every year."
+      "fr": "S4Gs est une association qui réunit des streamers du monde entier pour soutenir des causes humanitaires, avec un grand événement chaque année.",
+      "en": "S4Gs is a non-profit that brings together streamers from around the world to support humanitarian causes, with one big event every year."
     }
   },
   "stats": [
@@ -133,33 +133,13 @@
   "partners": [
     {
       "h2": {
-        "fr": "Partenaires institutionnels",
-        "en": "Institutional partners"
+        "fr": "Partenaires humanitaires",
+        "en": "Humanitarian partners"
       },
       "names": [
-        "Partenaire exemple 1",
-        "Partenaire exemple 2"
-      ]
-    },
-    {
-      "h2": {
-        "fr": "Partenaires communautaires",
-        "en": "Community partners"
-      },
-      "names": [
-        "Partenaire exemple 3",
-        "Partenaire exemple 4",
-        "Partenaire exemple 5"
-      ]
-    },
-    {
-      "h2": {
-        "fr": "Partenaires médias",
-        "en": "Media partners"
-      },
-      "names": [
-        "Partenaire exemple 6",
-        "Partenaire exemple 7"
+        "Aid for Youth Philippines",
+        "ChildHope Philippines",
+        "ECPAT Philippines"
       ]
     }
   ],
@@ -172,8 +152,8 @@
         "en": ""
       },
       "t": {
-        "fr": "S4GS Mobile Cup 2027",
-        "en": "S4GS Mobile Cup 2027"
+        "fr": "S4Gs Mobile Cup 2027",
+        "en": "S4Gs Mobile Cup 2027"
       },
       "p": {
         "fr": "Tournoi mobile gratuit en ligne : Clash Royale et Brawl Stars.",
@@ -190,8 +170,8 @@
         "en": "April 2027"
       },
       "t": {
-        "fr": "S4GS Streamathon 2027",
-        "en": "S4GS Streamathon 2027"
+        "fr": "S4Gs Streamathon 2027",
+        "en": "S4Gs Streamathon 2027"
       },
       "p": {
         "fr": "Week-end exact et lieu à confirmer.",
@@ -208,8 +188,8 @@
         "en": ""
       },
       "t": {
-        "fr": "S4GS Streamathon 2026",
-        "en": "S4GS Streamathon 2026"
+        "fr": "S4Gs Streamathon 2026",
+        "en": "S4Gs Streamathon 2026"
       },
       "p": {
         "fr": "Un week-end de 48 heures de stream, à Namur et en ligne, au profit d’Aid for Youth Philippines.",
