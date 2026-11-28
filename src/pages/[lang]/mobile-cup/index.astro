@@ -8,6 +8,7 @@ import { fmtRange } from '../../../i18n/utils';
 import { EVENT } from '../../../data/event';
 import { SITE } from '../../../config/site';
 import RegisterForm from '../../../components/RegisterForm.astro';
+import Countdown from '../../../components/Countdown.astro';
 export function getStaticPaths() { return READY_CODES.map((lang) => ({ params: { lang } })); }
 const { lang } = Astro.params as { lang: string };
 const t = ui(lang); const c = cupPage(lang);
@@ -20,6 +21,11 @@ const hues = ['y', 'b', 'g', 'lav', 'y'];
     <div class="kick">{c.hero.kicker}</div>
     <h1>{c.hero.h1}</h1><p class="lead">{c.hero.lead}</p>
     <span class="pillb">{c.hero.free}</span>
+    <div><Countdown lang={lang} end="2027-02-01T00:00:00+01:00" steps={[
+      { at: '2026-12-16T00:00:00+01:00', label: c.hero.count.open },
+      { at: '2027-01-16T15:00:00+01:00', label: c.hero.count.q1 },
+      { at: '2027-01-30T14:00:00+01:00', label: c.hero.count.finals },
+    ]} /></div>
     <div class="cta"><a class="btn" href="#inscription">{t.register}</a><a class="btn ghost" href={SITE.donationUrl} target="_blank" rel="noopener">{t.donate}</a></div>
   </div></section>
 

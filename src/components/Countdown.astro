@@ -1,0 +1,41 @@
+---
+// Compte à rebours en plusieurs étapes : affiche la prochaine échéance, puis disparaît
+// automatiquement une fois `end` passé (au chargement de la page et pendant la visite).
+// Les heures sont données avec leur fuseau (ex. 2026-12-16T00:00:00+01:00 pour Bruxelles en hiver).
+import { ui } from '../i18n/ui';
+const { lang, steps, end } = Astro.props as { lang: string; steps: { at: string; label: string }[]; end: string };
+const u = ui(lang).countdown;
+const now = Date.now();
+const live = now < Date.parse(end);
+const next = steps.find((s) => Date.parse(s.at) > now);
+---
+{live && (
+  <div class="cdown" data-cd={JSON.stringify(steps)} data-end={end} data-u={JSON.stringify(u)} hidden={!next}>
+    <span class="cd-l">{next?.label}</span>
+    <span class="cd-v" aria-live="off"></span>
+  </div>
+)}
+<script>
+  document.querySelectorAll<HTMLElement>('.cdown').forEach((el) => {
+    const steps: { at: string; label: string }[] = JSON.parse(el.dataset.cd || '[]');
+    const end = Date.parse(el.dataset.end || '');
+    const u = JSON.parse(el.dataset.u || '{}');
+    const l = el.querySelector('.cd-l')!, v = el.querySelector('.cd-v')!;
+    const pad = (n: number) => String(n).padStart(2, '0');
+    const tick = () => {
+      const now = Date.now();
+      const s = steps.find((x) => Date.parse(x.at) > now);
+      if (now >= end) { el.remove(); return; }
+      if (!s) { el.hidden = true; return; }
+      el.hidden = false;
+      let r = Math.floor((Date.parse(s.at) - now) / 1000);
+      const d = Math.floor(r / 86400); r %= 86400;
+      const h = Math.floor(r / 3600); r %= 3600;
+      const m = Math.floor(r / 60); const sec = r % 60;
+      l.textContent = s.label;
+      v.textContent = `${d} ${u.d} ${pad(h)} ${u.h} ${pad(m)} ${u.m} ${pad(sec)} ${u.s}`;
+    };
+    tick();
+    const id = setInterval(() => { if (!el.isConnected) clearInterval(id); else tick(); }, 1000);
+  });
+</script>

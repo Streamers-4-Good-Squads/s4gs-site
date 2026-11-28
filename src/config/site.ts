@@ -14,7 +14,7 @@ export const SITE = {
     youtube: 'https://www.youtube.com/@S4GSquads',
     tiktok: 'https://www.tiktok.com/@s4gs.streamathon',
   },
-  discordUrl: 'https://discord.gg/DtjG2xyVCR',
+  discordUrl: 'https://discord.gg/ry5AaASSy4',
   contactEmail: 'tournoi@s4gs.org',
   // Siège de l'ASBL (code postal 4130 confirmé)
   address: '69 avenue de la Grotte, 4130 Liège, Belgique',

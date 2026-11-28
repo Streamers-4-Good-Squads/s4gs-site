@@ -60,6 +60,20 @@ Pages de l'ancien site non reprises : article d'actualité, Live (lecteur, plann
 - Vidéos YouTube : `src/data/videos.json`, clé = slug de la page (ex. `streamathon-2026`, `mobile-cup`, `mission`), plusieurs vidéos possibles par page (`url` YouTube de tout format, `title` fr/en). La section « En vidéo » s'affiche automatiquement en bas de la page (`Base.astro`), ou à l'endroit choisi avec `<Videos>` et `noVideos` sur `<Base>`. Lecteur `src/components/YouTube.astro` : rien n'est chargé depuis YouTube avant le clic, puis youtube-nocookie.com. Pas encore modifiable depuis `/admin/` (à ajouter au Worker et à l'éditeur si besoin).
 - Page Streamathon 2026 : `/streamathon-2026/` (`src/i18n/pages/s2026.ts`), avec la vidéo de l'édition.
 
+## Décisions d'Allan après le check-up de l'ancien site Webflow (28 nov. 2026)
+- Nom officiel : **Streamers 4 Good Squads ASBL** (avec un s). Numéro d'entreprise **BE1036.153.802** (pied de page, conditions d'utilisation).
+- Historique : seulement « depuis 2024 », sans détail par édition.
+- Streamathon 2026 : en Belgique **dans les locaux de Pixiels**, à Manille au CIIT College, et en ligne. **L'HEAJ (Haute École Albert Jacquard) ne doit apparaître nulle part sur le site.**
+- **Aucune mention de Philia Haven ni de PlayFest** (anciens noms), nulle part.
+- Chiffres de l'accueil : 30 000 repas, 3 continents, 100+ streamers, 15 M de personnes en **portée potentielle** (formulation à garder).
+- Page Streamers : pas de fiches par streamer, renvoi vers les réseaux de S4Gs (onglet Streamers retiré de `/admin/`).
+- Discord : `https://discord.gg/ry5AaASSy4`. Réseaux : uniquement les nouveaux comptes (`@S4GSquads`, `@s4gs.streamathon`...), jamais les anciens comptes PlayFest.
+- Adresses e-mail de contact : à choisir page par page (demander à Allan).
+- Conditions d'utilisation : page `/terms/` (brouillon noindex, relecture juridique avant publication).
+- Comptes à rebours : `src/components/Countdown.astro`, étapes datées avec fuseau, disparition automatique après la date de fin (Mobile Cup : jusqu'au 31 janv. 2027).
+- Pays du Streamathon : suivre la carte qu'Allan doit transmettre (ne pas lister de pays avant).
+- Domaine : même adresse s4gs.org, l'ancien site disparaît, pas de redirections depuis les anciennes adresses Webflow.
+
 ## Décisions en attente (ne rien trancher seul : demander à Allan)
 - Formulaire Streamathon : hypothèses à valider (Philippines avec participation sur place, questions matériel et besoins particuliers, créneaux, âge minimum 13 ans avec e-mail parental de 13 à 17 ans).
 - Mode édition : un texte modifié change partout où le même texte apparaît dans la même langue. Restreindre à la page en cours si besoin.
@@ -78,7 +92,7 @@ Pages de l'ancien site non reprises : article d'actualité, Live (lecteur, plann
 - Allan / président : confirmer la date du Streamathon 2027, ajouter l'historique 2024 et 2025, choisir l'option de lots, durée de conservation et outil de formulaire pour la politique de confidentialité, identifiants GA4 et Ad Grants + outil de cookies, relecture juridique du règlement, date de livraison du CRM (plan B si après le 16 décembre), DNS et domaine.
 - Vérification d'âge à l'inscription (proposée, non lancée) : date de naissance déclarée + lien de confirmation envoyé au parent pour les 13-17 ans (statut "consentement parental en attente" à ajouter à `docs/specification-crm-inscriptions.md`), contrôle ciblé des gagnants, aucune pièce d'identité conservée.
 - Contenus réels pour actualités, streamers, partenaires, transparence, chiffres, puis activer les rubriques.
-- Traductions des 7 autres langues, bannière cookies + GA4, pages de redirection depuis l'ancien site Webflow, branchement du compteur au CRM, `formEndpoint` / `consentEndpoint` / `streamathonEndpoint` quand le CRM est prêt, retirer `noindex` des pages juridiques une fois validées, mise à jour de l'action GitHub (Node 20 déprécié).
+- Traductions des 7 autres langues, bannière cookies + GA4, branchement du compteur au CRM, `formEndpoint` / `consentEndpoint` / `streamathonEndpoint` quand le CRM est prêt, retirer `noindex` des pages juridiques une fois validées, mise à jour de l'action GitHub (Node 20 déprécié).
 - Écarts avec la stratégie 2027 et ses annexes, en attente de contenu ou de décision : guide pas à pas pour créer sa page de collecte Streamlabs Charity (lien à ajouter sur `/merci/`), paliers du compteur d'inscriptions (bonus débloqués), règle de changement de deck entre les manches (Clash Royale, « à confirmer » dans le guide), pays limites de la liste du formulaire (Turquie, Caucase, Kazakhstan, Israël retirés faute de mention dans la stratégie : à confirmer). Les documents internes prévoient encore un bouton « Partage avec ta famille » pour les mineurs : à mettre à jour côté président (le site envoie le lien de don au parent).
 - Formulaire Mobile Cup (27 nov. 2026) : une division par jeu (`divisions`), identifiants des deux coéquipiers Brawl Stars (`brawlStars.teammates`), pays limités aux trois zones hors Russie et Biélorussie, case « règlement et code de conduite ». Format décrit dans `docs/specification-crm-inscriptions.md`.
 - Liens partenaires confirmés par Éric : `https://childhope.org.ph/` et `https://ecpat.org/` (site du réseau international ECPAT). Chiffre « 96 % des 12-17 ans en ligne » : source sur le site d'ECPAT selon Éric. Lien Stripe direct renseigné dans `SITE.stripe.paymentLink` (28 nov. 2026) : la page Don n'utilise plus le bouton intégré ni le script Stripe.

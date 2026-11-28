@@ -115,3 +115,8 @@ dialog.don .cta{justify-content:center}
 .yt figcaption{margin-top:8px;font-size:14px}
 @media (prefers-reduced-motion:reduce){.yt-ic{transition:none}}
 @media (max-width:560px){.yt-ic{width:52px;height:52px;top:42%}.yt-n{display:none}.yt-t{font-size:16px}}
+/* Compte à rebours (disparaît seul après l'événement) */
+.cdown{display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin:14px 0 4px;padding:10px 18px;border-radius:16px;background:var(--card);border:1.5px solid var(--edge)}
+.cdown[hidden]{display:none}
+.cd-l{font-weight:700;color:var(--mut);font-size:14px}
+.cd-v{font-family:var(--display);font-weight:700;font-size:clamp(18px,2.6vw,24px);font-variant-numeric:tabular-nums;color:var(--ink)}

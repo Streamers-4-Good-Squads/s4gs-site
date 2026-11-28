@@ -1,6 +1,6 @@
 export interface CupPage {
   title: string; description: string;
-  hero: { kicker: string; h1: string; lead: string; free: string };
+  hero: { kicker: string; h1: string; lead: string; free: string; count: { open: string; q1: string; finals: string } };
   dates: { h2: string; items: Record<string, string> };
   games: { h2: string; intro: string; crText: string; bsText: string; open: string; openText: string; discovery: string; discoveryText: string; mixed: string };
   zones: { h2: string; intro: string; names: Record<string, string>; tz: string };

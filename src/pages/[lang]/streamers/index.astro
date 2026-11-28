@@ -12,11 +12,14 @@ const { lang } = Astro.params as { lang: string };
 const t = ui(lang); const a = assocPage(lang); const c = cupPage(lang);
 const hues = ['y', 'b', 'g'];
 const p = a.streamers; const on = SITE.sections.streamers;
+// Plutôt que des fiches par streamer, la page renvoie vers les réseaux de S4Gs (demande d'Allan, 28 nov. 2026)
+const socials = [['Discord', SITE.discordUrl], ['Instagram', SITE.socials.instagram], ['TikTok', SITE.socials.tiktok], ['YouTube', SITE.socials.youtube], ['Facebook', SITE.socials.facebook]];
 ---
 <Base lang={lang} slug="streamers" title={p.head.title} description={p.head.description} noindex={!on}>
   <PageHead lang={lang} head={p.head} crumb={t.nav.streamers} sample={on ? '' : p.sample} />
-  <section class="alt"><div class="wrap"><div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
-    {p.items.map((x, i) => <article class="card" style={`--c:var(--${hues[i % 3]})`}><div class="av" style={`--c:var(--${hues[i % 3]})`}>{x.n.slice(-1)}</div><h3>{x.n}</h3><p class="small">{x.role} | {x.region}</p></article>)}
-  </div></div></section>
-  <section><div class="wrap"><div class="box"><h2>{p.join.h2}</h2><p>{p.join.text}</p><a class="btn" href={`mailto:${SITE.contactEmail}?subject=${encodeURIComponent(p.join.subject)}`}>{p.join.cta}</a></div></div></section>
+  <section class="alt"><div class="wrap">
+    <div class="head"><h2>{p.follow.h2}</h2><p>{p.follow.text}</p></div>
+    <div class="logos socials">{socials.map(([n, u]) => <a href={u} target="_blank" rel="noopener">{n}</a>)}</div>
+  </div></section>
+  <section><div class="wrap"><div class="box"><h2>{p.join.h2}</h2><p>{p.join.text}</p><a class="btn" href={path(lang, 'streamathon')}>{p.join.cta}</a></div></div></section>
 </Base>

@@ -38,10 +38,11 @@ const site = [
     </ul></div>
     <div><h3>{t.footer.legal}</h3><ul>
       <li><a href={path(lang, 'privacy')}>{t.footer.privacy}</a></li>
+      <li><a href={path(lang, 'terms')}>{t.footer.terms}</a></li>
       <li><a href={path(lang, 'cookies')} data-cookie-settings>{t.footer.cookies}</a></li>
       {on.transparency && <li><a href={path(lang, 'transparency')}>{t.footer.transparency}</a></li>}
       <li><a href={`mailto:${SITE.contactEmail}`}>{t.footer.contact}</a></li>
     </ul></div>
   </div>
-  <div class="legal"><span>© {new Date().getFullYear()} Streamers 4 Good Squads ASBL - {t.footer.rights}</span><span class="small">{t.footer.supercell}</span></div>
+  <div class="legal"><span>© {new Date().getFullYear()} Streamers 4 Good Squads ASBL | {t.footer.rights}</span><span class="small">{t.footer.supercell}</span></div>
 </div></footer>

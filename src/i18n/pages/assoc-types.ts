@@ -24,7 +24,7 @@ export interface AssocStrings {
     calendar: { kick: string; h2: string; upcoming: string; past: string; items: CalItem[] };
   };
   news: { head: Head; sample: string; posts: { date: string; t: string; p: string }[] };
-  streamers: { head: Head; sample: string; join: { h2: string; text: string; cta: string; subject: string }; roles: string[]; items: { n: string; role: string; region: string }[] };
+  streamers: { head: Head; sample: string; follow: { h2: string; text: string }; join: { h2: string; text: string; cta: string; subject: string }; roles: string[]; items: { n: string; role: string; region: string }[] };
   partners: { head: Head; sample: string; groups: { h2: string; names: string[] }[]; join: { h2: string; text: string; cta: string; subject: string } };
   contact: { head: Head; cards: { h3: string; text: string; cta: string; subject?: string; href?: string }[]; address: string };
   transparency: { head: Head; sample: string; docs: { t: string; p: string }[]; note: string };
