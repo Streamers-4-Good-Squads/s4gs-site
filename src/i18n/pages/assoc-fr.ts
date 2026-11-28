@@ -31,13 +31,13 @@ export const assocFr: AssocStrings = {
   events: {
     head: { title: 'Événements | Streamers 4 Good Squads', description: 'La S4Gs Mobile Cup 2027, le Streamathon et les rendez-vous de S4Gs : dates, règlement et archives des éditions passées.', kick: 'Agenda', h1: 'Nos événements', lead: 'La Mobile Cup, le Streamathon et les rendez-vous de l’année, avec les archives des éditions passées.' },
     cup: { tag: 'Du 16 décembre 2026 au 31 janvier 2027', h3: 'S4Gs Mobile Cup 2027', text: 'Un tournoi gratuit et en ligne sur Clash Royale et Brawl Stars, ouvert aux joueurs d’Europe, des Amériques et d’Océanie. Les pré-inscriptions ouvrent le 16 décembre.', cta: 'Voir le tournoi et me pré-inscrire', rules: 'Lire le règlement', faq: 'Questions fréquentes' },
-    stream: { tag: 'Chaque année', h3: 'Streamathon', text: 'Un week-end de 48 heures de stream en direct, où streamers et communauté se mobilisent pour la cause. La dernière édition a eu lieu du 20 au 22 novembre 2026, en Belgique dans les locaux de Pixiels, à Manille au CIIT College et en ligne.' },
+    stream: { tag: 'Chaque année', h3: 'Streamathon', text: 'Un week-end de 48 heures de stream en direct, où streamers et communauté se mobilisent pour la cause. La dernière édition a eu lieu du 20 au 22 novembre 2026, à Namur dans les locaux de Pixiels, à Manille au CIIT College et en ligne.' },
     calendar: {
       kick: 'Calendrier', h2: 'À venir et archives', upcoming: 'À venir', past: 'Archives',
       items: [
         { iso: '2026-12-16', end: '2027-01-31', t: 'S4Gs Mobile Cup 2027', p: 'Tournoi mobile gratuit en ligne : Clash Royale et Brawl Stars.', link: 'mobile-cup' },
         { label: 'Avril 2027', t: 'S4Gs Streamathon 2027', p: 'Week-end exact et lieu à confirmer.' },
-        { iso: '2026-11-20', end: '2026-11-22', t: 'S4Gs Streamathon 2026', p: 'Un week-end de 48 heures de stream, en Belgique dans les locaux de Pixiels, à Manille au CIIT College et en ligne, au profit d’Aid for Youth Philippines.', past: true },
+        { iso: '2026-11-20', end: '2026-11-22', t: 'S4Gs Streamathon 2026', p: 'Un week-end de 48 heures de stream, à Namur dans les locaux de Pixiels, à Manille au CIIT College et en ligne, au profit d’Aid for Youth Philippines.', past: true },
       ],
     },
   },

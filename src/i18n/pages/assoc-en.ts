@@ -31,13 +31,13 @@ export const assocEn: AssocStrings = {
   events: {
     head: { title: 'Events | Streamers 4 Good Squads', description: 'The S4Gs Mobile Cup 2027, the Streamathon and S4Gs events: dates, rules and archive of past editions.', kick: 'Agenda', h1: 'Our events', lead: 'The Mobile Cup, the Streamathon and events through the year, with the archive of past editions.' },
     cup: { tag: '16 December 2026 to 31 January 2027', h3: 'S4Gs Mobile Cup 2027', text: 'A free online tournament on Clash Royale and Brawl Stars, open to players in Europe, the Americas and Oceania. Pre-registration opens on 16 December.', cta: 'See the tournament and pre-register', rules: 'Read the rules', faq: 'FAQ' },
-    stream: { tag: 'Every year', h3: 'Streamathon', text: 'A 48-hour live-stream weekend where streamers and the community rally for the cause. The latest edition took place from 20 to 22 November 2026, in Belgium at Pixiels’ premises, in Manila at CIIT College and online.' },
+    stream: { tag: 'Every year', h3: 'Streamathon', text: 'A 48-hour live-stream weekend where streamers and the community rally for the cause. The latest edition took place from 20 to 22 November 2026, in Namur at Pixiels’ premises, in Manila at CIIT College and online.' },
     calendar: {
       kick: 'Calendar', h2: 'Upcoming and archive', upcoming: 'Upcoming', past: 'Archive',
       items: [
         { iso: '2026-12-16', end: '2027-01-31', t: 'S4Gs Mobile Cup 2027', p: 'Free online mobile tournament: Clash Royale and Brawl Stars.', link: 'mobile-cup' },
         { label: 'April 2027', t: 'S4Gs Streamathon 2027', p: 'Exact weekend and venue to be confirmed.' },
-        { iso: '2026-11-20', end: '2026-11-22', t: 'S4Gs Streamathon 2026', p: 'A 48-hour stream weekend, in Belgium at Pixiels’ premises, in Manila at CIIT College and online, for Aid for Youth Philippines.', past: true },
+        { iso: '2026-11-20', end: '2026-11-22', t: 'S4Gs Streamathon 2026', p: 'A 48-hour stream weekend, in Namur at Pixiels’ premises, in Manila at CIIT College and online, for Aid for Youth Philippines.', past: true },
       ],
     },
   },

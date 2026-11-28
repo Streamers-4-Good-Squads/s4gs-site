@@ -63,7 +63,7 @@ Pages de l'ancien site non reprises : article d'actualité, Live (lecteur, plann
 ## Décisions d'Allan après le check-up de l'ancien site Webflow (28 nov. 2026)
 - Nom officiel : **Streamers 4 Good Squads ASBL** (avec un s). Numéro d'entreprise **BE1036.153.802** (pied de page, conditions d'utilisation).
 - Historique : seulement « depuis 2024 », sans détail par édition.
-- Streamathon 2026 : en Belgique **dans les locaux de Pixiels**, à Manille au CIIT College, et en ligne. **L'HEAJ (Haute École Albert Jacquard) ne doit apparaître nulle part sur le site.**
+- Streamathon 2026 : à Namur **dans les locaux de Pixiels**, à Manille au CIIT College, et en ligne. **L'HEAJ (Haute École Albert Jacquard) ne doit apparaître nulle part sur le site.**
 - **Aucune mention de Philia Haven ni de PlayFest** (anciens noms), nulle part.
 - Chiffres de l'accueil : 30 000 repas, 3 continents, 100+ streamers, 15 M de personnes en **portée potentielle** (formulation à garder).
 - Page Streamers : pas de fiches par streamer, renvoi vers les réseaux de S4Gs (onglet Streamers retiré de `/admin/`).
