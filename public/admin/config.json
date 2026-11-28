@@ -1,5 +1,5 @@
 {
   "tenantId": "f5b0644a-d552-4b9f-9701-a9c59cb4ab5c",
   "clientId": "f3212788-4df3-44e5-a6f9-e96b6cf15dd6",
-  "workerUrl": ""
+  "workerUrl": "https://s4gs-admin.s4gsquads.workers.dev"
 }

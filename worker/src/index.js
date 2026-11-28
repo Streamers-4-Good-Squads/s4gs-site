@@ -22,8 +22,8 @@ async function verify(req, env) {
   const tok = h.startsWith('Bearer ') ? h.slice(7) : '';
   const parts = tok.split('.');
   if (parts.length !== 3) throw new Error('Connexion requise');
-  const head = JSON.parse(txt.decode(b64url(parts[0])));
-  const claims = JSON.parse(txt.decode(b64url(parts[1])));
+  let head, claims;
+  try { head = JSON.parse(txt.decode(b64url(parts[0]))); claims = JSON.parse(txt.decode(b64url(parts[1]))); } catch (e) { throw new Error('Jeton refusé'); }
   if (head.alg !== 'RS256') throw new Error('Jeton refusé');
   const jwk = (await jwks(env)).find((k) => k.kid === head.kid);
   if (!jwk) throw new Error('Jeton refusé');
@@ -85,6 +85,9 @@ function checkTexts(c) {
 
 export default {
   async fetch(req, env) {
+    // Réglage manquant : message clair plutôt qu'une erreur technique
+    const missing = ['TENANT_ID', 'CLIENT_ID', 'EMAIL_DOMAIN', 'ALLOWED_ORIGINS', 'GH_REPO', 'GH_BRANCH', 'GH_TOKEN'].filter((k) => !env[k]);
+    if (missing.length) return new Response(JSON.stringify({ error: 'Réglage manquant dans Cloudflare : ' + missing.join(', ') }), { status: 500, headers: { 'Content-Type': 'application/json' } });
     const origin = req.headers.get('Origin') || '';
     const okOrigin = env.ALLOWED_ORIGINS.split(',').map((x) => x.trim()).includes(origin);
     const cors = { 'Access-Control-Allow-Origin': okOrigin ? origin : 'null', 'Access-Control-Allow-Headers': 'Authorization, Content-Type', 'Access-Control-Allow-Methods': 'GET, PUT, POST, OPTIONS', Vary: 'Origin' };
