@@ -28,7 +28,7 @@ const when = (x: any) => x.label ?? fmtSpan(x.iso, x.end, lang);
     <h3>{p.calendar.upcoming}</h3>
     <ul class="tl">{up.map((x, i) => <li style={`--c:var(--${hues[i % 3]})`}><b>{when(x)}</b><span><strong>{x.t}</strong>{x.link ? <> | <a href={path(lang, x.link)}>→</a></> : null}</span><span class="small">{x.p}</span></li>)}</ul>
     <h3 style="margin-top:32px">{p.calendar.past}</h3>
-    <ul class="tl past">{past.map((x) => <li><b>{when(x)}</b><span><strong>{x.t}</strong></span><span class="small">{x.p}</span></li>)}</ul>
+    <ul class="tl past">{past.map((x) => <li><b>{when(x)}</b><span><strong>{x.t}</strong>{x.link ? <> | <a href={path(lang, x.link)}>→</a></> : null}</span><span class="small">{x.p}</span></li>)}</ul>
   </div></section>
   <section><div class="wrap"><DonateBlock d={c.donate} /></div></section>
 </Base>

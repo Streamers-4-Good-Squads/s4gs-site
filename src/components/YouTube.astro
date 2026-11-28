@@ -1,0 +1,39 @@
+---
+// Lecteur YouTube léger : rien n'est chargé depuis YouTube avant le clic sur « Lire ».
+// Accepte les liens youtube.com/watch?v=, youtu.be/, /shorts/, /live/, /embed/, avec ?t= ou &start= facultatif.
+import { ui } from '../i18n/ui';
+const { url, title, lang } = Astro.props as { url: string; title: string; lang: string };
+const t = ui(lang).video;
+const m = String(url).match(/(?:youtu\.be\/|[?&]v=|\/(?:shorts|live|embed)\/)([A-Za-z0-9_-]{11})/);
+const id = m ? m[1] : '';
+const s = String(url).match(/[?&](?:t|start)=(\d+)/);
+const start = s ? s[1] : '';
+---
+{id && (
+  <figure class="yt" data-yt={id} data-start={start} data-title={title}>
+    <button class="yt-play" type="button" aria-label={`${t.play} : ${title}`}>
+      <span class="yt-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+      <span class="yt-t">{title}</span>
+      <span class="yt-n">{t.notice}</span>
+    </button>
+    <figcaption><a href={`https://www.youtube.com/watch?v=${id}`} target="_blank" rel="noopener">{t.open}</a></figcaption>
+  </figure>
+)}
+<script>
+  document.querySelectorAll<HTMLElement>('.yt').forEach((f) => {
+    const b = f.querySelector('.yt-play');
+    if (!b) return;
+    b.addEventListener('click', () => {
+      const p = new URLSearchParams({ autoplay: '1', rel: '0', modestbranding: '1' });
+      if (f.dataset.start) p.set('start', f.dataset.start);
+      const i = document.createElement('iframe');
+      i.src = `https://www.youtube-nocookie.com/embed/${f.dataset.yt}?${p}`;
+      i.title = f.dataset.title || 'YouTube';
+      i.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      i.allowFullscreen = true;
+      i.referrerPolicy = 'strict-origin-when-cross-origin';
+      b.replaceWith(i);
+      i.focus();
+    });
+  });
+</script>

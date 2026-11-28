@@ -100,3 +100,18 @@ dialog.don .cta{justify-content:center}
 .orgs .org blockquote{margin:8px 0 12px;padding:10px 16px;border-left:4px solid var(--y);font-style:italic;background:var(--tint);border-radius:0 12px 12px 0}
 .orgs .org .pill,.ways .pill{white-space:normal;text-align:center}
 #stripe-box{display:grid}#stripe-box .pill{width:100%}
+/* Lecteur YouTube (chargé au clic) */
+.vids h2{margin-bottom:18px}
+.vone{max-width:880px}.vgrid{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr))}
+.yt{margin:0}
+.yt-play,.yt iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:20px}
+.yt-play{position:relative;cursor:pointer;overflow:hidden;color:#fff;font:inherit;text-align:left;padding:clamp(16px,3vw,28px);display:flex;flex-direction:column;justify-content:flex-end;gap:6px;background:radial-gradient(120% 90% at 20% 10%,#6b3fd1 0%,#2a1466 45%,#0d0a2b 100%);box-shadow:0 14px 34px rgba(0,0,0,.18)}
+.yt-play::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.45));pointer-events:none}
+.yt-ic{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:clamp(64px,10vw,88px);height:clamp(64px,10vw,88px);border-radius:999px;background:var(--y);color:#070B1A;display:grid;place-items:center;box-shadow:0 0 0 10px rgba(255,255,255,.12);transition:transform .25s}
+.yt-ic svg{width:42%;height:42%;margin-left:6%}
+.yt-play:hover .yt-ic,.yt-play:focus-visible .yt-ic{transform:translate(-50%,-50%) scale(1.08)}
+.yt-t{position:relative;z-index:1;font-weight:800;font-size:clamp(17px,2.4vw,22px)}
+.yt-n{position:relative;z-index:1;font-size:13px;opacity:.85}
+.yt figcaption{margin-top:8px;font-size:14px}
+@media (prefers-reduced-motion:reduce){.yt-ic{transition:none}}
+@media (max-width:560px){.yt-ic{width:52px;height:52px;top:42%}.yt-n{display:none}.yt-t{font-size:16px}}

@@ -23,8 +23,11 @@ const items: Item[] = [
   // La Mobile Cup, ses pages juridiques et le formulaire appartiennent à la rubrique Événements
   { slug: 'events', label: t.nav.events, sub: [
     { slug: 'mobile-cup', label: t.footer.cup, also: ['rules', 'faq', 'merci', 'parents', 'prizes'] },
-    { slug: 'streamers', label: t.nav.streamers, show: on.streamers },
-    { slug: 'news', label: t.nav.news, show: on.news },
+    { slug: 'streamathon', label: 'Streamathon 2027' },
+    { slug: 'streamathon-2026', label: 'Streamathon 2026' },
+    // Affichées dans le menu à la demande d'Allan, même si la rubrique n'est pas encore activée (mention « Exemple » et noindex conservés)
+    { slug: 'streamers', label: t.nav.streamers },
+    { slug: 'news', label: t.nav.news },
   ] },
 ];
 const visible = (l: Item[]) => l.filter((i) => i.show !== false).map((i) => ({ ...i, sub: i.sub ? visible(i.sub) : undefined }));

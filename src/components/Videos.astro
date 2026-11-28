@@ -1,0 +1,17 @@
+---
+// Vidéos d'une page, lues depuis src/data/videos.json (clé = slug de la page, plusieurs vidéos possibles).
+import YouTube from './YouTube.astro';
+import { ui } from '../i18n/ui';
+import videos from '../data/videos.json';
+const { lang, slug } = Astro.props as { lang: string; slug: string };
+const list = ((videos as Record<string, { url: string; title: Record<string, string> }[]>)[slug] || []);
+const t = ui(lang).video;
+---
+{list.length > 0 && (
+  <section class="vids"><div class="wrap">
+    <h2>{t.h2}</h2>
+    <div class={list.length > 1 ? 'vgrid' : 'vone'}>
+      {list.map((v) => <YouTube lang={lang} url={v.url} title={v.title[lang] || v.title.en || v.title.fr} />)}
+    </div>
+  </div></section>
+)}
