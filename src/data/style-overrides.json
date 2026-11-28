@@ -1,1 +1,7 @@
-{}
+{
+  "index": {
+    "main>div:nth-child(2)": {
+      "background": "var(--g)"
+    }
+  }
+}
