@@ -73,6 +73,7 @@ Pages de l'ancien site non reprises : article d'actualité, Live (lecteur, plann
 - Comptes à rebours : `src/components/Countdown.astro`, étapes datées avec fuseau, disparition automatique après la date de fin (Mobile Cup : jusqu'au 31 janv. 2027).
 - Pays du Streamathon : suivre la carte qu'Allan doit transmettre (ne pas lister de pays avant).
 - Domaine : même adresse s4gs.org, l'ancien site disparaît, pas de redirections depuis les anciennes adresses Webflow.
+- Arrivée sur le site : plus de page de choix de langue. `src/pages/index.astro` redirige aussitôt vers la dernière langue utilisée (`localStorage` `s4gs-lang`, enregistrée par `Base.astro`), sinon la langue du navigateur si elle est prête (`READY`), sinon l'anglais. Les paramètres `?utm_...` sont conservés. Le sélecteur de langue reste dans l'en-tête.
 
 ## Décisions en attente (ne rien trancher seul : demander à Allan)
 - Formulaire Streamathon : hypothèses à valider (Philippines avec participation sur place, questions matériel et besoins particuliers, créneaux, âge minimum 13 ans avec e-mail parental de 13 à 17 ans).

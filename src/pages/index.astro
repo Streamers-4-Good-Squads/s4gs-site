@@ -1,6 +1,10 @@
 ---
-import '../styles/global.css';
-import { READY } from '../i18n/locales';
+// Racine du site : aucune page de choix. Redirection immédiate vers la bonne langue :
+// 1) dernière langue utilisée sur le site (localStorage s4gs-lang, enregistrée par Base.astro),
+// 2) sinon la première langue du navigateur disponible sur le site (READY),
+// 3) sinon l'anglais (DEFAULT). Les paramètres d'adresse (utm, ref) et l'ancre sont conservés.
+// Les liens cachés portent les adresses réelles : le script prefix-base y ajoute /s4gs-site sur l'adresse provisoire.
+import { READY, DEFAULT } from '../i18n/locales';
 ---
 <!doctype html>
 <html lang="en">
@@ -9,24 +13,24 @@ import { READY } from '../i18n/locales';
   <title>Streamers 4 Good Squads</title>
   <meta name="description" content="Streamers 4 Good Squads: gamers united for children." />
   {READY.map((l) => <link rel="alternate" hreflang={l.code} href={`https://s4gs.org/${l.code}/`} />)}
-  <link rel="alternate" hreflang="x-default" href="https://s4gs.org/en/" />
-  <script is:inline>(function(){try{var s=localStorage.getItem('s4gs-theme');var d=s?s==='dark':matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=d?'dark':'light'}catch(e){}})();</script>
+  <link rel="alternate" hreflang="x-default" href={`https://s4gs.org/${DEFAULT}/`} />
+  <style>html{background:#f5f0ff;color:#1a1033;font-family:system-ui,sans-serif}@media (prefers-color-scheme:dark){html{background:#070b1a;color:#f1ecff}}a{color:inherit}</style>
+  <script is:inline define:vars={{ codes: READY.map((l) => l.code), def: DEFAULT }}>
+    (function () {
+      var pick = null;
+      try { var s = localStorage.getItem('s4gs-lang'); if (codes.indexOf(s) > -1) pick = s; } catch (e) {}
+      if (!pick) {
+        var prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+        for (var i = 0; i < prefs.length && !pick; i++) { var c = String(prefs[i]).toLowerCase().split('-')[0]; if (codes.indexOf(c) > -1) pick = c; }
+      }
+      pick = pick || def;
+      var go = function () { var a = document.getElementById('l-' + pick); location.replace((a ? a.href : '/' + pick + '/') + location.search + location.hash); };
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+    })();
+  </script>
 </head>
 <body>
-  <main class="hero" style="min-height:100vh;display:grid;place-items:center">
-    <div class="wrap">
-      <img class="mascot" src="/img/stream-e.webp" alt="" width="120" height="216" />
-      <h1>S4Gs</h1>
-      <p class="lead" id="sug"></p>
-      <div class="cta">
-        {READY.map((l) => <a class="btn ghost" id={'l-' + l.code} href={`/${l.code}/`} lang={l.code}>{l.name}</a>)}
-      </div>
-    </div>
-  </main>
-  <script is:inline>
-    // Propose la langue du navigateur, sans jamais rediriger de force.
-    var codes=['en','fr'];var m=(navigator.languages||[navigator.language]).map(function(x){return x.slice(0,2)}).find(function(x){return codes.indexOf(x)>-1});
-    if(m){var a=document.getElementById('l-'+m);a.classList.remove('ghost');a.focus({preventScroll:true})}
-  </script>
+  <nav aria-label="Language">{READY.map((l) => <a id={'l-' + l.code} href={`/${l.code}/`} lang={l.code} hidden>{l.name}</a>)}</nav>
+  <noscript><p style="padding:24px">{READY.map((l) => <><a href={`/${l.code}/`} lang={l.code}>{l.name}</a>{' '}</>)}</p></noscript>
 </body>
 </html>

@@ -30,6 +30,7 @@ const p = (l: string) => `${SITE.url}/${l}/${slug ? slug + '/' : ''}`;
   <script is:inline>
     (function(){try{var s=localStorage.getItem('s4gs-theme');var d=s?s==='dark':matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=d?'dark':'light'}catch(e){}})();
   </script>
+  {Astro.url.pathname.startsWith(`/${lang}/`) && <script is:inline define:vars={{ lang }}>try{localStorage.setItem('s4gs-lang',lang)}catch(e){}</script>}
 </head>
 <body>
   <a class="skip" href="#main">{t.skip}</a>
