@@ -7,6 +7,8 @@ export const SITE = {
   // Stripe : si paymentLink (adresse buy.stripe.com/...) est renseigné, il remplace le bouton intégré,
   // qui ne charge le script de Stripe qu'au clic. La clé publishable est publique par nature.
   stripe: { paymentLink: 'https://buy.stripe.com/bJe8wP37w5wYd2lch67ok00', buyButtonId: 'buy_btn_1UgVs8I58HrD7mHlE5m94Ilq', publishableKey: 'pk_live_51ThOm0I58HrD7mHligxlxnb91tqcnJwHdBSZgybpt1uMw3tYFGw9rYNn35OhlRac28NdKOfDPFEFXdzgQHcyXoIC00F7xQVdPG' },
+  // Page de l'équipe « S4Gs Mobile Cup 2027 » sur Streamlabs Charity (compétition de collecte). Vide = bouton remplacé par « lien publié à l'ouverture ».
+  fundraisingUrl: '',
   paypalUrl: 'https://www.paypal.com/donate/?hosted_button_id=RSKBAGGRFRWAS',
   socials: {
     facebook: 'https://www.facebook.com/streamersforgood',

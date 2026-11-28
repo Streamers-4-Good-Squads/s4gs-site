@@ -31,7 +31,7 @@ const c = thanksPage(lang);
       <h2 id="don-h">{c.donate.h2}</h2><p>{c.donate.text}</p>
       <div class="amts" aria-hidden="true"><span>5 €</span><span>10 €</span><span>20 €</span><span>{c.donate.free}</span></div>
       <div class="cta"><a class="btn y" href={SITE.donationUrl} target="_blank" rel="noopener">{c.donate.cta}</a></div>
-      <p class="small">{c.donate.fund}</p>
+      <p class="small">{c.donate.fund} <a href={`/${lang}/mobile-cup/#guide-collecte`}>{c.donate.guide}</a></p>
       <p class="small">{c.donate.noAdvantage}</p>
       <p class="small"><button class="link" type="button" data-close>{c.donate.later}</button></p>
     </div>

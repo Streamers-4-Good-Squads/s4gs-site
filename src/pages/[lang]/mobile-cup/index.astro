@@ -79,5 +79,19 @@ const hues = ['y', 'b', 'g', 'lav', 'y'];
     <p class="small">{c.fund.minors}</p>
   </div></section>
 
+  <section id="guide-collecte"><div class="wrap">
+    <div class="head"><h2>{c.guide.h2}</h2><p>{c.guide.intro}</p></div>
+    <ol class="gsteps">{c.guide.steps.map((s) => <li><h3>{s.h3}</h3><p>{s.text}</p></li>)}</ol>
+    <div class="cta" style="margin:8px 0 26px">{SITE.fundraisingUrl
+      ? <a class="btn y" href={SITE.fundraisingUrl} target="_blank" rel="noopener">{c.guide.cta}</a>
+      : <p class="box small" style="margin:0">{c.guide.soon}</p>}</div>
+    <div class="ev">
+      <div class="card"><h3>{c.guide.message.h3}</h3><p class="msg">{c.guide.message.text}</p></div>
+      <div class="card"><h3>{c.guide.minors.h3}</h3><p>{c.guide.minors.text}</p></div>
+    </div>
+    <h3 style="margin-top:28px">{c.guide.tips.h3}</h3>
+    <ul class="list">{c.guide.tips.items.map((i) => <li>{i}</li>)}</ul>
+  </div></section>
+
   <section><div class="wrap"><p class="small">{c.disclaimer}</p></div></section>
 </Base>

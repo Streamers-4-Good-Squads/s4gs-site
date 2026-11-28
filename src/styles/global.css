@@ -120,3 +120,9 @@ dialog.don .cta{justify-content:center}
 .cdown[hidden]{display:none}
 .cd-l{font-weight:700;color:var(--mut);font-size:14px}
 .cd-v{font-family:var(--display);font-weight:700;font-size:clamp(18px,2.6vw,24px);font-variant-numeric:tabular-nums;color:var(--ink)}
+/* Guide de la collecte (page Mobile Cup) */
+.gsteps{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:14px;counter-reset:g;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))}
+.gsteps li{counter-increment:g;background:var(--card);border:1.5px solid var(--edge);border-radius:18px;padding:18px 18px 16px}
+.gsteps li::before{content:counter(g);display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--y);color:#070B1A;font-family:var(--display);font-weight:700;margin-bottom:10px}
+.gsteps h3{font-size:1rem;margin:0 0 6px}.gsteps p{margin:0;font-size:15px}
+.msg{font-style:italic;border-left:4px solid var(--y);padding-left:12px}
