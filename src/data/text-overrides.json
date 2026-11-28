@@ -1,4 +1,6 @@
 {
-  "fr": {},
+  "fr": {
+    "Carte bancaire": "Stripe"
+  },
   "en": {}
 }
