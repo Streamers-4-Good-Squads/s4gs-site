@@ -3,6 +3,7 @@
 
 const CONTENT_PATH = 'src/data/content.json';
 const TEXTS_PATH = 'src/data/text-overrides.json';
+const STYLES_PATH = 'src/data/style-overrides.json';
 const MAX_JSON = 300 * 1024, MAX_IMG = 1500 * 1024;
 
 const b64url = (s) => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/').padEnd(Math.ceil(s.length / 4) * 4, '=')), (c) => c.charCodeAt(0));
@@ -83,6 +84,29 @@ function checkTexts(c) {
   return out;
 }
 
+// Couleurs modifiées depuis le site : { page: { sélecteur: { color, background } } }, valeurs limitées aux couleurs
+// de la charte (variables CSS) ou à un code #rrggbb, sélecteurs limités à un chemin depuis <main>.
+function checkStyles(c) {
+  if (!c || typeof c !== 'object' || Array.isArray(c)) throw new Error('Couleurs invalides');
+  const SEL = /^main(>[a-z][a-z0-9]*:nth-child\(\d{1,3}\))+$/, VAL = /^(var\(--(acc|lav|y|b|g|ink|mut|card|bg|tint|edge)\)|#[0-9a-f]{6})$/i;
+  const out = {};
+  for (const [page, rules] of Object.entries(c)) {
+    if (!/^[a-z0-9-]{1,80}$/.test(page) || !rules || typeof rules !== 'object' || Array.isArray(rules)) throw new Error('Couleurs invalides');
+    out[page] = {};
+    for (const [sel, d] of Object.entries(rules)) {
+      if (!SEL.test(sel) || sel.length > 400 || !d || typeof d !== 'object') throw new Error('Couleurs invalides');
+      const keep = {};
+      for (const [p, v] of Object.entries(d)) {
+        if (!['color', 'background'].includes(p) || typeof v !== 'string' || !VAL.test(v)) throw new Error('Couleurs invalides');
+        keep[p] = v;
+      }
+      if (Object.keys(keep).length) out[page][sel] = keep;
+    }
+    if (!Object.keys(out[page]).length) delete out[page];
+  }
+  return out;
+}
+
 export default {
   async fetch(req, env) {
     // Réglage manquant : message clair plutôt qu'une erreur technique
@@ -125,6 +149,25 @@ export default {
         const { content, sha } = JSON.parse(raw);
         const clean = checkTexts(content);
         const r = await gh(env, `contents/${TEXTS_PATH}`, { method: 'PUT', body: JSON.stringify({ message: `Textes modifiés depuis le site (${email})`, content: toB64(JSON.stringify(clean, null, 2) + '\n'), sha, branch: env.GH_BRANCH }) });
+        if (r.status === 409 || r.status === 422) return json({ error: 'Quelqu’un a publié entre-temps : recommencez.' }, 409);
+        if (!r.ok) return json({ error: 'Publication impossible (' + r.status + ')' }, 502);
+        return json({ sha: (await r.json()).content.sha });
+      }
+      if (url.pathname === '/styles' && req.method === 'GET') {
+        const r = await gh(env, `contents/${STYLES_PATH}?ref=${env.GH_BRANCH}`);
+        if (r.status === 404) return json({ content: {}, sha: null });
+        if (!r.ok) return json({ error: 'Lecture impossible (' + r.status + ')' }, 502);
+        const f = await r.json();
+        return json({ content: JSON.parse(fromB64(f.content)), sha: f.sha });
+      }
+      if (url.pathname === '/styles' && req.method === 'PUT') {
+        const raw = await req.text();
+        if (raw.length > MAX_JSON) return json({ error: 'Contenu trop volumineux' }, 413);
+        const { content, sha } = JSON.parse(raw);
+        const clean = checkStyles(content);
+        const body = { message: `Couleurs modifiées depuis le site (${email})`, content: toB64(JSON.stringify(clean, null, 2) + '\n'), branch: env.GH_BRANCH };
+        if (sha) body.sha = sha;
+        const r = await gh(env, `contents/${STYLES_PATH}`, { method: 'PUT', body: JSON.stringify(body) });
         if (r.status === 409 || r.status === 422) return json({ error: 'Quelqu’un a publié entre-temps : recommencez.' }, 409);
         if (!r.ok) return json({ error: 'Publication impossible (' + r.status + ')' }, 502);
         return json({ sha: (await r.json()).content.sha });
