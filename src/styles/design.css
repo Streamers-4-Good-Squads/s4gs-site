@@ -328,5 +328,6 @@ footer.ft{background:var(--tint);margin-top:0}
 .site .ddm a{padding:9px 12px;border-radius:12px;text-decoration:none;color:var(--ink);font-weight:700;font-size:14px}
 .site .ddm a:hover,.site .ddm a[aria-current="page"]{background:var(--tint)}
 @container (max-width:1060px){.site .dd{display:block}.site .dd>.l{display:block}.site .ddb{display:none}.site .ddm{position:static;opacity:1;visibility:visible;transform:none;min-width:0;background:none;border:0;box-shadow:none;padding:0 0 6px 18px;transition:none}.site .ddm a{font-size:13.5px;font-weight:600;padding:7px 12px}}
-.site .logos a{min-height:72px;padding:10px 14px;border-radius:14px;border:2px solid var(--edge);display:grid;place-items:center;text-align:center;background:var(--card);color:var(--ink);font-weight:700;font-size:14px;text-decoration:none;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.site .logos a,.site .logos .pn{min-height:72px;padding:10px 14px;border-radius:14px;border:2px solid var(--edge);display:grid;place-items:center;text-align:center;background:var(--card);color:var(--ink);font-weight:700;font-size:14px;text-decoration:none;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
 .site .logos a:hover{transform:translateY(-5px) rotate(-1deg);background:var(--tint)}
+.site .logos{grid-template-columns:repeat(auto-fill,minmax(min(calc(50% - 7px),220px),1fr))}

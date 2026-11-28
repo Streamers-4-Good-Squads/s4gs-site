@@ -58,7 +58,7 @@ export const assocEn: AssocStrings = {
     items: [{ n: 'Handle 1', role: 'Streamer', region: 'Europe' }, { n: 'Handle 2', role: 'Cosplayer', region: 'Asia' }, { n: 'Handle 3', role: 'Creator', region: 'Americas' }, { n: 'Handle 4', role: 'Streamer', region: 'Europe' }],
   },
   partners: {
-    head: { title: 'Partners | Streamers 4 Good Squads', description: 'The organisations S4Gs works with for children.', kick: 'Partners', h1: 'Together for a shared cause', lead: 'S4Gs works with organisations that share its values. Click a name to discover their work.' },
+    head: { title: 'Partners | Streamers 4 Good Squads', description: 'The organisations S4Gs works with for children.', kick: 'Partners', h1: 'Together for a shared cause', lead: 'Some partners stand by S4Gs all year round, others support a specific event. Thank you to all of them.' },
     sample: 'Example',
     groups: [
       { h2: 'Institutional partners', names: ['Example partner 1', 'Example partner 2'] },

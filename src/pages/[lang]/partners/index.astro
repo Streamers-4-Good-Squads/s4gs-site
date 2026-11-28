@@ -17,6 +17,6 @@ const orgId = (n: string) => missions(lang).orgs.find((o) => o.name === n)?.id;
 ---
 <Base lang={lang} slug="partners" title={p.head.title} description={p.head.description} noindex={!on}>
   <PageHead lang={lang} head={p.head} crumb={t.nav.partners} sample={on ? '' : p.sample} />
-  {p.groups.map((g, i) => <section class={i % 2 === 0 ? 'alt' : ''}><div class="wrap"><h2>{g.h2}</h2><div class="logos">{g.names.map((n) => (orgId(n) ? <a href={path(lang, 'mission') + '#' + orgId(n)}>{n}</a> : <div>{n}</div>))}</div></div></section>)}
+  {p.groups.map((g, i) => <section class={i % 2 === 0 ? 'alt' : ''}><div class="wrap"><h2>{g.h2}</h2><div class="logos">{g.names.map((n) => (orgId(n) ? <a href={path(lang, 'mission') + '#' + orgId(n)}>{n}</a> : <div class="pn">{n}</div>))}</div></div></section>)}
   <section><div class="wrap"><div class="box"><h2>{p.join.h2}</h2><p>{p.join.text}</p><a class="btn" href={`mailto:${SITE.contactEmail}?subject=${encodeURIComponent(p.join.subject)}`}>{p.join.cta}</a></div></div></section>
 </Base>

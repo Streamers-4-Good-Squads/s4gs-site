@@ -62,7 +62,7 @@ const orgId = (n: string) => missions(lang).orgs.find((o) => o.name === n)?.id;
   </section>}
   {on.partners && <section class="alt sec wrap">
     <div class="head"><div><h2>{ah.partners.h2}</h2></div><a class="pill sec2" href={path(lang, 'partners')}>{ah.partners.all}</a></div>
-    <div class="logos">{a.partners.groups.flatMap((g) => g.names).slice(0, 6).map((n) => (orgId(n) ? <a href={path(lang, 'mission') + '#' + orgId(n)}>{n}</a> : <div>{n}</div>))}</div>
+    <div class="logos">{[...new Set(a.partners.groups.flatMap((g) => g.names))].slice(0, 6).map((n) => (orgId(n) ? <a href={path(lang, 'mission') + '#' + orgId(n)}>{n}</a> : <div class="pn">{n}</div>))}</div>
   </section>}
   <section class="sec wrap">
     <div class="head"><div><h2>{h.help.h2}</h2></div></div>

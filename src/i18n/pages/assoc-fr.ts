@@ -58,7 +58,7 @@ export const assocFr: AssocStrings = {
     items: [{ n: 'Pseudo 1', role: 'Streamer', region: 'Europe' }, { n: 'Pseudo 2', role: 'Cosplayer', region: 'Asie' }, { n: 'Pseudo 3', role: 'Créateur', region: 'Amériques' }, { n: 'Pseudo 4', role: 'Streamer', region: 'Europe' }],
   },
   partners: {
-    head: { title: 'Partenaires | Streamers 4 Good Squads', description: 'Les organisations avec lesquelles S4Gs agit pour les enfants.', kick: 'Partenaires', h1: 'Ensemble pour une cause commune', lead: 'S4Gs agit avec des organisations qui partagent ses valeurs. Clique sur un nom pour découvrir son action.' },
+    head: { title: 'Partenaires | Streamers 4 Good Squads', description: 'Les organisations avec lesquelles S4Gs agit pour les enfants.', kick: 'Partenaires', h1: 'Ensemble pour une cause commune', lead: 'Certains partenaires accompagnent S4Gs tout au long de l’année, d’autres soutiennent un événement en particulier. Merci à toutes et à tous.' },
     sample: 'Exemple',
     groups: [
       { h2: 'Partenaires institutionnels', names: ['Partenaire exemple 1', 'Partenaire exemple 2'] },

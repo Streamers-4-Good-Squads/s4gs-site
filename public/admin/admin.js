@@ -9,7 +9,7 @@
   var bi = function (o) { return { fr: (o && o.fr) || '', en: (o && o.en) || '' }; };
 
   var TABS = [['home', 'Accueil'], ['sections', 'Rubriques'], ['news', 'Actualités'], ['events', 'Événements'], ['streamers', 'Streamers'], ['partners', 'Partenaires'], ['stats', 'Chiffres']];
-  var SECTIONS = [['news', 'Actualités', 'Page et lien dans le menu'], ['streamers', 'Streamers', 'Page et lien dans le menu'], ['partners', 'Partenaires', 'Page et lien dans le menu'], ['transparency', 'Transparence', 'Page et lien dans le pied de page'], ['stats', 'Chiffres clés', 'Bloc sur la page d’accueil']];
+  var SECTIONS = [['news', 'Actualités', 'Contenu réel : retire la mention Exemple, page indexée'], ['streamers', 'Streamers', 'Contenu réel : retire la mention Exemple, page indexée'], ['partners', 'Partenaires', 'Page et lien dans le menu'], ['transparency', 'Transparence', 'Page et lien dans le pied de page'], ['stats', 'Chiffres clés', 'Bloc sur la page d’accueil']];
 
   function show(html) { app.innerHTML = html; }
   function msg(t, cls) { var m = $('#msg'); if (m) { m.textContent = t; m.className = 'msg ' + (cls || ''); } }

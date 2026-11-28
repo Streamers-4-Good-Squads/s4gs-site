@@ -133,13 +133,30 @@
   "partners": [
     {
       "h2": {
-        "fr": "Partenaires humanitaires",
-        "en": "Humanitarian partners"
+        "fr": "Partenaires permanents",
+        "en": "Long-term partners"
       },
       "names": [
-        "Aid for Youth Philippines",
-        "ChildHope Philippines",
-        "ECPAT Philippines"
+        "haca.studio",
+        "Aid for Youth Philippines"
+      ]
+    },
+    {
+      "h2": {
+        "fr": "Streamathon 2027 : partenaires de l’événement",
+        "en": "Streamathon 2027: event partners"
+      },
+      "names": [
+        "Top Gaming"
+      ]
+    },
+    {
+      "h2": {
+        "fr": "Streamathon 2026 : partenaires de l’événement",
+        "en": "Streamathon 2026: event partners"
+      },
+      "names": [
+        "Top Gaming"
       ]
     }
   ],
